@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reino Silábico Encantado - Jogo Educativo de Sílabas</title>
+  <title>O Reino Silábico da Princesa Alice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700;800&display=swap" rel="stylesheet">
@@ -28,7 +28,10 @@
 
     body {
       font-family: 'Quicksand', sans-serif;
-      background: var(--bg-gradient);
+      /* Fundo mágico com imagem de castelo/floresta encantada */
+      background: linear-gradient(rgba(252, 231, 243, 0.85), rgba(224, 242, 254, 0.85)), 
+                  url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920') no-repeat center center fixed;
+      background-size: cover;
       height: 100vh;
       max-height: 100vh;
       width: 100vw;
@@ -46,7 +49,7 @@
       position: fixed;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.25;
+      opacity: 0.35;
       animation: float 4s ease-in-out infinite;
     }
     @keyframes float {
@@ -59,9 +62,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(244, 114, 182, 0.4);
+      border: 1.5px solid rgba(244, 114, 182, 0.5);
       border-radius: 16px;
       padding: 6px 14px;
       max-width: 1050px;
@@ -69,6 +72,7 @@
       margin: 0 auto;
       z-index: 10;
       flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.15);
     }
     .top-brand {
       display: flex;
@@ -123,14 +127,14 @@
     }
     .level-btn {
       flex: 1;
-      padding: 6px 10px;
+      padding: 8px 10px;
       border-radius: 14px;
-      border: 1.5px solid #fbcfe8;
-      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #fbcfe8;
+      background: rgba(255, 255, 255, 0.95);
       cursor: pointer;
       font-family: 'Fredoka', cursive;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #475569;
       display: flex;
       align-items: center;
@@ -142,19 +146,19 @@
       background: linear-gradient(135deg, #10b981, #059669);
       color: white;
       border-color: #059669;
-      box-shadow: 0 3px 0 #047857;
+      box-shadow: 0 4px 0 #047857;
     }
     .level-btn.active.lvl2 {
       background: linear-gradient(135deg, #a855f7, #ec4899);
       color: white;
       border-color: #9333ea;
-      box-shadow: 0 3px 0 #7e22ce;
+      box-shadow: 0 4px 0 #7e22ce;
     }
     .level-btn.active.lvl3 {
       background: linear-gradient(135deg, #f59e0b, #ea580c);
       color: white;
       border-color: #d97706;
-      box-shadow: 0 3px 0 #b45309;
+      box-shadow: 0 4px 0 #b45309;
     }
 
     /* Main Stage Card */
@@ -175,11 +179,11 @@
       backdrop-filter: blur(12px);
       border: 3px solid #fbcfe8;
       border-radius: 24px;
-      padding: 12px 18px;
-      box-shadow: 0 10px 25px -5px rgba(244, 114, 182, 0.3);
+      padding: 14px 20px;
+      box-shadow: 0 15px 35px -5px rgba(236, 72, 153, 0.35);
       width: 100%;
       height: 100%;
-      max-height: 520px;
+      max-height: 530px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -198,8 +202,8 @@
       background: #fdf2f8;
       border: 1px solid #fbcfe8;
       border-radius: 10px;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -212,18 +216,19 @@
     .nav-arrow:active { transform: scale(0.9); }
     .word-counter {
       font-family: 'Fredoka', cursive;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: #9333ea;
       background: #f3e8ff;
-      padding: 2px 10px;
-      border-radius: 10px;
+      padding: 3px 12px;
+      border-radius: 12px;
+      border: 1px solid #e9d5ff;
     }
 
     /* 2-Column Content Grid */
     .stage-grid {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 290px 1fr;
       gap: 16px;
       align-items: center;
       height: 100%;
@@ -249,7 +254,7 @@
       border-radius: 18px;
       padding: 10px;
       height: 100%;
-      max-height: 420px;
+      max-height: 430px;
     }
     .unit-mode-toggle {
       display: flex;
@@ -259,11 +264,11 @@
     }
     .mode-btn {
       flex: 1;
-      padding: 4px;
+      padding: 5px;
       border-radius: 8px;
       border: 1px solid #fbcfe8;
       background: white;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: #64748b;
       cursor: pointer;
@@ -317,7 +322,7 @@
       color: white;
       border: none;
       border-radius: 14px;
-      padding: 7px 14px;
+      padding: 8px 14px;
       font-family: 'Fredoka', cursive;
       font-size: 0.9rem;
       font-weight: 700;
@@ -328,16 +333,17 @@
       box-shadow: 0 3px 0 #be185d;
       transition: all 0.15s;
       width: 100%;
-      max-width: 200px;
+      max-width: 210px;
       justify-content: center;
     }
     .listen-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #be185d; }
     .word-hint {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #64748b;
       text-align: center;
       margin-top: 6px;
       line-height: 1.2;
+      font-weight: 600;
     }
 
     /* Right Panel: Target Slots + Choice Options */
@@ -353,12 +359,12 @@
       background: linear-gradient(to right, rgba(253, 242, 248, 0.8), rgba(245, 243, 255, 0.8));
       border: 2px dashed #f472b6;
       border-radius: 18px;
-      padding: 10px 14px;
+      padding: 12px 14px;
       text-align: center;
     }
     .slots-title {
       font-family: 'Fredoka', cursive;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
       color: #ec4899;
       text-transform: uppercase;
@@ -369,16 +375,16 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
-      min-height: 52px;
+      gap: 10px;
+      min-height: 56px;
     }
     .slot-item {
-      min-width: 60px;
-      height: 52px;
-      padding: 0 10px;
+      min-width: 65px;
+      height: 56px;
+      padding: 0 12px;
       border-radius: 14px;
       font-family: 'Fredoka', cursive;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -413,15 +419,15 @@
 
     /* Choices Area */
     .choices-box {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.8);
       border: 1px solid #f3e8ff;
       border-radius: 18px;
-      padding: 10px 14px;
+      padding: 12px 14px;
       text-align: center;
     }
     .choices-title {
       font-family: 'Fredoka', cursive;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
       color: #9333ea;
       text-transform: uppercase;
@@ -438,7 +444,7 @@
       background: white;
       border: 2px solid #f472b6;
       border-radius: 16px;
-      padding: 8px 16px;
+      padding: 8px 18px;
       font-family: 'Fredoka', cursive;
       font-size: 1.5rem;
       font-weight: 700;
@@ -450,7 +456,7 @@
     .choice-cloud:hover { background: #fdf2f8; transform: translateY(-2px); }
     .choice-cloud:active { transform: translateY(3px); box-shadow: 0 1px 0 #f472b6; }
     .choice-cloud.used {
-      opacity: 0.2;
+      opacity: 0.25;
       pointer-events: none;
       transform: scale(0.9);
       box-shadow: none;
@@ -458,7 +464,7 @@
 
     /* Feedback Banner */
     .feedback-banner {
-      padding: 8px 14px;
+      padding: 10px 14px;
       border-radius: 14px;
       display: flex;
       align-items: center;
@@ -496,31 +502,32 @@
       max-width: 1050px;
       width: 100%;
       margin: 4px auto 0 auto;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid #fbcfe8;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid #fbcfe8;
       border-radius: 14px;
-      padding: 3px 6px;
+      padding: 5px 8px;
       display: flex;
       align-items: center;
       gap: 6px;
       overflow-x: auto;
       flex-shrink: 0;
       scrollbar-width: none;
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.1);
     }
     .word-strip::-webkit-scrollbar { display: none; }
     .strip-chip {
       background: white;
       border: 1px solid #fbcfe8;
-      border-radius: 8px;
-      padding: 2px 8px;
-      font-size: 0.75rem;
+      border-radius: 10px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
       font-weight: 700;
       color: #475569;
       cursor: pointer;
       white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       transition: all 0.15s;
     }
     .strip-chip.active {
@@ -528,6 +535,7 @@
       color: white;
       border-color: #ec4899;
       transform: scale(1.05);
+      box-shadow: 0 2px 6px rgba(236, 72, 153, 0.3);
     }
   </style>
 </head>
@@ -542,7 +550,7 @@
   <header class="top-bar">
     <div class="top-brand">
       <span>👑</span>
-      <span>Reino Silábico Encantado</span>
+      <span>O Reino Silábico da Princesa Alice</span>
     </div>
     <div class="top-actions">
       <div class="score-badge">
@@ -675,7 +683,7 @@
     }
 
     const PRAISES = [
-      "Sensacional! Você conseguiu!",
+      "Sensacional, Princesa Alice! Você conseguiu!",
       "Sua varinha mágica acertou em cheio!",
       "Uau, você é super inteligente!",
       "Que brilho incrível, você conseguiu!",
@@ -684,7 +692,7 @@
     ];
 
     const ENCOURAGEMENTS = [
-      "Quase lá! Tente mais uma vez.",
+      "Quase lá, princesinha! Tente mais uma vez.",
       "Não foi dessa vez, mas o unicórnio confia em você!",
       "Respira fundo, com calma a sua varinha mágica acerta!"
     ];
@@ -760,14 +768,14 @@
 
     let currentLevel = parseInt(localStorage.getItem('reino_silabico_level') || '1', 10);
     let stars = parseInt(localStorage.getItem('reino_silabico_stars') || '0', 10);
-    let unitMode = 'letras'; // 'letras' ou 'silabas'
+    let unitMode = 'letras';
     let currentIndex = 0;
     let filteredWords = [];
     let currentWordItem = null;
     let targetUnits = [];
     let userSlots = [];
     let activeChoices = [];
-    let missingTargetIndex = -1; // Usado no Nível 3
+    let missingTargetIndex = -1;
 
     function initGame() {
       document.getElementById('starsCount').innerText = stars;
@@ -779,7 +787,6 @@
 
     function filterWordsByLevel() {
       if (currentLevel === 3) {
-        // Nível 3 usa palavras do nível 1 e 2 como desafios de complete
         filteredWords = [...WORDS];
       } else {
         filteredWords = WORDS.filter(w => w.level === currentLevel);
@@ -819,12 +826,10 @@
       currentWordItem = filteredWords[currentIndex];
       document.getElementById('wordCounter').innerText = `Palavra ${currentIndex + 1} de ${filteredWords.length}`;
       
-      // Render SVG Illustration
       document.getElementById('illustrationSvg').innerHTML = SVG_MAP[currentWordItem.id] || SVG_MAP.fada;
       document.getElementById('cornerEmoji').innerText = currentWordItem.emoji;
       document.getElementById('wordHint').innerText = currentWordItem.hint;
 
-      // Definir unidades-alvo (letras ou sílabas)
       if (unitMode === 'letras') {
         targetUnits = currentWordItem.word.split('');
         document.getElementById('slotsTitle').innerText = "Sua Palavra (Letras):";
@@ -833,18 +838,14 @@
         document.getElementById('slotsTitle').innerText = "Sua Palavra (Sílabas):";
       }
 
-      // Se Nível 3: Modo "Complete a Sílaba/Letra"
       if (currentLevel === 3) {
-        // Escolhe aleatoriamente um índice para ficar faltando
         missingTargetIndex = Math.floor(Math.random() * targetUnits.length);
       } else {
         missingTargetIndex = -1;
       }
 
-      // Inicializar slots do usuário
       userSlots = targetUnits.map(() => null);
 
-      // Se nível 3, preenche automaticamente os que não estão faltando
       if (currentLevel === 3) {
         targetUnits.forEach((u, idx) => {
           if (idx !== missingTargetIndex) {
@@ -853,10 +854,7 @@
         });
       }
 
-      // Criar opções de escolha embaralhadas
       generateChoices();
-
-      // Esconder banner de feedback
       document.getElementById('feedbackBanner').style.display = 'none';
 
       renderSlots();
@@ -866,21 +864,18 @@
 
     function generateChoices() {
       let pool = [...targetUnits];
-      // Adicionar distractors se necessário
       const distractors = unitMode === 'letras' ? ['A', 'E', 'O', 'S', 'M', 'P'] : ['BA', 'CA', 'PA', 'TA', 'RO'];
       while (pool.length < targetUnits.length + 3) {
         const rand = distractors[Math.floor(Math.random() * distractors.length)];
         if (!pool.includes(rand)) pool.push(rand);
       }
       
-      // Embaralhar
       activeChoices = pool.map((val, idx) => ({
         id: idx,
         val: val,
         used: false
       })).sort(() => Math.random() - 0.5);
 
-      // Se nível 3, garantir que a resposta correta está nas opções
       if (currentLevel === 3) {
         const correctVal = targetUnits[missingTargetIndex];
         if (!activeChoices.some(c => c.val === correctVal)) {
@@ -900,7 +895,7 @@
         if (currentLevel === 3 && idx === missingTargetIndex) {
           if (userSlots[idx] === null) {
             div.classList.add('missing-target');
-            div.innerText = '❓';
+            div.innerText = '❓ Falta?';
           } else {
             div.classList.add('solved');
             div.innerText = userSlots[idx];
@@ -938,7 +933,6 @@
       playPop();
 
       if (currentLevel === 3) {
-        // No nível 3, preenche direto na casa que falta
         userSlots[missingTargetIndex] = choice.val;
         choice.used = true;
         renderSlots();
@@ -947,7 +941,6 @@
         return;
       }
 
-      // Níveis 1 e 2: Preencher o primeiro slot vazio
       const emptyIdx = userSlots.findIndex(s => s === null);
       if (emptyIdx !== -1) {
         userSlots[emptyIdx] = choice.val;
@@ -955,7 +948,6 @@
         renderSlots();
         renderChoices();
 
-        // Verificar se preencheu tudo
         if (!userSlots.includes(null)) {
           checkWinCondition();
         }
@@ -963,14 +955,13 @@
     }
 
     function removeSlotItem(idx) {
-      if (currentLevel === 3) return; // No nível 3 não remove o miolo fixo
+      if (currentLevel === 3) return;
       const val = userSlots[idx];
       if (val === null) return;
 
       playPop();
       userSlots[idx] = null;
 
-      // Devolver para as opções
       const choice = activeChoices.find(c => c.used && c.val === val);
       if (choice) choice.used = false;
 
@@ -996,7 +987,7 @@
         speakPraise();
 
         banner.className = 'feedback-banner success';
-        msg.innerHTML = `✨ Parabéns! Você formou <b>${currentWordItem.word}</b>! (+10 ⭐)`;
+        msg.innerHTML = `✨ Parabéns, Princesa Alice! Você formou <b>${currentWordItem.word}</b>! (+10 ⭐)`;
         banner.style.display = 'flex';
       } else {
         speakEncouragement();
@@ -1029,7 +1020,6 @@
         chip.id = `stripChip-${idx}`;
         chip.innerHTML = `<span>${w.emoji}</span><span>${w.word}</span>`;
         chip.onclick = () => {
-          // Achar nível da palavra e mudar se necessário
           if (w.level !== currentLevel && currentLevel !== 3) {
             currentLevel = w.level;
             updateLevelUI();
