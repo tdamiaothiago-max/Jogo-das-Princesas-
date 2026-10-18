@@ -2,17 +2,17 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>O Reino Silábico Encantado - Jogo Educativo de Sílabas</title>
+  <meta name="description" content="Jogo educativo encantador para crianças aprenderem divisão silábica em português com áudio interativo, desafios e recompensas mágicas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 50%, #e0f2fe 100%);
       --pink-primary: #ec4899;
-      --pink-dark: #db2777;
+      --pink-dark: #be185d;
       --purple-primary: #a855f7;
       --amber-gold: #f59e0b;
       --emerald-green: #10b981;
@@ -28,212 +28,201 @@
 
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(rgba(252, 231, 243, 0.85), rgba(224, 242, 254, 0.85)), 
-                  url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920') no-repeat center center fixed;
-      background-size: cover;
-      height: 100vh;
-      max-height: 100vh;
+      background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 50%, #e0f2fe 100%);
+      min-height: 100vh;
       width: 100vw;
-      overflow: hidden;
+      overflow-x: hidden;
       color: #334155;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       position: relative;
-      padding: 6px 12px;
     }
 
-    .ambient-deco {
+    .ambient-decor {
       position: fixed;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.35;
-      animation: float 4s ease-in-out infinite;
+      z-index: 0;
+      opacity: 0.22;
+      animation: floatSlow 6s ease-in-out infinite;
     }
-    @keyframes float {
+    @keyframes floatSlow {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(3deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
     }
 
-    .top-bar {
+    .app-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8px 12px;
+      width: 100%;
       display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 100vh;
+      justify-content: space-between;
+    }
+
+    .header-bar {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      border-radius: 20px;
+      padding: 6px 14px;
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(8px);
-      border: 1.5px solid rgba(244, 114, 182, 0.5);
-      border-radius: 16px;
-      padding: 6px 14px;
-      max-width: 1050px;
-      width: 100%;
-      margin: 0 auto;
-      z-index: 10;
-      flex-shrink: 0;
-      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.15);
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(244, 114, 182, 0.1);
     }
-    .top-brand {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+
+    .brand-title {
       font-family: 'Fredoka', cursive;
       font-weight: 700;
       font-size: 1.15rem;
-      color: #ec4899;
-    }
-    .top-actions {
+      color: #db2777;
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-    .score-badge {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: #fef3c7;
-      border: 1.5px solid #f59e0b;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-family: 'Fredoka', cursive;
-      font-weight: 700;
-      color: #b45309;
-      font-size: 0.95rem;
-    }
-    .icon-btn {
-      background: #fdf2f8;
-      border: 1px solid #fbcfe8;
-      border-radius: 12px;
-      padding: 5px 10px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #be185d;
-      transition: all 0.15s;
-    }
-    .icon-btn:hover { background: #fce7f3; }
-    .icon-btn:active { transform: scale(0.95); }
-
-    .level-bar {
-      display: flex;
-      gap: 8px;
-      max-width: 1050px;
-      width: 100%;
-      margin: 4px auto;
-      z-index: 10;
-      flex-shrink: 0;
-    }
-    .level-btn {
-      flex: 1;
-      padding: 8px 10px;
-      border-radius: 14px;
-      border: 2px solid #fbcfe8;
-      background: rgba(255, 255, 255, 0.95);
-      cursor: pointer;
-      font-family: 'Fredoka', cursive;
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: #475569;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       gap: 6px;
-      transition: all 0.15s;
-    }
-    .level-btn.active.lvl1 {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      border-color: #059669;
-      box-shadow: 0 4px 0 #047857;
-    }
-    .level-btn.active.lvl2 {
-      background: linear-gradient(135deg, #a855f7, #ec4899);
-      color: white;
-      border-color: #9333ea;
-      box-shadow: 0 4px 0 #7e22ce;
-    }
-    .level-btn.active.lvl3 {
-      background: linear-gradient(135deg, #f59e0b, #ea580c);
-      color: white;
-      border-color: #d97706;
-      box-shadow: 0 4px 0 #b45309;
     }
 
-    .stage-wrapper {
-      flex: 1;
-      min-height: 0;
+    .header-actions {
       display: flex;
       align-items: center;
-      justify-content: center;
-      max-width: 1050px;
-      width: 100%;
-      margin: 0 auto;
-      z-index: 10;
-      overflow: hidden;
+      gap: 6px;
+      flex-wrap: wrap;
     }
-    .game-card {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
+
+    .badge-star {
+      background: linear-gradient(135deg, #fef3c7, #fce7f3);
+      border: 1px solid #fcd34d;
+      padding: 4px 10px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Fredoka', cursive;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #b45309;
+    }
+
+    .btn-action {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 5px 10px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #475569;
+      transition: all 0.15s ease;
+    }
+    .btn-action:hover {
+      background: #fdf2f8;
+      color: #db2777;
+      border-color: #fbcfe8;
+    }
+    .btn-action.primary {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+    }
+
+    .level-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    @media (min-width: 640px) {
+      .level-selector-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .level-card-btn {
+      padding: 8px 10px;
+      border-radius: 16px;
+      border: 2px solid #e2e8f0;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+    .level-card-btn.active.lvl-1 { background: linear-gradient(135deg, #10b981, #14b8a6); color: white; border-color: #059669; }
+    .level-card-btn.active.lvl-2 { background: linear-gradient(135deg, #a855f7, #ec4899); color: white; border-color: #9333ea; }
+    .level-card-btn.active.lvl-3 { background: linear-gradient(135deg, #f59e0b, #ea580c); color: white; border-color: #d97706; }
+    .level-card-btn.active.lvl-4 { background: linear-gradient(135deg, #e11d48, #db2777); color: white; border-color: #be123c; }
+
+    .level-title-text {
+      font-family: 'Fredoka', cursive;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .level-badge-count {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .game-main-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
       border: 3px solid #fbcfe8;
-      border-radius: 24px;
-      padding: 14px 20px;
-      box-shadow: 0 15px 35px -5px rgba(236, 72, 153, 0.35);
-      width: 100%;
-      height: 100%;
-      max-height: 530px;
+      border-radius: 28px;
+      padding: 12px 16px;
+      box-shadow: 0 12px 30px rgba(244, 114, 182, 0.2);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
+      gap: 10px;
     }
 
-    .card-nav {
+    .card-top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 6px;
+      gap: 6px;
+      padding-bottom: 8px;
       border-bottom: 1px solid #fce7f3;
-      flex-shrink: 0;
+      flex-wrap: wrap;
     }
-    .nav-arrow {
+
+    .nav-arrow-btn {
       background: #fdf2f8;
       border: 1px solid #fbcfe8;
-      border-radius: 10px;
+      color: #db2777;
       width: 34px;
       height: 34px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.1rem;
-      color: #be185d;
       cursor: pointer;
-      transition: all 0.15s;
-    }
-    .nav-arrow:hover { background: #fce7f3; }
-    .nav-arrow:active { transform: scale(0.9); }
-    .word-counter {
-      font-family: 'Fredoka', cursive;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #9333ea;
-      background: #f3e8ff;
-      padding: 3px 12px;
-      border-radius: 12px;
-      border: 1px solid #e9d5ff;
+      font-weight: bold;
     }
 
-    .stage-grid {
+    .stage-layout {
       display: grid;
-      grid-template-columns: 290px 1fr;
-      gap: 16px;
+      grid-template-columns: 1fr;
+      gap: 14px;
       align-items: center;
-      height: 100%;
-      min-height: 0;
-      padding: 4px 0;
     }
-    @media (max-width: 768px) {
-      .stage-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        gap: 8px;
+    @media (min-width: 768px) {
+      .stage-layout {
+        grid-template-columns: 5fr 7fr;
+        gap: 20px;
       }
     }
 
@@ -242,480 +231,589 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(to bottom, #fdf2f8, #f5f3ff);
-      border: 1.5px solid #fbcfe8;
-      border-radius: 18px;
-      padding: 10px;
-      height: 100%;
-      max-height: 430px;
+      background: linear-gradient(180deg, rgba(253, 242, 248, 0.7) 0%, rgba(245, 243, 255, 0.5) 100%);
+      padding: 12px;
+      border-radius: 22px;
+      border: 1px solid #fbcfe8;
     }
-    .unit-mode-toggle {
+
+    .unit-toggle-pills {
       display: flex;
-      width: 100%;
-      gap: 4px;
+      background: #ffffff;
+      padding: 3px;
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+      gap: 3px;
       margin-bottom: 8px;
     }
-    .mode-btn {
-      flex: 1;
-      padding: 5px;
-      border-radius: 8px;
-      border: 1px solid #fbcfe8;
-      background: white;
+    .unit-pill-btn {
+      padding: 4px 12px;
+      border-radius: 10px;
       font-size: 0.75rem;
       font-weight: 700;
-      color: #64748b;
       cursor: pointer;
-      transition: all 0.15s;
+      border: none;
+      background: transparent;
+      color: #64748b;
     }
-    .mode-btn.active {
-      background: linear-gradient(to right, #ec4899, #a855f7);
+    .unit-pill-btn.active {
+      background: #ec4899;
       color: white;
-      border-color: #ec4899;
     }
 
     .illustration-frame {
       width: 170px;
       height: 170px;
-      background: linear-gradient(135deg, #f472b6, #c084fc, #fbbf24);
+      border-radius: 24px;
+      background: linear-gradient(135deg, #fbcfe8, #ddd6fe, #fef08a);
       padding: 5px;
-      border-radius: 26px;
-      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.35);
+      box-shadow: 0 8px 20px rgba(244, 114, 182, 0.3);
+      cursor: pointer;
+      position: relative;
+    }
+    .illustration-inner {
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      cursor: pointer;
-      margin-bottom: 8px;
-      transition: transform 0.25s;
-      font-size: 5rem;
-    }
-    .illustration-frame:hover { transform: scale(1.04); }
-    .illustration-frame:active { transform: scale(0.96); }
-    .illustration-badge {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid #fbcfe8;
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
+      overflow: hidden;
     }
 
-    .listen-btn {
-      background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
-      color: white;
-      border: none;
+    .hidden-name-pill {
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px dashed #f472b6;
       border-radius: 14px;
-      padding: 8px 14px;
-      font-family: 'Fredoka', cursive;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
+      padding: 5px 14px;
       display: flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 3px 0 #be185d;
-      transition: all 0.15s;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .hidden-name-pill.revealed {
+      border: 2px solid #10b981;
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+    }
+
+    .btn-audio-speak {
+      margin-top: 8px;
       width: 100%;
-      max-width: 210px;
-      justify-content: center;
-    }
-    .listen-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #be185d; }
-    .word-hint {
-      font-size: 0.78rem;
-      color: #64748b;
-      text-align: center;
-      margin-top: 6px;
-      line-height: 1.2;
-      font-weight: 600;
-    }
-
-    .right-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 12px;
-      height: 100%;
-    }
-
-    .slots-box {
-      background: linear-gradient(to right, rgba(253, 242, 248, 0.8), rgba(245, 243, 255, 0.8));
-      border: 2px dashed #f472b6;
-      border-radius: 18px;
-      padding: 12px 14px;
-      text-align: center;
-    }
-    .slots-title {
-      font-family: 'Fredoka', cursive;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #ec4899;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-    .slots-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      min-height: 56px;
-    }
-    .slot-item {
-      min-width: 65px;
-      height: 56px;
-      padding: 0 12px;
-      border-radius: 14px;
-      font-family: 'Fredoka', cursive;
-      font-size: 1.7rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    .slot-item.empty {
-      border: 2px dashed #f472b6;
-      background: white;
-      color: #f472b6;
-      opacity: 0.5;
-      font-size: 0.85rem;
-    }
-    .slot-item.filled {
-      background: linear-gradient(135deg, #ec4899, #a855f7);
-      color: white;
-      box-shadow: 0 4px 0 #be185d;
-      cursor: pointer;
-    }
-
-    .choices-box {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #f3e8ff;
-      border-radius: 18px;
-      padding: 12px 14px;
-      text-align: center;
-    }
-    .choices-title {
-      font-family: 'Fredoka', cursive;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #9333ea;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-    }
-    .choices-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-    .choice-cloud {
-      background: white;
-      border: 2px solid #f472b6;
-      border-radius: 16px;
-      padding: 8px 18px;
-      font-family: 'Fredoka', cursive;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #db2777;
-      cursor: pointer;
-      box-shadow: 0 4px 0 #f472b6;
-      transition: all 0.15s;
-    }
-    .choice-cloud:hover { background: #fdf2f8; transform: translateY(-2px); }
-    .choice-cloud:active { transform: translateY(3px); box-shadow: 0 1px 0 #f472b6; }
-    .choice-cloud.used {
-      opacity: 0.25;
-      pointer-events: none;
-      transform: scale(0.9);
-      box-shadow: none;
-    }
-
-    .feedback-banner {
-      padding: 10px 14px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .feedback-banner.success {
-      background: #ecfdf5;
-      border: 2px solid #34d399;
-      color: #065f46;
-    }
-    .feedback-banner.error {
-      background: #fff1f2;
-      border: 2px solid #fda4af;
-      color: #9f1239;
-    }
-    .next-btn {
-      background: linear-gradient(to right, #10b981, #059669);
+      max-width: 240px;
+      background: linear-gradient(135deg, #9333ea, #ec4899, #f43f5e);
       color: white;
       border: none;
-      border-radius: 12px;
-      padding: 6px 14px;
+      padding: 9px 16px;
+      border-radius: 16px;
       font-family: 'Fredoka', cursive;
+      font-weight: 700;
       font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35);
+    }
+
+    .support-tools-row {
+      margin-top: 8px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .support-tool-btn {
+      background: #ffffff;
+      border: 1px solid #fbcfe8;
+      color: #be185d;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 3px 0 #047857;
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    .word-strip {
-      max-width: 1050px;
-      width: 100%;
-      margin: 4px auto 0 auto;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1.5px solid #fbcfe8;
-      border-radius: 14px;
-      padding: 5px 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      overflow-x: auto;
-      flex-shrink: 0;
-      scrollbar-width: none;
-      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.1);
-    }
-    .word-strip::-webkit-scrollbar { display: none; }
-    .strip-chip {
-      background: white;
-      border: 1px solid #fbcfe8;
-      border-radius: 10px;
+    .hint-bubble {
+      margin-top: 6px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid #fce7f3;
       padding: 4px 10px;
-      font-size: 0.8rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .assembly-box-card {
+      background: linear-gradient(135deg, rgba(253, 244, 255, 0.7), rgba(254, 242, 242, 0.7));
+      border: 2px solid #f5d0fe;
+      border-radius: 22px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+    .slots-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 64px;
+      margin-top: 6px;
+    }
+
+    .slot-tile {
+      min-width: 52px;
+      height: 60px;
+      padding: 0 8px;
+      border-radius: 18px;
+      font-family: 'Fredoka', cursive;
       font-weight: 700;
-      color: #475569;
-      cursor: pointer;
-      white-space: nowrap;
+      font-size: 1.6rem;
       display: flex;
       align-items: center;
-      gap: 5px;
-      transition: all 0.15s;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
     }
-    .strip-chip.active {
-      background: linear-gradient(to right, #ec4899, #a855f7);
+    .slot-tile.empty {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2.5px dashed #f472b6;
+      color: rgba(244, 114, 182, 0.4);
+    }
+    .slot-tile.filled {
+      background: linear-gradient(135deg, #ec4899, #9333ea);
       color: white;
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+      border: 2px solid #fbcfe8;
+    }
+
+    .options-box-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #ede9fe;
+      border-radius: 22px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+    .options-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .cloud-btn {
+      font-family: 'Fredoka', cursive;
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: 2.5px solid #fbcfe8;
+      background: #ffffff;
+      color: #be185d;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(244, 114, 182, 0.15);
+      transition: all 0.15s ease;
+    }
+    .cloud-btn:hover {
+      background: #fdf2f8;
+      transform: scale(1.06);
+    }
+    .cloud-btn.used {
+      opacity: 0.2;
+      transform: scale(0.9);
+      cursor: not-allowed;
+    }
+
+    .feedback-banner {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      text-align: center;
+    }
+    .feedback-banner.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1.5px solid #6ee7b7;
+    }
+    .feedback-banner.error {
+      background: #fff1f2;
+      color: #9f1239;
+      border: 1.5px solid #fecdd3;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #ffffff;
+      border-radius: 28px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      border: 3px solid #fbcfe8;
+      overflow: hidden;
+    }
+    .modal-header {
+      background: linear-gradient(135deg, #ec4899, #9333ea);
+      color: white;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .word-grid-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+    }
+    .repo-item-card {
+      background: white;
+      border: 1.5px solid #fce7f3;
+      border-radius: 16px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+    .repo-item-card:hover {
       border-color: #ec4899;
-      transform: scale(1.05);
-      box-shadow: 0 2px 6px rgba(236, 72, 153, 0.3);
+    }
+    .app-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #64748b;
+      padding: 6px;
     }
   </style>
 </head>
 <body>
-  <div class="ambient-deco" style="top: 15px; left: 15px; font-size: 2.5rem;">☁️</div>
-  <div class="ambient-deco" style="top: 25px; right: 25px; font-size: 2.2rem;">✨</div>
-  <div class="ambient-deco" style="bottom: 25px; left: 20px; font-size: 2.5rem;">🧚‍♀️</div>
-  <div class="ambient-deco" style="bottom: 25px; right: 20px; font-size: 2.5rem;">🦄</div>
 
-  <header class="top-bar">
-    <div class="top-brand">
-      <span>👑</span>
-      <span>O Reino Silábico Encantado</span>
-    </div>
-    <div class="top-actions">
-      <div class="score-badge">
-        <span>⭐</span>
-        <span id="starsCount">0</span>
-      </div>
-      <button class="icon-btn" onclick="toggleSound()">
-        <span id="soundIcon">🔊 Som</span>
-      </button>
-      <button class="icon-btn" onclick="speakPrincessMessage()">
-        <span>👑 Princesa</span>
-      </button>
-    </div>
-  </header>
+  <div class="ambient-decor" style="top: 20px; left: 20px; font-size: 2.2rem;">☁️</div>
+  <div class="ambient-decor" style="top: 35px; right: 30px; font-size: 2rem;">✨</div>
+  <div class="ambient-decor" style="bottom: 30px; left: 30px; font-size: 2.2rem;">🧚‍♀️</div>
+  <div class="ambient-decor" style="bottom: 35px; right: 25px; font-size: 2.2rem;">🦄</div>
 
-  <div class="level-bar">
-    <button class="level-btn lvl1 active" id="lvlBtn1" onclick="switchLevel(1)">
-      <span>🌸 Nível 1: Sílabas Simples</span>
-    </button>
-    <button class="level-btn lvl2" id="lvlBtn2" onclick="switchLevel(2)">
-      <span>🦄 Nível 2: Sílabas Complexas</span>
-    </button>
-    <button class="level-btn lvl3" id="lvlBtn3" onclick="switchLevel(3)">
-      <span>⭐ Nível 3: Complete a Sílaba</span>
-    </button>
-  </div>
+  <div class="app-container">
 
-  <div class="stage-wrapper">
-    <main class="game-card">
-      <div class="card-nav">
-        <button class="nav-arrow" onclick="prevWord()">❮</button>
-        <span class="word-counter" id="wordCounter">Palavra 1 de 12</span>
-        <button class="nav-arrow" onclick="nextWord()">❯</button>
+    <header class="header-bar">
+      <div class="brand-title">
+        <span>👑</span>
+        <span>Reino Silábico Encantado</span>
       </div>
 
-      <div class="stage-grid">
+      <div class="header-actions">
+        <button class="btn-action primary" onclick="openRepoModal()">
+          <span>📚</span>
+          <span>Repositório (50)</span>
+        </button>
+
+        <button class="btn-action" onclick="speakPrincessAffirmation()">
+          <span>👑</span>
+          <span>Voz da Princesa</span>
+        </button>
+
+        <button class="btn-action" id="soundToggleBtn" onclick="toggleSound()">
+          <span>🔊</span>
+          <span id="soundLabel">Som</span>
+        </button>
+
+        <div class="badge-star" title="Suas estrelas conquistadas">
+          <span>⭐</span>
+          <span id="starsDisplay">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="level-selector-grid">
+      <button class="level-card-btn lvl-1 active" id="btnLvl1" onclick="selectLevel(1)">
+        <div>
+          <span class="level-title-text">🌸 Nível 1: Simples</span>
+          <div style="font-size: 0.65rem; opacity: 0.85;">FA-DA, CO-RO-A, LUA...</div>
+        </div>
+        <span class="level-badge-count">50</span>
+      </button>
+    </div>
+
+    <main class="game-main-card">
+      <div class="card-top-bar">
+        <button class="nav-arrow-btn" onclick="prevWord()" title="Palavra anterior">◀</button>
+
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span id="currentLevelBadge" style="background:#fdf2f8; color:#be185d; border:1px solid #fbcfe8; padding:3px 10px; border-radius:12px; font-weight:bold; font-size:0.75rem;">
+            🌸 Nível 1: Simples
+          </span>
+          <span id="wordProgressCounter" style="font-size:0.8rem; font-weight:bold; color:#64748b;">
+            Palavra 1 de 50
+          </span>
+        </div>
+
+        <button class="nav-arrow-btn" onclick="nextWord()" title="Próxima palavra">▶</button>
+      </div>
+
+      <div class="stage-layout">
+
         <div class="left-panel">
-          <div class="unit-mode-toggle" id="unitModeToggle">
-            <button class="mode-btn active" id="btnModeLetras" onclick="setUnitMode('letras')">🔤 Por Letras</button>
-            <button class="mode-btn" id="btnModeSilabas" onclick="setUnitMode('silabas')">🧩 Por Sílabas</button>
+          <div class="unit-toggle-pills">
+            <button class="unit-pill-btn active" id="btnModeLetters" onclick="setAssemblyMode('letters')">
+              🔤 Por Letras
+            </button>
+            <button class="unit-pill-btn" id="btnModeSyllables" onclick="setAssemblyMode('syllables')">
+              🧩 Por Sílabas
+            </button>
           </div>
 
-          <div class="illustration-frame" onclick="speakCurrentWord()" title="Toque para ouvir a palavra!">
-            <span id="illustrationEmoji">🧚‍♀️</span>
-            <div class="illustration-badge">✨</div>
+          <div class="illustration-frame" onclick="speakCurrentWord()" title="Toque para ouvir!">
+            <div class="illustration-inner">
+              <div id="illustrationSvgContainer" style="font-size: 5rem;">🧚‍♀️</div>
+            </div>
           </div>
 
-          <button class="listen-btn" onclick="speakCurrentWord()">
+          <div class="hidden-name-pill" id="objectNamePill" onclick="handlePeekName()" title="Nome do objeto oculto! Toque para espiar">
+            <span id="hiddenPillIcon" style="font-size:0.85rem;">🙈</span>
+            <span id="hiddenPillTitle" style="font-weight:700; font-size:0.85rem; color:#64748b;">Nome Oculto:</span>
+            <span id="hiddenPillContent" style="font-weight:800; font-size:0.85rem; color:#db2777; letter-spacing:1px;">❓ · ❓</span>
+          </div>
+
+          <button class="btn-audio-speak" onclick="speakCurrentWord()">
             <span>🔊</span>
-            <span id="listenBtnLabel">Ouvir Palavra</span>
+            <span>Ouvir Palavra</span>
           </button>
 
-          <p class="word-hint" id="wordHint">Dica mágica...</p>
+          <div class="support-tools-row">
+            <button class="support-tool-btn" onclick="spellWord()">
+              <span>🔤</span>
+              <span>Soletrar</span>
+            </button>
+            <button class="support-tool-btn" onclick="clapWord()">
+              <span>👏</span>
+              <span>Palmas</span>
+            </button>
+            <button class="support-tool-btn" onclick="handlePeekName()">
+              <span>👁️</span>
+              <span>Espiar (2s)</span>
+            </button>
+          </div>
+
+          <div class="hint-bubble" id="wordHintText">
+            💡 Dica mágica...
+          </div>
         </div>
 
         <div class="right-panel">
-          <div class="slots-box">
-            <div class="slots-title" id="slotsTitle">SUA PALAVRA:</div>
-            <div class="slots-grid" id="slotsContainer"></div>
+          <div class="assembly-box-card">
+            <div style="font-size: 0.8rem; font-weight: 800; color: #7e22ce; text-transform: uppercase;">
+              ✨ Campo de Montagem da Palavra:
+            </div>
+            <div class="slots-container" id="slotsContainer"></div>
           </div>
 
-          <div class="choices-box">
-            <div class="choices-title" id="choicesTitle">TOQUE PARA ESCOLHER:</div>
-            <div class="choices-grid" id="choicesGrid"></div>
+          <div class="options-box-card">
+            <div style="font-size: 0.8rem; font-weight: 800; color: #be185d; text-transform: uppercase;">
+              ☁️ Toque para Escolher:
+            </div>
+            <div class="options-container" id="optionsContainer"></div>
           </div>
 
-          <div id="feedbackBanner" class="feedback-banner" style="display: none;">
-            <div id="feedbackMsg" style="font-weight: 700; font-size: 0.95rem;"></div>
-            <button class="next-btn" id="feedbackNextBtn" onclick="nextWord()">
+          <div class="feedback-banner" id="feedbackBanner" style="display: none;"></div>
+
+          <div style="display: flex; gap: 8px; justify-content: flex-end;">
+            <button class="btn-action" onclick="resetCurrentWord()">
+              <span>🔄</span>
+              <span>Limpar</span>
+            </button>
+            <button class="btn-action primary" onclick="nextWord()">
               <span>Próxima</span>
-              <span>❯</span>
+              <span>▶</span>
             </button>
           </div>
         </div>
+
       </div>
     </main>
+
+    <footer class="app-footer">
+      O Reino Silábico Encantado · Alfabetização Lúdica & Consciência Silábica
+    </footer>
+
   </div>
 
-  <div class="word-strip" id="wordStrip"></div>
+  <div class="modal-overlay" id="repoModalOverlay" onclick="closeRepoModalOnBackdrop(event)">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">📚</span>
+          <div>
+            <div style="font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1.15rem;">
+              Repositório de Palavras Mágicas
+            </div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeRepoModal()">✕</button>
+      </div>
+      <div class="word-grid-scroll" id="repoWordsGrid"></div>
+    </div>
+  </div>
 
   <script>
-    let soundEnabled = true;
-
-    const WORDS = [
-      { id: 'fada', word: 'FADA', syllables: ['FA', 'DA'], emoji: '🧚‍♀️', level: 1, hint: 'Fadinha com asinhas brilhantes.' },
-      { id: 'coroa', word: 'COROA', syllables: ['CO', 'RO', 'A'], emoji: '👑', level: 1, hint: 'Acessório dourado da realeza.' },
-      { id: 'castelo', word: 'CASTELO', syllables: ['CAS', 'TE', 'LO'], emoji: '🏰', level: 1, hint: 'Palácio com torres altas.' },
-      { id: 'doce', word: 'DOCE', syllables: ['DO', 'CE'], emoji: '🍭', level: 1, hint: 'Guloseima saborosa e docinha.' },
-      { id: 'lua', word: 'LUA', syllables: ['LU', 'A'], emoji: '🌙', level: 1, hint: 'Ilumina o céu à noite.' },
-      { id: 'dado', word: 'DADO', syllables: ['DA', 'DO'], emoji: '🎲', level: 1, hint: 'Cubinho numérico para jogar.' },
-      { id: 'nuvem', word: 'NUVEM', syllables: ['NU', 'VEM'], emoji: '☁️', level: 1, hint: 'Flutua no céu azul.' },
-      { id: 'sapo', word: 'SAPO', syllables: ['SA', 'PO'], emoji: '🐸', level: 1, hint: 'Adora pular na lagoa.' },
-      { id: 'bolo', word: 'BOLO', syllables: ['BO', 'LO'], emoji: '🎂', level: 1, hint: 'Bolo de aniversário fofinho.' },
-      { id: 'gato', word: 'GATO', syllables: ['GA', 'TO'], emoji: '🐱', level: 1, hint: 'Bichinho fofo que faz miau.' },
-      { id: 'bala', word: 'BALA', syllables: ['BA', 'LA'], emoji: '🍬', level: 1, hint: 'Docinho colorido.' },
-      { id: 'pato', word: 'PATO', syllables: ['PA', 'TO'], emoji: '🦆', level: 1, hint: 'Nada no laguinho e faz quá-quá.' },
-      { id: 'princesa', word: 'PRINCESA', syllables: ['PRIN', 'CE', 'SA'], emoji: '👸', level: 2, hint: 'Vive em um lindo castelo.' },
-      { id: 'unicornio', word: 'UNICÓRNIO', syllables: ['U', 'NI', 'CÓR', 'NIO'], emoji: '🦄', level: 2, hint: 'Cavalo com chifre mágico.' },
-      { id: 'algodao', word: 'ALGODÃO', syllables: ['AL', 'GO', 'DÃO'], emoji: '☁️', level: 2, hint: 'Algodão doce cor-de-rosa.' },
-      { id: 'borboleta', word: 'BORBOLETA', syllables: ['BOR', 'BO', 'LE', 'TA'], emoji: '🦋', level: 2, hint: 'Asas coloridas no jardim.' },
-      { id: 'estrela', word: 'ESTRELA', syllables: ['ES', 'TRE', 'LA'], emoji: '⭐', level: 2, hint: 'Ponto brilhante no céu.' },
-      { id: 'chocolate', word: 'CHOCOLATE', syllables: ['CHO', 'CO', 'LA', 'TE'], emoji: '🍫', level: 2, hint: 'Doce cremoso e irresistível.' }
+    const WORDS_DATABASE = [
+      { id: "n1-1", level: 1, word: "FADA", syllables: ["FA", "DA"], emoji: "🧚‍♀️", hint: "Ser mágico com asas que realiza desejos." },
+      { id: "n1-2", level: 1, word: "LUA", syllables: ["LU", "A"], emoji: "🌙", hint: "Brilha no céu durante a noite encantada." },
+      { id: "n1-3", level: 1, word: "DADO", syllables: ["DA", "DO"], emoji: "🎲", hint: "Cubinho com pontinhos para jogos divertidos." },
+      { id: "n1-4", level: 1, word: "BOLO", syllables: ["BO", "LO"], emoji: "🎂", hint: "Doce fofinho de aniversário com velinhas." },
+      { id: "n1-5", level: 1, word: "SAPO", syllables: ["SA", "PO"], emoji: "🐸", hint: "Verdinho que pula na lagoa e come mosquinha." },
+      { id: "n1-6", level: 1, word: "GATO", syllables: ["GA", "TO"], emoji: "🐱", hint: "Felino manhoso que faz miau." },
+      { id: "n1-7", level: 1, word: "BOLA", syllables: ["BO", "LA"], emoji: "⚽", hint: "Brinquedo redondo que quica e rola no chão." },
+      { id: "n1-8", level: 1, word: "CASA", syllables: ["CA", "SA"], emoji: "🏡", hint: "Lar quentinho onde a família mora." },
+      { id: "n1-9", level: 1, word: "NAVIO", syllables: ["NA", "VI", "O"], emoji: "🚢", hint: "Barco gigante que viaja pelo mar azul." },
+      { id: "n1-10", level: 1, word: "PATO", syllables: ["PA", "TO"], emoji: "🦆", hint: "Ave aquática que nada dizendo quá-quá." },
+      { id: "n1-11", level: 1, word: "MALA", syllables: ["MA", "LA"], emoji: "🧳", hint: "Usada para guardar roupas em viagens." },
+      { id: "n1-12", level: 1, word: "DEDO", syllables: ["DE", "DO"], emoji: "🖐️", hint: "Parte da nossa mão para apontar e tocar." },
+      { id: "n1-13", level: 1, word: "RATO", syllables: ["RA", "TO"], emoji: "🐭", hint: "Pequeno roedor esperto com rabo compridinho." },
+      { id: "n1-14", level: 1, word: "PIPOCA", syllables: ["PI", "PO", "CA"], emoji: "🍿", hint: "Milho que estoura na panela e vira branquinho." },
+      { id: "n1-15", level: 1, word: "COPO", syllables: ["CO", "PO"], emoji: "🥛", hint: "Usado para beber água fresquinha e suco." },
+      { id: "n1-16", level: 1, word: "SUCO", syllables: ["SU", "CO"], emoji: "🧃", hint: "Bebida gostosa feita com frutas naturais." },
+      { id: "n1-17", level: 1, word: "SOFÁ", syllables: ["SO", "FÁ"], emoji: "🛋️", hint: "Móvel macio da sala para sentar e descansar." },
+      { id: "n1-18", level: 1, word: "MESA", syllables: ["ME", "SA"], emoji: "🪑", hint: "Móvel com quatro pernas onde fazemos refeições." },
+      { id: "n1-19", level: 1, word: "FOGO", syllables: ["FO", "GO"], emoji: "🔥", hint: "Chama quente e luminosa que queima na fogueira." },
+      { id: "n1-20", level: 1, word: "MACACO", syllables: ["MA", "CA", "CO"], emoji: "🐵", hint: "Animal brincalhão que adora banana e pula em galhos." },
+      { id: "n1-21", level: 1, word: "TUCANO", syllables: ["TU", "CA", "NO"], emoji: "🦜", hint: "Pássaro tropical com bico grande e colorido." },
+      { id: "n1-22", level: 1, word: "VACA", syllables: ["VA", "CA"], emoji: "🐮", hint: "Animal da fazenda que faz muuu e dá leite." },
+      { id: "n1-23", level: 1, word: "CAVALO", syllables: ["CA", "VA", "LO"], emoji: "🐴", hint: "Animal elegante que cavalga e relincha forte." },
+      { id: "n1-24", level: 1, word: "BONECA", syllables: ["BO", "NE", "CA"], emoji: "🪆", hint: "Brinquedo favorito para cuidar e criar historinhas." },
+      { id: "n1-25", level: 1, word: "COROA", syllables: ["CO", "RO", "A"], emoji: "👑", hint: "Acessório dourado usado por reis e rainhas." },
+      { id: "n1-26", level: 1, word: "BANANA", syllables: ["BA", "NA", "NA"], emoji: "🍌", hint: "Fruta amarela e docinha facílima de descascar." },
+      { id: "n1-27", level: 1, word: "PANELA", syllables: ["PA", "NE", "LA"], emoji: "🍲", hint: "Usada no fogão para preparar comidas deliciosas." },
+      { id: "n1-28", level: 1, word: "ZEBRA", syllables: ["ZE", "BRA"], emoji: "🦓", hint: "Animal fofo listrado de preto e branco." },
+      { id: "n1-29", level: 1, word: "SAPATO", syllables: ["SA", "PA", "TO"], emoji: "👞", hint: "Calçado que protege nossos pezinhos ao caminhar." },
+      { id: "n1-30", level: 1, word: "JANELA", syllables: ["JA", "NE", "LA"], emoji: "🪟", hint: "Abertura na parede por onde entra a luz do sol." },
+      { id: "n1-31", level: 1, word: "POMBA", syllables: ["POM", "BA"], emoji: "🕊️", hint: "Ave branca símbolo de paz e tranquilidade." },
+      { id: "n1-32", level: 1, word: "UVA", syllables: ["U", "VA"], emoji: "🍇", hint: "Fruta redondinha em cachos, roxa ou verdinha." },
+      { id: "n1-33", level: 1, word: "PIRULITO", syllables: ["PI", "RU", "LI", "TO"], emoji: "🍭", hint: "Doce açucarado no palito para saborear." },
+      { id: "n1-34", level: 1, word: "PICOLÉ", syllables: ["PI", "CO", "LÉ"], emoji: "🍧", hint: "Sorvete geladinho no palito para dias quentes." },
+      { id: "n1-35", level: 1, word: "GELATINA", syllables: ["GE", "LA", "TI", "NA"], emoji: "🍮", hint: "Sobremesa gelatinosa e colorida que balança." },
+      { id: "n1-36", level: 1, word: "FARINHA", syllables: ["FA", "RI", "NHA"], emoji: "🌾", hint: "Pó branquinho feito de grãos para fazer bolos." },
+      { id: "n1-37", level: 1, word: "BATATA", syllables: ["BA", "TA", "TA"], emoji: "🥔", hint: "Tubérculo saboroso que vira purê ou batata frita." },
+      { id: "n1-38", level: 1, word: "CENOURA", syllables: ["CE", "NOU", "RA"], emoji: "🥕", hint: "Vegetal alaranjado e crocante favorito dos coelhinhos." },
+      { id: "n1-39", level: 1, word: "TOMATE", syllables: ["TO", "MA", "TE"], emoji: "🍅", hint: "Fruto vermelhinho muito usado em saladas e molhos." },
+      { id: "n1-40", level: 1, word: "CORUJA", syllables: ["CO", "RU", "JA"], emoji: "🦉", hint: "Ave noturna de olhos grandões e muito sábia." },
+      { id: "n1-41", level: 1, word: "LEÃO", syllables: ["LE", "ÃO"], emoji: "🦁", hint: "O rei da selva com uma juba linda e rugido forte." },
+      { id: "n1-42", level: 1, word: "PEIXE", syllables: ["PEI", "XE"], emoji: "🐟", hint: "Animal que nada ligeiro nos rios e mares." },
+      { id: "n1-43", level: 1, word: "RUA", syllables: ["RU", "A"], emoji: "🛣️", hint: "Caminho asfaltado por onde passam carros e pessoas." },
+      { id: "n1-44", level: 1, word: "MATA", syllables: ["MA", "TA"], emoji: "🌳", hint: "Floresta cheia de árvores verdes e passarinhos." },
+      { id: "n1-45", level: 1, word: "RIO", syllables: ["RI", "O"], emoji: "🌊", hint: "Água doce que corre mansinha pela natureza." },
+      { id: "n1-46", level: 1, word: "SOL", syllables: ["SOL"], emoji: "☀️", hint: "A grande estrela que ilumina e aquece nosso dia." },
+      { id: "n1-47", level: 1, word: "BALA", syllables: ["BA", "LA"], emoji: "🍬", hint: "Docinho colorido embalado em papel brilhante." },
+      { id: "n1-48", level: 1, word: "BULE", syllables: ["BU", "LE"], emoji: "🫖", hint: "Recipiente com bico para servir chá quentinho." },
+      { id: "n1-49", level: 1, word: "CANECA", syllables: ["CA", "NE", "CA"], emoji: "☕", hint: "Copo com alça para tomar leite ou chocolate." },
+      { id: "n1-50", level: 1, word: "DOCE", syllables: ["DO", "CE"], emoji: "🧁", hint: "Guloseima saborosa com sabor de açúcar e festa." }
     ];
 
     let currentLevel = 1;
     let stars = 0;
-    let unitMode = 'letras';
+    let assemblyMode = 'letters';
     let currentIndex = 0;
-    let filteredWords = [];
     let currentWordItem = null;
     let targetUnits = [];
     let userSlots = [];
     let activeChoices = [];
+    let soundEnabled = true;
 
     function initGame() {
-      filterWordsByLevel();
       loadCurrentWord();
-      renderWordStrip();
     }
 
-    function filterWordsByLevel() {
-      if (currentLevel === 3) {
-        filteredWords = [...WORDS];
-      } else {
-        filteredWords = WORDS.filter(w => w.level === currentLevel);
-      }
-      if (currentIndex >= filteredWords.length) currentIndex = 0;
-    }
-
-    function switchLevel(lvl) {
+    function selectLevel(lvl) {
       currentLevel = lvl;
       currentIndex = 0;
-      [1, 2, 3].forEach(i => {
-        document.getElementById(`lvlBtn${i}`).classList.toggle('active', i === lvl);
-      });
-      filterWordsByLevel();
       loadCurrentWord();
-      renderWordStrip();
     }
 
-    function setUnitMode(mode) {
-      unitMode = mode;
-      document.getElementById('btnModeLetras').classList.toggle('active', mode === 'letras');
-      document.getElementById('btnModeSilabas').classList.toggle('active', mode === 'silabas');
+    function setAssemblyMode(mode) {
+      assemblyMode = mode;
+      document.getElementById('btnModeLetters').classList.toggle('active', mode === 'letters');
+      document.getElementById('btnModeSyllables').classList.toggle('active', mode === 'syllables');
       loadCurrentWord();
     }
 
     function loadCurrentWord() {
-      currentWordItem = filteredWords[currentIndex] || WORDS[0];
-      document.getElementById('wordCounter').innerText = `Palavra ${currentIndex + 1} de ${filteredWords.length}`;
-      document.getElementById('illustrationEmoji').innerText = currentWordItem.emoji;
-      document.getElementById('wordHint').innerText = currentWordItem.hint;
+      currentWordItem = WORDS_DATABASE[currentIndex];
+      document.getElementById('wordProgressCounter').innerText = `Palavra ${currentIndex + 1} de ${WORDS_DATABASE.length}`;
+      document.getElementById('illustrationSvgContainer').innerText = currentWordItem.emoji;
+      document.getElementById('wordHintText').innerText = `💡 ${currentWordItem.hint}`;
+      document.getElementById('hiddenPillContent').innerText = "❓ · ❓";
 
-      if (unitMode === 'letras') {
+      if (assemblyMode === 'letters') {
         targetUnits = currentWordItem.word.split('');
-        document.getElementById('slotsTitle').innerText = "SUA PALAVRA:";
       } else {
         targetUnits = [...currentWordItem.syllables];
-        document.getElementById('slotsTitle').innerText = "SUA PALAVRA (SÍLABAS):";
       }
 
       userSlots = targetUnits.map(() => null);
-
       generateChoices();
-      document.getElementById('feedbackBanner').style.display = 'none';
 
+      document.getElementById('feedbackBanner').style.display = 'none';
       renderSlots();
       renderChoices();
-      updateWordStripActive();
     }
 
     function generateChoices() {
       let pool = [...targetUnits];
-      const distractors = unitMode === 'letras' ? ['A', 'E', 'O', 'S', 'M', 'P'] : ['BA', 'CA', 'PA', 'TA', 'RO'];
+      const distractors = assemblyMode === 'letters' ? ['A', 'E', 'O', 'S', 'M', 'P'] : ['BA', 'CA', 'PA', 'TA', 'RO'];
       while (pool.length < targetUnits.length + 2) {
         const rand = distractors[Math.floor(Math.random() * distractors.length)];
         if (!pool.includes(rand)) pool.push(rand);
       }
-      
-      activeChoices = pool.map((val, idx) => ({
-        id: idx,
-        val: val,
-        used: false
-      })).sort(() => Math.random() - 0.5);
+      activeChoices = pool.map((val, idx) => ({ id: idx, val, used: false })).sort(() => Math.random() - 0.5);
     }
 
     function renderSlots() {
       const container = document.getElementById('slotsContainer');
       container.innerHTML = '';
-
       targetUnits.forEach((_, idx) => {
         const div = document.createElement('div');
-        div.className = 'slot-item';
-
+        div.className = 'slot-tile';
         if (userSlots[idx] === null) {
           div.classList.add('empty');
           div.innerText = `${idx + 1}º`;
@@ -729,42 +827,35 @@
     }
 
     function renderChoices() {
-      const grid = document.getElementById('choicesGrid');
-      grid.innerHTML = '';
-
+      const container = document.getElementById('optionsContainer');
+      container.innerHTML = '';
       activeChoices.forEach(choice => {
         const btn = document.createElement('button');
-        btn.className = `choice-cloud ${choice.used ? 'used' : ''}`;
+        btn.className = `cloud-btn ${choice.used ? 'used' : ''}`;
         btn.innerText = choice.val;
         btn.onclick = () => selectChoice(choice);
-        grid.appendChild(btn);
+        container.appendChild(btn);
       });
     }
 
     function selectChoice(choice) {
       if (choice.used) return;
-
       const emptyIdx = userSlots.findIndex(s => s === null);
       if (emptyIdx !== -1) {
         userSlots[emptyIdx] = choice.val;
         choice.used = true;
         renderSlots();
         renderChoices();
-
-        if (!userSlots.includes(null)) {
-          checkWinCondition();
-        }
+        if (!userSlots.includes(null)) checkWinCondition();
       }
     }
 
     function removeSlotItem(idx) {
       const val = userSlots[idx];
       if (val === null) return;
-
       userSlots[idx] = null;
       const choice = activeChoices.find(c => c.used && c.val === val);
       if (choice) choice.used = false;
-
       renderSlots();
       renderChoices();
     }
@@ -772,27 +863,36 @@
     function checkWinCondition() {
       const userString = userSlots.join('');
       const targetString = targetUnits.join('');
-
       const banner = document.getElementById('feedbackBanner');
-      const msg = document.getElementById('feedbackMsg');
 
       if (userString === targetString) {
-        if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
-
+        if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
         stars += 10;
-        document.getElementById('starsCount').innerText = stars;
-
+        document.getElementById('starsDisplay').innerText = stars;
         speakText(`Parabéns! Você acertou ${currentWordItem.word}!`);
-
         banner.className = 'feedback-banner success';
-        msg.innerHTML = `✨ Parabéns! Você acertou! (+10 ⭐)`;
+        banner.innerHTML = `✨ Muito bem! Você conseguiu! (+10 ⭐)`;
         banner.style.display = 'flex';
       } else {
         speakText("Ops! Tente novamente, você consegue!");
         banner.className = 'feedback-banner error';
-        msg.innerHTML = `⚠️ Ops! Tente trocar uma das letrinhas!`;
+        banner.innerHTML = `⚠️ Quase lá! Reorganize as pecinhas!`;
         banner.style.display = 'flex';
       }
+    }
+
+    function resetCurrentWord() {
+      loadCurrentWord();
+    }
+
+    function nextWord() {
+      currentIndex = (currentIndex + 1) % WORDS_DATABASE.length;
+      loadCurrentWord();
+    }
+
+    function prevWord() {
+      currentIndex = (currentIndex - 1 + WORDS_DATABASE.length) % WORDS_DATABASE.length;
+      loadCurrentWord();
     }
 
     function speakText(text) {
@@ -808,59 +908,59 @@
       speakText(currentWordItem.word);
     }
 
-    function speakPrincessMessage() {
-      speakText("Olá! Nosso reino mágico está pronto para você jogar!");
+    function speakPrincessAffirmation() {
+      speakText("Olá! Nosso reino mágico está pronto para você jogar e aprender!");
+    }
+
+    function spellWord() {
+      const letters = currentWordItem.word.split('').join('... ');
+      speakText(letters);
+    }
+
+    function clapWord() {
+      const syllables = currentWordItem.syllables.join('... ');
+      speakText(syllables);
+    }
+
+    function handlePeekName() {
+      document.getElementById('hiddenPillContent').innerText = currentWordItem.word;
+      setTimeout(() => {
+        document.getElementById('hiddenPillContent').innerText = "❓ · ❓";
+      }, 2000);
     }
 
     function toggleSound() {
       soundEnabled = !soundEnabled;
-      document.getElementById('soundIcon').innerText = soundEnabled ? '🔊 Som' : '🔇 Mudo';
+      document.getElementById('soundLabel').innerText = soundEnabled ? 'Som' : 'Mudo';
     }
 
-    function nextWord() {
-      currentIndex = (currentIndex + 1) % filteredWords.length;
-      loadCurrentWord();
-    }
-
-    function prevWord() {
-      currentIndex = (currentIndex - 1 + filteredWords.length) % filteredWords.length;
-      loadCurrentWord();
-    }
-
-    function renderWordStrip() {
-      const strip = document.getElementById('wordStrip');
-      strip.innerHTML = '';
-      WORDS.forEach((w, idx) => {
-        const chip = document.createElement('div');
-        chip.className = 'strip-chip';
-        chip.id = `stripChip-${idx}`;
-        chip.innerHTML = `<span>${w.emoji}</span><span>${w.word}</span>`;
-        chip.onclick = () => {
-          const foundIdx = filteredWords.findIndex(fw => fw.id === w.id);
-          if (foundIdx !== -1) {
-            currentIndex = foundIdx;
-            loadCurrentWord();
-          }
+    function openRepoModal() {
+      const overlay = document.getElementById('repoModalOverlay');
+      const grid = document.getElementById('repoWordsGrid');
+      grid.innerHTML = '';
+      WORDS_DATABASE.forEach((w, idx) => {
+        const item = document.createElement('div');
+        item.className = 'repo-item-card';
+        item.innerHTML = `<strong>${w.emoji} ${w.word}</strong><br><small>${w.syllables.join('-')}</small>`;
+        item.onclick = () => {
+          currentIndex = idx;
+          loadCurrentWord();
+          closeRepoModal();
         };
-        strip.appendChild(chip);
+        grid.appendChild(item);
       });
-      updateWordStripActive();
+      overlay.classList.add('open');
     }
 
-    function updateWordStripActive() {
-      WORDS.forEach((w, idx) => {
-        const chip = document.getElementById(`stripChip-${idx}`);
-        if (!chip) return;
-        if (w.id === currentWordItem.id) {
-          chip.classList.add('active');
-        } else {
-          chip.classList.remove('active');
-        }
-      });
+    function closeRepoModal() {
+      document.getElementById('repoModalOverlay').classList.remove('open');
+    }
+
+    function closeRepoModalOnBackdrop(e) {
+      if (e.target.id === 'repoModalOverlay') closeRepoModal();
     }
 
     document.addEventListener("DOMContentLoaded", initGame);
-    window.onload = initGame;
   </script>
 </body>
 </html>
