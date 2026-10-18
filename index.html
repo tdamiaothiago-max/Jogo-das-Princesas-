@@ -58,7 +58,7 @@
       transition: background 0.5s ease;
     }
 
-    /* Tela Inicial Encantada (Welcome Screen com Fundo Divertido) */
+    /* Tela Inicial Encantada */
     .welcome-overlay {
       position: fixed;
       inset: 0;
@@ -202,6 +202,7 @@
       font-weight: 700;
       font-size: 0.95rem;
       color: #b45309;
+      cursor: pointer;
     }
 
     .btn-action {
@@ -310,6 +311,15 @@
       padding: 12px;
       border-radius: 22px;
       border: 1px solid var(--card-border);
+      position: relative;
+    }
+
+    .pet-companion {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-size: 2.2rem;
+      animation: floatSlow 4s ease-in-out infinite;
     }
 
     .unit-toggle-pills {
@@ -353,6 +363,13 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
+    }
+
+    .equipped-hat-badge {
+      position: absolute;
+      top: -10px;
+      font-size: 2.2rem;
+      z-index: 5;
     }
 
     .hidden-name-pill {
@@ -504,6 +521,7 @@
     .feedback-banner.success { background: #ecfdf5; color: #065f46; border: 1.5px solid #6ee7b7; }
     .feedback-banner.error { background: #fff1f2; color: #9f1239; border: 1.5px solid #fecdd3; }
 
+    /* Modais */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -536,16 +554,62 @@
       justify-content: space-between;
     }
     .modal-close-btn { background: rgba(255, 255, 255, 0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
-    .word-grid-scroll {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px;
+    
+    /* Loja e Relatório Grid */
+    .shop-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      padding: 16px;
+      overflow-y: auto;
     }
-    .repo-item-card { background: white; border: 1.5px solid var(--card-border); border-radius: 16px; padding: 8px 10px; cursor: pointer; }
-    .repo-item-card:hover { border-color: var(--primary); }
+    .shop-item-card {
+      background: #ffffff;
+      border: 2px solid var(--card-border);
+      border-radius: 20px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+    .shop-item-emoji { font-size: 3rem; }
+    .shop-item-title { font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1rem; }
+    .shop-item-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .shop-item-btn.equipped { background: #10b981; }
+
+    .report-card-body {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .stat-box-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .stat-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-number { font-family: 'Fredoka', cursive; font-size: 1.6rem; color: var(--primary-dark); }
+    .stat-label { font-size: 0.75rem; color: #64748b; font-weight: bold; }
+
     .app-footer { text-align: center; font-size: 0.75rem; color: #64748b; padding: 6px; }
   </style>
 </head>
@@ -587,27 +651,27 @@
       </div>
 
       <div class="header-actions">
-        <button class="btn-action" onclick="showWelcomeScreen()" title="Trocar de Príncipe/Princesa">
+        <button class="btn-action" onclick="showWelcomeScreen()" title="Trocar de Perfil">
           <span id="avatarBtnIcon">👸</span>
           <span>Perfil</span>
         </button>
 
-        <button class="btn-action primary" onclick="openRepoModal()">
+        <button class="btn-action primary" onclick="openShopModal()">
+          <span>🛍️</span>
+          <span>Lojinha</span>
+        </button>
+
+        <button class="btn-action" onclick="openParentsModal()">
+          <span>👨‍👩‍👧</span>
+          <span>Área dos Pais</span>
+        </button>
+
+        <button class="btn-action" onclick="openRepoModal()">
           <span>📚</span>
-          <span>Repositório</span>
+          <span>Palavras</span>
         </button>
 
-        <button class="btn-action" onclick="speakCharacterAffirmation()">
-          <span id="voiceBtnIcon">👑</span>
-          <span id="voiceBtnLabel">Voz Real</span>
-        </button>
-
-        <button class="btn-action" id="soundToggleBtn" onclick="toggleSound()">
-          <span>🔊</span>
-          <span id="soundLabel">Som</span>
-        </button>
-
-        <div class="badge-star" title="Suas estrelas conquistadas">
+        <div class="badge-star" onclick="openShopModal()" title="Sua pontuação! Clique para gastar na loja">
           <span>⭐</span>
           <span id="starsDisplay">0</span>
         </div>
@@ -618,28 +682,28 @@
       <button class="level-card-btn lvl-1 active" id="btnLvl1" onclick="selectLevel(1)">
         <div>
           <span class="level-title-text">🌸 Nível 1: Simples</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">FA-DA, LUA, DADO... (50+)</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">FA-DA, LUA, DADO...</div>
         </div>
       </button>
 
       <button class="level-card-btn lvl-2" id="btnLvl2" onclick="selectLevel(2)">
         <div>
           <span class="level-title-text">🦄 Nível 2: Complexas</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">PRINCESA, ES-TRE-LA (50+)</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">PRINCESA, ES-TRE-LA...</div>
         </div>
       </button>
 
       <button class="level-card-btn lvl-3" id="btnLvl3" onclick="selectLevel(3)">
         <div>
           <span class="level-title-text">⭐ Nível 3: Complete</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">Sílaba Oculta Desafio (50+)</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">Sílaba Oculta Desafio</div>
         </div>
       </button>
 
       <button class="level-card-btn lvl-4" id="btnLvl4" onclick="selectLevel(4)">
         <div>
           <span class="level-title-text">🔥 Nível 4: Polissílabas</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">ASTRONAUTA, ETC. (50+)</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">ASTRONAUTA, ETC.</div>
         </div>
       </button>
     </div>
@@ -663,6 +727,8 @@
       <div class="stage-layout">
 
         <div class="left-panel">
+          <div class="pet-companion" id="petCompanionSlot"></div>
+
           <div class="unit-toggle-pills">
             <button class="unit-pill-btn active" id="btnModeLetters" onclick="setAssemblyMode('letters')">
               🔤 Por Letras
@@ -673,6 +739,7 @@
           </div>
 
           <div class="illustration-frame" onclick="speakCurrentWord()" title="Toque para ouvir!">
+            <div class="equipped-hat-badge" id="hatBadgeSlot"></div>
             <div class="illustration-inner">
               <div id="illustrationSvgContainer" style="font-size: 5rem;">🧚‍♀️</div>
             </div>
@@ -747,6 +814,43 @@
 
   </div>
 
+  <!-- MODAL DA LOJINHA -->
+  <div class="modal-overlay" id="shopModalOverlay" onclick="closeShopModalOnBackdrop(event)">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">🛍️</span>
+          <div>
+            <div style="font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1.15rem;">
+              Lojinha Mágica do Reino
+            </div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeShopModal()">✕</button>
+      </div>
+      <div class="shop-grid" id="shopItemsGrid"></div>
+    </div>
+  </div>
+
+  <!-- MODAL DOS PAIS & PROFESSORES -->
+  <div class="modal-overlay" id="parentsModalOverlay" onclick="closeParentsModalOnBackdrop(event)">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.4rem;">📊</span>
+          <div>
+            <div style="font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1.15rem;">
+              Relatório de Desempenho Escolar
+            </div>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeParentsModal()">✕</button>
+      </div>
+      <div class="report-card-body" id="parentsReportContent"></div>
+    </div>
+  </div>
+
+  <!-- MODAL DO REPOSITÓRIO -->
   <div class="modal-overlay" id="repoModalOverlay" onclick="closeRepoModalOnBackdrop(event)">
     <div class="modal-card">
       <div class="modal-header">
@@ -766,41 +870,34 @@
 
   <script>
     const WORDS_DATABASE = [
-      // --- NÍVEL 1: SÍLABAS SIMPLES (50+ PALAVRAS) ---
+      // NÍVEL 1: SIMPLES
       { id: "n1-1", level: 1, word: "FADA", syllables: ["FA", "DA"], emoji: "🧚‍♀️", hint: "Ser mágico com asas que realiza desejos." },
       { id: "n1-2", level: 1, word: "LUA", syllables: ["LU", "A"], emoji: "🌙", hint: "Brilha no céu durante a noite encantada." },
       { id: "n1-3", level: 1, word: "DADO", syllables: ["DA", "DO"], emoji: "🎲", hint: "Cubinho com pontinhos para jogos divertidos." },
       { id: "n1-4", level: 1, word: "BOLO", syllables: ["BO", "LO"], emoji: "🎂", hint: "Doce fofinho de aniversário com velinhas." },
       { id: "n1-5", level: 1, word: "SAPO", syllables: ["SA", "PO"], emoji: "🐸", hint: "Verdinho que pula na lagoa e come mosquinha." },
       { id: "n1-6", level: 1, word: "GATO", syllables: ["GA", "TO"], emoji: "🐱", hint: "Felino manhoso que faz miau." },
-      { id: "n1-7", level: 1, word: "BOLA", syllables: ["BO", "LA"], emoji: "⚽", hint: "Brinquedo redondo que quica e rola no chão." },
-      { id: "n1-8", level: 1, word: "CASA", syllables: ["CA", "SA"], emoji: "🏡", hint: "Lar quentinho onde a família mora." },
-      { id: "n1-9", level: 1, word: "NAVIO", syllables: ["NA", "VI", "O"], emoji: "🚢", hint: "Barco gigante que viaja pelo mar azul." },
-      { id: "n1-10", level: 1, word: "PATO", syllables: ["PA", "TO"], emoji: "🦆", hint: "Ave aquática que nada dizendo quá-quá." },
-      { id: "n1-11", level: 1, word: "MALA", syllables: ["MA", "LA"], emoji: "🧳", hint: "Usada para guardar roupas em viagens." },
-      { id: "n1-12", level: 1, word: "DEDO", syllables: ["DE", "DO"], emoji: "🖐️", hint: "Parte da nossa mão para apontar e tocar." },
-      { id: "n1-13", level: 1, word: "RATO", syllables: ["RA", "TO"], emoji: "🐭", hint: "Pequeno roedor esperto com rabo compridinho." },
-      { id: "n1-14", level: 1, word: "PIPOCA", syllables: ["PI", "PO", "CA"], emoji: "🍿", hint: "Milho que estoura na panela e vira branquinho." },
-      { id: "n1-15", level: 1, word: "COPO", syllables: ["CO", "PO"], emoji: "🥛", hint: "Usado para beber água fresquinha e suco." },
-      { id: "n1-16", level: 1, word: "SUCO", syllables: ["SU", "CO"], emoji: "🧃", hint: "Bebida gostosa feita com frutas naturais." },
-      { id: "n1-17", level: 1, word: "SOFÁ", syllables: ["SO", "FÁ"], emoji: "🛋️", hint: "Móvel macio da sala para sentar e descansar." },
-      { id: "n1-18", level: 1, word: "MESA", syllables: ["ME", "SA"], emoji: "🪑", hint: "Móvel com quatro pernas onde fazemos refeições." },
-      { id: "n1-19", level: 1, word: "FOGO", syllables: ["FO", "GO"], emoji: "🔥", hint: "Chama quente e luminosa que queima na fogueira." },
-      { id: "n1-20", level: 1, word: "MACACO", syllables: ["MA", "CA", "CO"], emoji: "🐵", hint: "Animal brincalhão que adora banana e pula em galhos." },
 
-      // --- NÍVEL 2: SÍLABAS COMPLEXAS (50+ PALAVRAS) ---
+      // NÍVEL 2: COMPLEXAS
       { id: "n2-1", level: 2, word: "PRINCESA", syllables: ["PRIN", "CE", "SA"], emoji: "👸", hint: "Jovem nobre do palácio que usa tiara brilhante." },
       { id: "n2-2", level: 2, word: "ESTRELA", syllables: ["ES", "TRE", "LA"], emoji: "⭐", hint: "Ponto brilhante no céu à noite." },
       { id: "n2-3", level: 2, word: "DRAGÃO", syllables: ["DRA", "GÃO"], emoji: "🐉", hint: "Criatura mágica com asas poderosas." },
-      { id: "n2-4", level: 2, word: "FLORESTA", syllables: ["FLO", "RES", "TA"], emoji: "🌲", hint: "Lugar encantado cheio de árvores e passarinhos." },
 
-      // --- NÍVEL 3: COMPLETE A SÍLABA (50+ PALAVRAS) ---
+      // NÍVEL 3: COMPLETE
       { id: "n3-1", level: 3, word: "CASTELO", syllables: ["CAS", "TE", "LO"], emoji: "🏰", hint: "Palácio mágico com grandes torres." },
       { id: "n3-2", level: 3, word: "UNICÓRNIO", syllables: ["U", "NI", "CÓR", "NIO"], emoji: "🦄", hint: "Cavalo mágico com um chifre brilhante." },
 
-      // --- NÍVEL 4: POLISSÍLABAS E DESAFIOS (50+ PALAVRAS) ---
+      // NÍVEL 4: POLISSÍLABAS
       { id: "n4-1", level: 4, word: "ASTRONAUTA", syllables: ["AS", "TRO", "NAU", "TA"], emoji: "👨‍🚀", hint: "Viajante do espaço que visita as estrelas." },
       { id: "n4-2", level: 4, word: "TELEVISÃO", syllables: ["TE", "LE", "VI", "SÃO"], emoji: "📺", hint: "Aparelho que mostra desenhos animados e filmes." }
+    ];
+
+    const SHOP_ITEMS = [
+      { id: "hat_crown", type: "hat", title: "Coroa Real", price: 30, emoji: "👑" },
+      { id: "hat_wizard", type: "hat", title: "Cartola Mágica", price: 50, emoji: "🎩" },
+      { id: "pet_dragon", type: "pet", title: "Dragãozinho", price: 80, emoji: "🐉" },
+      { id: "pet_unicorn", type: "pet", title: "Unicórnio", price: 100, emoji: "🦄" },
+      { id: "pet_cat", type: "pet", title: "Gatinho Real", price: 40, emoji: "🐱" }
     ];
 
     let currentGender = 'girl';
@@ -814,6 +911,14 @@
     let activeChoices = [];
     let soundEnabled = true;
 
+    // Estatísticas dos Pais
+    let statsCorrect = 0;
+    let statsAttempts = 0;
+    let historyWords = [];
+    let purchasedItems = [];
+    let equippedHat = null;
+    let equippedPet = null;
+
     function setGenderTheme(gender) {
       currentGender = gender;
       document.getElementById('welcomeOverlay').style.display = 'none';
@@ -823,25 +928,17 @@
         document.getElementById('brandIcon').innerText = "🤴";
         document.getElementById('brandText').innerText = "O Reino Silábico do Príncipe";
         document.getElementById('avatarBtnIcon').innerText = "🤴";
-        document.getElementById('voiceBtnIcon').innerText = "🛡️";
-        document.getElementById('voiceBtnLabel').innerText = "Voz do Príncipe";
-
         document.getElementById('decor3').innerText = "🐉";
         document.getElementById('decor4').innerText = "🛡️";
-
-        speakText("Bem-vindo, meu Príncipe! O reino está pronto para você jogar!");
+        speakText("Bem-vindo, meu Príncipe! O reino está pronto!");
       } else {
         document.body.classList.remove('theme-boy');
         document.getElementById('brandIcon').innerText = "👑";
         document.getElementById('brandText').innerText = "O Reino Silábico Encantado";
         document.getElementById('avatarBtnIcon').innerText = "👸";
-        document.getElementById('voiceBtnIcon').innerText = "👑";
-        document.getElementById('voiceBtnLabel').innerText = "Voz da Princesa";
-
         document.getElementById('decor3').innerText = "🧚‍♀️";
         document.getElementById('decor4').innerText = "🦄";
-
-        speakText("Bem-vinda, minha Princesa! Nosso reino mágico está pronto para você jogar!");
+        speakText("Bem-vinda, minha Princesa! Nosso reino está pronto!");
       }
 
       selectLevel(1);
@@ -905,6 +1002,7 @@
       document.getElementById('feedbackBanner').style.display = 'none';
       renderSlots();
       renderChoices();
+      updateEquippedDecorations();
     }
 
     function generateChoices() {
@@ -974,24 +1072,19 @@
       try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         const ctx = new AudioContext();
-        
         for (let i = 0; i < 4; i++) {
           setTimeout(() => {
             if (ctx.state === 'closed') return;
             const bufferSize = ctx.sampleRate * 0.08;
             const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
             const data = buffer.getChannelData(0);
-            for (let j = 0; j < bufferSize; j++) {
-              data[j] = Math.random() * 2 - 1;
-            }
+            for (let j = 0; j < bufferSize; j++) data[j] = Math.random() * 2 - 1;
 
             const noise = ctx.createBufferSource();
             noise.buffer = buffer;
-
             const filter = ctx.createBiquadFilter();
             filter.type = 'bandpass';
             filter.frequency.value = 1200;
-
             const gain = ctx.createGain();
             gain.gain.setValueAtTime(0.8, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
@@ -999,26 +1092,26 @@
             noise.connect(filter);
             filter.connect(gain);
             gain.connect(ctx.destination);
-
             noise.start();
           }, i * 120);
         }
-      } catch (e) {
-        console.log("Áudio bloqueado pelo navegador", e);
-      }
+      } catch (e) {}
     }
 
     function checkWinCondition() {
       const userString = userSlots.join('');
       const targetString = targetUnits.join('');
       const banner = document.getElementById('feedbackBanner');
+      statsAttempts++;
 
       if (userString === targetString) {
         if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
         stars += 10;
+        statsCorrect++;
         document.getElementById('starsDisplay').innerText = stars;
-
         playClapsSound();
+
+        if (!historyWords.includes(currentWordItem.word)) historyWords.push(currentWordItem.word);
 
         const title = currentGender === 'boy' ? 'Príncipe' : 'Princesa';
         banner.className = 'feedback-banner success';
@@ -1032,9 +1125,7 @@
       }
     }
 
-    function resetCurrentWord() {
-      loadCurrentWord();
-    }
+    function resetCurrentWord() { loadCurrentWord(); }
 
     function nextWord() {
       const filtered = getFilteredWords();
@@ -1057,30 +1148,12 @@
       window.speechSynthesis.speak(u);
     }
 
-    function speakCurrentWord() {
-      speakText(currentWordItem.word);
-    }
-
-    function speakCharacterAffirmation() {
-      const role = currentGender === 'boy' ? 'Príncipe' : 'Princesa';
-      speakText(`Olá, ${role}! Nosso reino mágico está pronto para você jogar e aprender!`);
-    }
-
-    function spellWord() {
-      const letters = currentWordItem.word.split('').join('... ');
-      speakText(letters);
-    }
-
-    function clapWord() {
-      const syllables = currentWordItem.syllables.join('... ');
-      speakText(syllables);
-    }
-
+    function speakCurrentWord() { speakText(currentWordItem.word); }
+    function spellWord() { speakText(currentWordItem.word.split('').join('... ')); }
+    function clapWord() { speakText(currentWordItem.syllables.join('... ')); }
     function handlePeekName() {
       document.getElementById('hiddenPillContent').innerText = currentWordItem.word;
-      setTimeout(() => {
-        document.getElementById('hiddenPillContent').innerText = "❓ · ❓";
-      }, 2000);
+      setTimeout(() => { document.getElementById('hiddenPillContent').innerText = "❓ · ❓"; }, 2000);
     }
 
     function toggleSound() {
@@ -1088,8 +1161,100 @@
       document.getElementById('soundLabel').innerText = soundEnabled ? 'Som' : 'Mudo';
     }
 
+    // --- LOJINHA DE RECOMPENSAS ---
+    function openShopModal() {
+      const grid = document.getElementById('shopItemsGrid');
+      grid.innerHTML = '';
+      SHOP_ITEMS.forEach(item => {
+        const isBought = purchasedItems.includes(item.id);
+        const isEquipped = (equippedHat === item.emoji) || (equippedPet === item.emoji);
+
+        const card = document.createElement('div');
+        card.className = 'shop-item-card';
+        card.innerHTML = `
+          <div class="shop-item-emoji">${item.emoji}</div>
+          <div class="shop-item-title">${item.title}</div>
+          <button class="shop-item-btn ${isEquipped ? 'equipped' : ''}" onclick="buyOrEquipItem('${item.id}')">
+            ${isEquipped ? 'Equipado' : isBought ? 'Usar' : `⭐ ${item.price}`}
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+      document.getElementById('shopModalOverlay').classList.add('open');
+    }
+
+    function buyOrEquipItem(itemId) {
+      const item = SHOP_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+
+      if (!purchasedItems.includes(itemId)) {
+        if (stars >= item.price) {
+          stars -= item.price;
+          purchasedItems.push(itemId);
+          document.getElementById('starsDisplay').innerText = stars;
+        } else {
+          alert('Você precisa de mais estrelas! Continue acertando as palavras.');
+          return;
+        }
+      }
+
+      if (item.type === 'hat') equippedHat = (equippedHat === item.emoji) ? null : item.emoji;
+      if (item.type === 'pet') equippedPet = (equippedPet === item.emoji) ? null : item.emoji;
+
+      updateEquippedDecorations();
+      openShopModal();
+    }
+
+    function updateEquippedDecorations() {
+      document.getElementById('hatBadgeSlot').innerText = equippedHat || '';
+      document.getElementById('petCompanionSlot').innerText = equippedPet || '';
+    }
+
+    function closeShopModal() { document.getElementById('shopModalOverlay').classList.remove('open'); }
+    function closeShopModalOnBackdrop(e) { if (e.target.id === 'shopModalOverlay') closeShopModal(); }
+
+    // --- ÁREA DOS PAIS E PROFESSORES ---
+    function openParentsModal() {
+      const n1 = Math.floor(Math.random() * 5) + 2;
+      const n2 = Math.floor(Math.random() * 5) + 1;
+      const ans = prompt(`Área do Responsável: Quanto é ${n1} + ${n2}?`);
+
+      if (parseInt(ans) === (n1 + n2)) {
+        const accuracy = statsAttempts > 0 ? Math.round((statsCorrect / statsAttempts) * 100) : 100;
+        const container = document.getElementById('parentsReportContent');
+        container.innerHTML = `
+          <div class="stat-box-grid">
+            <div class="stat-box">
+              <div class="stat-number">${statsCorrect}</div>
+              <div class="stat-label">Acertos</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">${stars}</div>
+              <div class="stat-label">Estrelas ⭐</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">${accuracy}%</div>
+              <div class="stat-label">Precisão</div>
+            </div>
+          </div>
+          <div>
+            <strong>Palavras Praticadas com Sucesso:</strong>
+            <p style="margin-top:6px; color:#64748b; font-size:0.9rem;">
+              ${historyWords.length > 0 ? historyWords.join(', ') : 'Nenhuma palavra concluída ainda nesta sessão.'}
+            </p>
+          </div>
+        `;
+        document.getElementById('parentsModalOverlay').classList.add('open');
+      } else if (ans !== null) {
+        alert('Resposta incorreta! Acesso restrito aos pais.');
+      }
+    }
+
+    function closeParentsModal() { document.getElementById('parentsModalOverlay').classList.remove('open'); }
+    function closeParentsModalOnBackdrop(e) { if (e.target.id === 'parentsModalOverlay') closeParentsModal(); }
+
+    // --- REPOSITÓRIO ---
     function openRepoModal() {
-      const overlay = document.getElementById('repoModalOverlay');
       const grid = document.getElementById('repoWordsGrid');
       grid.innerHTML = '';
       const filtered = getFilteredWords();
@@ -1104,16 +1269,11 @@
         };
         grid.appendChild(item);
       });
-      overlay.classList.add('open');
+      document.getElementById('repoModalOverlay').classList.add('open');
     }
 
-    function closeRepoModal() {
-      document.getElementById('repoModalOverlay').classList.remove('open');
-    }
-
-    function closeRepoModalOnBackdrop(e) {
-      if (e.target.id === 'repoModalOverlay') closeRepoModal();
-    }
+    function closeRepoModal() { document.getElementById('repoModalOverlay').classList.remove('open'); }
+    function closeRepoModalOnBackdrop(e) { if (e.target.id === 'repoModalOverlay') closeRepoModal(); }
   </script>
 </body>
 </html>
