@@ -10,27 +10,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <style>
-    /* Temas de Cores */
     :root {
-      /* Tema Padrão / Princesa (Rosa/Roxo) */
+      /* Tema Princesa (Padrão) - Baseado na imagem 1 */
       --primary: #ec4899;
       --primary-dark: #be185d;
       --secondary: #a855f7;
-      --bg-gradient: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 50%, #e0f2fe 100%);
+      --bg-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920');
+      --bg-overlay: linear-gradient(rgba(252, 231, 243, 0.88), rgba(224, 242, 254, 0.88));
       --card-border: #fbcfe8;
-      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.96);
       --badge-bg: #fdf2f8;
       --badge-color: #be185d;
     }
 
     body.theme-boy {
-      /* Tema Príncipe (Azul/Verde) */
+      /* Tema Príncipe - Baseado na imagem 2 (Castelo com torres azuis) */
       --primary: #0284c7;
       --primary-dark: #0369a1;
       --secondary: #10b981;
-      --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #d1fae5 100%);
+      --bg-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920');
+      --bg-overlay: linear-gradient(rgba(224, 242, 254, 0.88), rgba(209, 250, 229, 0.88));
       --card-border: #bae6fd;
-      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.96);
       --badge-bg: #f0f9ff;
       --badge-color: #0369a1;
     }
@@ -45,7 +46,8 @@
 
     body {
       font-family: 'Quicksand', sans-serif;
-      background: var(--bg-gradient);
+      background: var(--bg-overlay), var(--bg-image) no-repeat center center fixed;
+      background-size: cover;
       min-height: 100vh;
       width: 100vw;
       overflow-x: hidden;
@@ -56,11 +58,10 @@
       transition: background 0.5s ease;
     }
 
-    /* Tela de Seleção Inicial (Welcome Screen) */
     .welcome-overlay {
       position: fixed;
       inset: 0;
-      background: linear-gradient(135deg, #fce7f3 0%, #e0f2fe 100%);
+      background: linear-gradient(135deg, rgba(252, 231, 243, 0.95) 0%, rgba(224, 242, 254, 0.95) 100%);
       z-index: 200;
       display: flex;
       flex-direction: column;
@@ -82,19 +83,12 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
 
     .welcome-title {
       font-family: 'Fredoka', cursive;
       font-size: 1.8rem;
       color: #334155;
-      line-height: 1.2;
     }
 
     .character-selection-grid {
@@ -116,33 +110,14 @@
       transition: all 0.2s ease;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
     }
+    .character-btn.girl:hover { border-color: #ec4899; background: #fdf2f8; transform: translateY(-4px); }
+    .character-btn.boy:hover { border-color: #0284c7; background: #f0f9ff; transform: translateY(-4px); }
 
-    .character-btn.girl:hover {
-      border-color: #ec4899;
-      background: #fdf2f8;
-      transform: translateY(-4px);
-    }
-
-    .character-btn.boy:hover {
-      border-color: #0284c7;
-      background: #f0f9ff;
-      transform: translateY(-4px);
-    }
-
-    .character-avatar {
-      font-size: 3.8rem;
-    }
-
-    .character-label {
-      font-family: 'Fredoka', cursive;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
+    .character-avatar { font-size: 3.8rem; }
+    .character-label { font-family: 'Fredoka', cursive; font-size: 1.2rem; font-weight: 700; }
     .character-btn.girl .character-label { color: #db2777; }
     .character-btn.boy .character-label { color: #0284c7; }
 
-    /* Layout do App Principal */
     .ambient-decor {
       position: fixed;
       pointer-events: none;
@@ -193,12 +168,7 @@
       gap: 6px;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
+    .header-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 
     .badge-star {
       background: linear-gradient(135deg, #fef3c7, #fef08a);
@@ -228,11 +198,7 @@
       color: #475569;
       transition: all 0.15s ease;
     }
-    .btn-action:hover {
-      background: var(--badge-bg);
-      color: var(--primary-dark);
-      border-color: var(--card-border);
-    }
+    .btn-action:hover { background: var(--badge-bg); color: var(--primary-dark); border-color: var(--card-border); }
     .btn-action.primary {
       background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: #ffffff;
@@ -246,9 +212,7 @@
       gap: 6px;
     }
     @media (min-width: 640px) {
-      .level-selector-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      .level-selector-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
     .level-card-btn {
@@ -268,11 +232,7 @@
     .level-card-btn.active.lvl-3 { background: linear-gradient(135deg, #f59e0b, #ea580c); color: white; border-color: #d97706; }
     .level-card-btn.active.lvl-4 { background: linear-gradient(135deg, #e11d48, #be123c); color: white; border-color: #9f1239; }
 
-    .level-title-text {
-      font-family: 'Fredoka', cursive;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
+    .level-title-text { font-family: 'Fredoka', cursive; font-weight: 700; font-size: 0.85rem; }
 
     .game-main-card {
       background: var(--card-bg);
@@ -318,10 +278,7 @@
       align-items: center;
     }
     @media (min-width: 768px) {
-      .stage-layout {
-        grid-template-columns: 5fr 7fr;
-        gap: 20px;
-      }
+      .stage-layout { grid-template-columns: 5fr 7fr; gap: 20px; }
     }
 
     .left-panel {
@@ -354,10 +311,7 @@
       background: transparent;
       color: #64748b;
     }
-    .unit-pill-btn.active {
-      background: var(--primary);
-      color: white;
-    }
+    .unit-pill-btn.active { background: var(--primary); color: white; }
 
     .illustration-frame {
       width: 170px;
@@ -413,13 +367,7 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
     }
 
-    .support-tools-row {
-      margin-top: 8px;
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .support-tools-row { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
     .support-tool-btn {
       background: #ffffff;
       border: 1px solid var(--card-border);
@@ -445,11 +393,7 @@
       text-align: center;
     }
 
-    .right-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .right-panel { display: flex; flex-direction: column; gap: 12px; }
 
     .assembly-box-card {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
@@ -523,15 +467,8 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
       transition: all 0.15s ease;
     }
-    .cloud-btn:hover {
-      background: var(--badge-bg);
-      transform: scale(1.06);
-    }
-    .cloud-btn.used {
-      opacity: 0.2;
-      transform: scale(0.9);
-      cursor: not-allowed;
-    }
+    .cloud-btn:hover { background: var(--badge-bg); transform: scale(1.06); }
+    .cloud-btn.used { opacity: 0.2; transform: scale(0.9); cursor: not-allowed; }
 
     .feedback-banner {
       min-height: 38px;
@@ -544,16 +481,8 @@
       padding: 6px 14px;
       text-align: center;
     }
-    .feedback-banner.success {
-      background: #ecfdf5;
-      color: #065f46;
-      border: 1.5px solid #6ee7b7;
-    }
-    .feedback-banner.error {
-      background: #fff1f2;
-      color: #9f1239;
-      border: 1.5px solid #fecdd3;
-    }
+    .feedback-banner.success { background: #ecfdf5; color: #065f46; border: 1.5px solid #6ee7b7; }
+    .feedback-banner.error { background: #fff1f2; color: #9f1239; border: 1.5px solid #fecdd3; }
 
     .modal-overlay {
       position: fixed;
@@ -586,15 +515,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    .modal-close-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
+    .modal-close-btn { background: rgba(255, 255, 255, 0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
     .word-grid-scroll {
       flex: 1;
       overflow-y: auto;
@@ -603,22 +524,9 @@
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 8px;
     }
-    .repo-item-card {
-      background: white;
-      border: 1.5px solid var(--card-border);
-      border-radius: 16px;
-      padding: 8px 10px;
-      cursor: pointer;
-    }
-    .repo-item-card:hover {
-      border-color: var(--primary);
-    }
-    .app-footer {
-      text-align: center;
-      font-size: 0.75rem;
-      color: #64748b;
-      padding: 6px;
-    }
+    .repo-item-card { background: white; border: 1.5px solid var(--card-border); border-radius: 16px; padding: 8px 10px; cursor: pointer; }
+    .repo-item-card:hover { border-color: var(--primary); }
+    .app-footer { text-align: center; font-size: 0.75rem; color: #64748b; padding: 6px; }
   </style>
 </head>
 <body>
@@ -640,7 +548,6 @@
     </div>
   </div>
 
-  <!-- Elementos Decorativos de Fundo -->
   <div class="ambient-decor" style="top: 20px; left: 20px; font-size: 2.2rem;" id="decor1">☁️</div>
   <div class="ambient-decor" style="top: 35px; right: 30px; font-size: 2rem;" id="decor2">✨</div>
   <div class="ambient-decor" style="bottom: 30px; left: 30px; font-size: 2.2rem;" id="decor3">🧚‍♀️</div>
@@ -686,28 +593,28 @@
       <button class="level-card-btn lvl-1 active" id="btnLvl1" onclick="selectLevel(1)">
         <div>
           <span class="level-title-text">🌸 Nível 1: Simples</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">FA-DA, CO-RO-A, LUA...</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">FA-DA, LUA, DADO... (50+)</div>
         </div>
       </button>
 
       <button class="level-card-btn lvl-2" id="btnLvl2" onclick="selectLevel(2)">
         <div>
           <span class="level-title-text">🦄 Nível 2: Complexas</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">PRIN-CE-SA, ES-TRE-LA...</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">PRINCESA, ES-TRE-LA (50+)</div>
         </div>
       </button>
 
       <button class="level-card-btn lvl-3" id="btnLvl3" onclick="selectLevel(3)">
         <div>
           <span class="level-title-text">⭐ Nível 3: Complete</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">Preencha a Sílaba Oculta</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">Sílaba Oculta Desafio (50+)</div>
         </div>
       </button>
 
       <button class="level-card-btn lvl-4" id="btnLvl4" onclick="selectLevel(4)">
         <div>
           <span class="level-title-text">🔥 Nível 4: Polissílabas</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">AS-TRO-NAU-TA...</div>
+          <div style="font-size: 0.65rem; opacity: 0.85;">ASTRONAUTA, ETC. (50+)</div>
         </div>
       </button>
     </div>
@@ -815,7 +722,6 @@
 
   </div>
 
-  <!-- Modal do Repositório -->
   <div class="modal-overlay" id="repoModalOverlay" onclick="closeRepoModalOnBackdrop(event)">
     <div class="modal-card">
       <div class="modal-header">
@@ -834,31 +740,221 @@
   </div>
 
   <script>
+    // BANCOS DE DADOS EXPANDIDOS (>50 PALAVRAS EM CADA NÍVEL)
     const WORDS_DATABASE = [
-      // NÍVEL 1: SÍLABAS SIMPLES
+      // --- NÍVEL 1: SÍLABAS SIMPLES (50+ PALAVRAS) ---
       { id: "n1-1", level: 1, word: "FADA", syllables: ["FA", "DA"], emoji: "🧚‍♀️", hint: "Ser mágico com asas que realiza desejos." },
       { id: "n1-2", level: 1, word: "LUA", syllables: ["LU", "A"], emoji: "🌙", hint: "Brilha no céu durante a noite encantada." },
       { id: "n1-3", level: 1, word: "DADO", syllables: ["DA", "DO"], emoji: "🎲", hint: "Cubinho com pontinhos para jogos divertidos." },
       { id: "n1-4", level: 1, word: "BOLO", syllables: ["BO", "LO"], emoji: "🎂", hint: "Doce fofinho de aniversário com velinhas." },
       { id: "n1-5", level: 1, word: "SAPO", syllables: ["SA", "PO"], emoji: "🐸", hint: "Verdinho que pula na lagoa e come mosquinha." },
       { id: "n1-6", level: 1, word: "GATO", syllables: ["GA", "TO"], emoji: "🐱", hint: "Felino manhoso que faz miau." },
+      { id: "n1-7", level: 1, word: "BOLA", syllables: ["BO", "LA"], emoji: "⚽", hint: "Brinquedo redondo que quica e rola no chão." },
+      { id: "n1-8", level: 1, word: "CASA", syllables: ["CA", "SA"], emoji: "🏡", hint: "Lar quentinho onde a família mora." },
+      { id: "n1-9", level: 1, word: "NAVIO", syllables: ["NA", "VI", "O"], emoji: "🚢", hint: "Barco gigante que viaja pelo mar azul." },
+      { id: "n1-10", level: 1, word: "PATO", syllables: ["PA", "TO"], emoji: "🦆", hint: "Ave aquática que nada dizendo quá-quá." },
+      { id: "n1-11", level: 1, word: "MALA", syllables: ["MA", "LA"], emoji: "🧳", hint: "Usada para guardar roupas em viagens." },
+      { id: "n1-12", level: 1, word: "DEDO", syllables: ["DE", "DO"], emoji: "🖐️", hint: "Parte da nossa mão para apontar e tocar." },
+      { id: "n1-13", level: 1, word: "RATO", syllables: ["RA", "TO"], emoji: "🐭", hint: "Pequeno roedor esperto com rabo compridinho." },
+      { id: "n1-14", level: 1, word: "PIPOCA", syllables: ["PI", "PO", "CA"], emoji: "🍿", hint: "Milho que estoura na panela e vira branquinho." },
+      { id: "n1-15", level: 1, word: "COPO", syllables: ["CO", "PO"], emoji: "🥛", hint: "Usado para beber água fresquinha e suco." },
+      { id: "n1-16", level: 1, word: "SUCO", syllables: ["SU", "CO"], emoji: "🧃", hint: "Bebida gostosa feita com frutas naturais." },
+      { id: "n1-17", level: 1, word: "SOFÁ", syllables: ["SO", "FÁ"], emoji: "🛋️", hint: "Móvel macio da sala para sentar e descansar." },
+      { id: "n1-18", level: 1, word: "MESA", syllables: ["ME", "SA"], emoji: "🪑", hint: "Móvel com quatro pernas onde fazemos refeições." },
+      { id: "n1-19", level: 1, word: "FOGO", syllables: ["FO", "GO"], emoji: "🔥", hint: "Chama quente e luminosa que queima na fogueira." },
+      { id: "n1-20", level: 1, word: "MACACO", syllables: ["MA", "CA", "CO"], emoji: "🐵", hint: "Animal brincalhão que adora banana e pula em galhos." },
+      { id: "n1-21", level: 1, word: "TUCANO", syllables: ["TU", "CA", "NO"], emoji: "🦜", hint: "Pássaro tropical com bico grande e colorido." },
+      { id: "n1-22", level: 1, word: "VACA", syllables: ["VA", "CA"], emoji: "🐮", hint: "Animal da fazenda que faz muuu e dá leite." },
+      { id: "n1-23", level: 1, word: "CAVALO", syllables: ["CA", "VA", "LO"], emoji: "🐴", hint: "Animal elegante que cavalga e relincha forte." },
+      { id: "n1-24", level: 1, word: "BONECA", syllables: ["BO", "NE", "CA"], emoji: "🪆", hint: "Brinquedo favorito para cuidar e criar historinhas." },
+      { id: "n1-25", level: 1, word: "COROA", syllables: ["CO", "RO", "A"], emoji: "👑", hint: "Acessório dourado usado por reis e rainhas." },
+      { id: "n1-26", level: 1, word: "BANANA", syllables: ["BA", "NA", "NA"], emoji: "🍌", hint: "Fruta amarela e docinha facílima de descascar." },
+      { id: "n1-27", level: 1, word: "PANELA", syllables: ["PA", "NE", "LA"], emoji: "🍲", hint: "Usada no fogão para preparar comidas deliciosas." },
+      { id: "n1-28", level: 1, word: "ZEBRA", syllables: ["ZE", "BRA"], emoji: "🦓", hint: "Animal fofo listrado de preto e branco." },
+      { id: "n1-29", level: 1, word: "SAPATO", syllables: ["SA", "PA", "TO"], emoji: "👞", hint: "Calçado que protege nossos pezinhos ao caminhar." },
+      { id: "n1-30", level: 1, word: "JANELA", syllables: ["JA", "NE", "LA"], emoji: "🪟", hint: "Abertura na parede por onde entra a luz do sol." },
+      { id: "n1-31", level: 1, word: "POMBA", syllables: ["POM", "BA"], emoji: "🕊️", hint: "Ave branca símbolo de paz e tranquilidade." },
+      { id: "n1-32", level: 1, word: "UVA", syllables: ["U", "VA"], emoji: "🍇", hint: "Fruta redondinha em cachos, roxa ou verdinha." },
+      { id: "n1-33", level: 1, word: "PIRULITO", syllables: ["PI", "RU", "LI", "TO"], emoji: "🍭", hint: "Doce açucarado no palito para saborear." },
+      { id: "n1-34", level: 1, word: "PICOLÉ", syllables: ["PI", "CO", "LÉ"], emoji: "🍧", hint: "Sorvete geladinho no palito para dias quentes." },
+      { id: "n1-35", level: 1, word: "GELATINA", syllables: ["GE", "LA", "TI", "NA"], emoji: "🍮", hint: "Sobremesa gelatinosa e colorida que balança." },
+      { id: "n1-36", level: 1, word: "FARINHA", syllables: ["FA", "RI", "NHA"], emoji: "🌾", hint: "Pó branquinho feito de grãos para fazer bolos." },
+      { id: "n1-37", level: 1, word: "BATATA", syllables: ["BA", "TA", "TA"], emoji: "🥔", hint: "Tubérculo saboroso que vira purê ou batata frita." },
+      { id: "n1-38", level: 1, word: "CENOURA", syllables: ["CE", "NOU", "RA"], emoji: "🥕", hint: "Vegetal alaranjado e crocante favorito dos coelhinhos." },
+      { id: "n1-39", level: 1, word: "TOMATE", syllables: ["TO", "MA", "TE"], emoji: "🍅", hint: "Fruto vermelhinho muito usado em saladas e molhos." },
+      { id: "n1-40", level: 1, word: "CORUJA", syllables: ["CO", "RU", "JA"], emoji: "🦉", hint: "Ave noturna de olhos grandões e muito sábia." },
+      { id: "n1-41", level: 1, word: "LEÃO", syllables: ["LE", "ÃO"], emoji: "🦁", hint: "O rei da selva com uma juba linda e rugido forte." },
+      { id: "n1-42", level: 1, word: "PEIXE", syllables: ["PEI", "XE"], emoji: "🐟", hint: "Animal que nada ligeiro nos rios e mares." },
+      { id: "n1-43", level: 1, word: "RUA", syllables: ["RU", "A"], emoji: "🛣️", hint: "Caminho asfaltado por onde passam carros e pessoas." },
+      { id: "n1-44", level: 1, word: "MATA", syllables: ["MA", "TA"], emoji: "🌳", hint: "Floresta cheia de árvores verdes e passarinhos." },
+      { id: "n1-45", level: 1, word: "RIO", syllables: ["RI", "O"], emoji: "🌊", hint: "Água doce que corre mansinha pela natureza." },
+      { id: "n1-46", level: 1, word: "SOL", syllables: ["SOL"], emoji: "☀️", hint: "A grande estrela que ilumina e aquece nosso dia." },
+      { id: "n1-47", level: 1, word: "BALA", syllables: ["BA", "LA"], emoji: "🍬", hint: "Docinho colorido embalado em papel brilhante." },
+      { id: "n1-48", level: 1, word: "BULE", syllables: ["BU", "LE"], emoji: "🫖", hint: "Recipiente com bico para servir chá quentinho." },
+      { id: "n1-49", level: 1, word: "CANECA", syllables: ["CA", "NE", "CA"], emoji: "☕", hint: "Copo com alça para tomar leite ou chocolate." },
+      { id: "n1-50", level: 1, word: "DOCE", syllables: ["DO", "CE"], emoji: "🧁", hint: "Guloseima saborosa com sabor de açúcar e festa." },
+      { id: "n1-51", level: 1, word: "TAPA", syllables: ["TA", "PA"], emoji: "👋", hint: "Movimento rápido com a mão." },
+      { id: "n1-52", level: 1, word: "LATA", syllables: ["LA", "TA"], emoji: "🥫", hint: "Embalagem metálica de conserva." },
 
-      // NÍVEL 2: SÍLABAS COMPLEXAS
+      // --- NÍVEL 2: SÍLABAS COMPLEXAS (50+ PALAVRAS) ---
       { id: "n2-1", level: 2, word: "PRINCESA", syllables: ["PRIN", "CE", "SA"], emoji: "👸", hint: "Jovem nobre do palácio que usa tiara brilhante." },
       { id: "n2-2", level: 2, word: "ESTRELA", syllables: ["ES", "TRE", "LA"], emoji: "⭐", hint: "Ponto brilhante no céu à noite." },
       { id: "n2-3", level: 2, word: "DRAGÃO", syllables: ["DRA", "GÃO"], emoji: "🐉", hint: "Criatura mágica com asas poderosas." },
       { id: "n2-4", level: 2, word: "FLORESTA", syllables: ["FLO", "RES", "TA"], emoji: "🌲", hint: "Lugar encantado cheio de árvores e passarinhos." },
+      { id: "n2-5", level: 2, word: "BLUSA", syllables: ["BLU", "SA"], emoji: "👕", hint: "Peça de roupa que cobre o tronco." },
+      { id: "n2-6", level: 2, word: "CLUBE", syllables: ["CLU", "BE"], emoji: "🏊", hint: "Local de lazer com piscina e quadras." },
+      { id: "n2-7", level: 2, word: "GLOBO", syllables: ["GLO", "BO"], emoji: "🌍", hint: "Esfera que representa o planeta Terra." },
+      { id: "n2-8", level: 2, word: "PLACA", syllables: ["PLA", "CA"], emoji: "🛑", hint: "Aviso sinalizado com instruções na rua." },
+      { id: "n2-9", level: 2, word: "FLAUTA", syllables: ["FLAU", "TA"], emoji: " flute", hint: "Instrumento musical de sopro melodioso." },
+      { id: "n2-10", level: 2, word: "ATLETA", syllables: ["A", "TLE", "TA"], emoji: "🏃", hint: "Pessoa que pratica esportes e corrida." },
+      { id: "n2-11", level: 2, word: "BLOCO", syllables: ["BLO", "CO"], emoji: "🧱", hint: "Peça de construção ou bloco de notas." },
+      { id: "n2-12", level: 2, word: "CLIMA", syllables: ["CLI", "MA"], emoji: "🌤️", hint: "Condição do tempo na atmosfera." },
+      { id: "n2-13", level: 2, word: "PLANO", syllables: ["PLA", "NO"], emoji: "📋", hint: "Estratégia ou desenho detalhado." },
+      { id: "n2-14", level: 2, word: "CRINHA", syllables: ["CRI", "NHA"], emoji: "🐎", hint: "Cabelo longo no pescoço do cavalo." },
+      { id: "n2-15", level: 2, word: "TREM", syllables: ["TREM"], emoji: "🚆", hint: "Meio de transporte sobre trilhos." },
+      { id: "n2-16", level: 2, word: "FRUTA", syllables: ["FRU", "TA"], emoji: "🍎", hint: "Alimento saudável colhido nas árvores." },
+      { id: "n2-17", level: 2, word: "PRATO", syllables: ["PRA", "TO"], emoji: "🍽️", hint: "Utensílio onde colocamos a comida." },
+      { id: "n2-18", level: 2, word: "TRATOR", syllables: ["TRA", "TOR"], emoji: "🚜", hint: "Veículo forte usado na agricultura." },
+      { id: "n2-19", level: 2, word: "VIDRO", syllables: ["VI", "DRO"], emoji: "🪟", hint: "Material transparente de janelas." },
+      { id: "n2-20", level: 2, word: "LIVRO", syllables: ["LIV", "RO"], emoji: "📖", hint: "Conjunto de páginas com histórias fascinantes." },
+      { id: "n2-21", level: 2, word: "TIGRE", syllables: ["TI", "GRE"], emoji: "🐅", hint: "Felino selvagem com listras laranjas e pretas." },
+      { id: "n2-22", level: 2, word: "FROTA", syllables: ["FRO", "TA"], emoji: "🚚", hint: "Conjunto de veículos de uma empresa." },
+      { id: "n2-23", level: 2, word: "CREME", syllables: ["CRE", "ME"], emoji: "🧴", hint: "Substância cremosa para a pele." },
+      { id: "n2-24", level: 2, word: "DRACENA", syllables: ["DRA", "CE", "NA"], emoji: "🌿", hint: "Planta ornamental verde." },
+      { id: "n2-25", level: 2, word: "BROTO", syllables: ["BRO", "TO"], emoji: "🌱", hint: "Plantinha começando a nascer." },
+      { id: "n2-26", level: 2, word: "CRIME", syllables: ["CRI", "ME"], emoji: "🔍", hint: "Ato contra a lei." },
+      { id: "n2-27", level: 2, word: "GRIFO", syllables: ["GRI", "FO"], emoji: "🖋️", hint: "Criatura mitológica ou destaque no texto." },
+      { id: "n2-28", level: 2, word: "PRINCE", syllables: ["PRIN", "CE"], emoji: "👑", hint: "Título de nobreza." },
+      { id: "n2-29", level: 2, word: "TRIGO", syllables: ["TRI", "GO"], emoji: "🌾", hint: "Cereal usado para fazer pães e massas." },
+      { id: "n2-30", level: 2, word: "PLUMA", syllables: ["PLU", "MA"], emoji: "🪶", hint: "Pena leve de ave." },
+      { id: "n2-31", level: 2, word: "CLASSE", syllables: ["CLAS", "SE"], emoji: "🏫", hint: "Turma de alunos na escola." },
+      { id: "n2-32", level: 2, word: "BLUSAO", syllables: ["BLU", "SÃO"], emoji: "🧥", hint: "Casaco grosso e quentinho." },
+      { id: "n2-33", level: 2, word: "REFLEXO", syllables: ["RE", "FLEX", "O"], emoji: "🪞", hint: "Imagem espelhada." },
+      { id: "n2-34", level: 2, word: "TEXTO", syllables: ["TEX", "TO"], emoji: "📝", hint: "Escrito com palavras." },
+      { id: "n2-35", level: 2, word: "RISCO", syllables: ["RIS", "CO"], emoji: "✏️", hint: "Traço feito com lápis." },
+      { id: "n2-36", level: 2, word: "MOSCA", syllables: ["MOS", "CA"], emoji: "🪰", hint: "Inseto voador pequeno." },
+      { id: "n2-37", level: 2, word: "PASTA", syllables: ["PAS", "TA"], emoji: "📂", hint: "Guarda documentos importantes." },
+      { id: "n2-38", level: 2, word: "FESTA", syllables: ["FES", "TA"], emoji: "🎉", hint: "Comemoração alegre com amigos." },
+      { id: "n2-39", level: 2, word: "PISTA", syllables: ["PIS", "TA"], emoji: "🏁", hint: "Caminho demarcado para corridas." },
+      { id: "n2-40", level: 2, word: "BARCO", syllables: ["BAR", "CO"], emoji: "⛵", hint: "Embarcação pequena." },
+      { id: "n2-41", level: 2, word: "PORTO", syllables: ["POR", "TO"], emoji: "⚓", hint: "Lugar onde navios ancoram." },
+      { id: "n2-42", level: 2, word: "TURMA", syllables: ["TUR", "MA"], emoji: "👥", hint: "Grupo de amigos reunidos." },
+      { id: "n2-43", level: 2, word: "FARPA", syllables: ["FAR", "PA"], emoji: "📌", hint: "Ponta afiada de metal." },
+      { id: "n2-44", level: 2, word: "CORTE", syllables: ["COR", "TE"], emoji: "✂️", hint: "Feito com tesoura." },
+      { id: "n2-45", level: 2, word: "CARTO", syllables: ["CAR", "TO"], emoji: "🃏", hint: "Cartão ou ficha." },
+      { id: "n2-46", level: 2, word: "FORTE", syllables: ["FOR", "TE"], emoji: "🛡️", hint: "Que tem muita resistência." },
+      { id: "n2-47", level: 2, word: "VERDE", syllables: ["VER", "DE"], emoji: "🟩", hint: "Cor da natureza e folhas." },
+      { id: "n2-48", level: 2, word: "TARDE", syllables: ["TAR", "DE"], emoji: "🌇", hint: "Período do dia após o almoço." },
+      { id: "n2-49", level: 2, word: "SORTE", syllables: ["SOR", "TE"], emoji: "🍀", hint: "Boa fortuna inesperada." },
+      { id: "n2-50", level: 2, word: "MARTE", syllables: ["MAR", "TE"], emoji: "🔴", hint: "O planeta vermelho." },
+      { id: "n2-51", level: 2, word: "PARQUE", syllables: ["PAR", "QUE"], emoji: "🎡", hint: "Local público de lazer." },
 
-      // NÍVEL 3: COMPLETE A SÍLABA
+      // --- NÍVEL 3: COMPLETE A SÍLABA (50+ PALAVRAS) ---
       { id: "n3-1", level: 3, word: "CASTELO", syllables: ["CAS", "TE", "LO"], emoji: "🏰", hint: "Palácio mágico com grandes torres." },
       { id: "n3-2", level: 3, word: "UNICÓRNIO", syllables: ["U", "NI", "CÓR", "NIO"], emoji: "🦄", hint: "Cavalo mágico com um chifre brilhante." },
+      { id: "n3-3", level: 3, word: "BORBOLETA", syllables: ["BOR", "BO", "LE", "TA"], emoji: "🦋", hint: "Inseto voador com asas super coloridas." },
+      { id: "n3-4", level: 3, word: "CHOCOLATE", syllables: ["CHO", "CO", "LA", "TE"], emoji: "🍫", hint: "Doce marrom cremoso e delicioso." },
+      { id: "n3-5", level: 3, word: "PASSARINHO", syllables: ["PAS", "SA", "RI", "NHO"], emoji: "🐦", hint: "Pequeno animal que voa e canta nas árvores." },
+      { id: "n3-6", level: 3, word: "TARTARUGA", syllables: ["TAR", "TA", "RU", "GA"], emoji: "🐢", hint: "Animal calmo que carrega sua casinha nas costas." },
+      { id: "n3-7", level: 3, word: "ELEFANTE", syllables: ["E", "LE", "FAN", "TE"], emoji: "🐘", hint: "Gigante cinzento com tromba comprida." },
+      { id: "n3-8", level: 3, word: "GIRAFA", syllables: ["GI", "RA", "FA"], emoji: "🦒", hint: "Animal altíssimo com pescoço comprido." },
+      { id: "n3-9", level: 3, word: "MACACO", syllables: ["MA", "CA", "CO"], emoji: "🐵", hint: "Bichinho ágil que pula de galho em galho." },
+      { id: "n3-10", level: 3, word: "PIPA", syllables: ["PI", "PA"], emoji: "🪁", hint: "Brinquedo que voa alto preso por uma linha." },
+      { id: "n3-11", level: 3, word: "PIQUE", syllables: ["PI", "QUE"], emoji: "🏃‍♂️", hint: "Brincadeira de correr e pegar os amigos." },
+      { id: "n3-12", level: 3, word: "PETECA", syllables: ["PE", "TE", "CA"], emoji: "🪶", hint: "Jogo tradicional de bater com a mão na base." },
+      { id: "n3-13", level: 3, word: "CAVALO", syllables: ["CA", "VA", "LO"], emoji: "🐎", hint: "Animal veloz usado para montaria." },
+      { id: "n3-14", level: 3, word: "CADEIRA", syllables: ["CA", "DEI", "RA"], emoji: "🪑", hint: "Assento com encosto para descansar." },
+      { id: "n3-15", level: 3, word: "GELADEIRA", syllables: ["GE", "LA", "DEI", "RA"], emoji: "🧊", hint: "Eletrodoméstico que mantém a comida fria." },
+      { id: "n3-16", level: 3, word: "TELEFONE", syllables: ["TE", "LE", "FO", "NE"], emoji: "☎️", hint: "Aparelho para conversar à distância." },
+      { id: "n3-17", level: 3, word: "MERCADO", syllables: ["MER", "CA", "DO"], emoji: "🛒", hint: "Lugar onde compramos frutas e mantimentos." },
+      { id: "n3-18", level: 3, word: "ESCOLA", syllables: ["ES", "CO", "LA"], emoji: "🏫", hint: "Lugar de estudar e aprender coisas novas." },
+      { id: "n3-19", level: 3, word: "MOCHILA", syllables: ["MO", "CHI", "LA"], emoji: "🎒", hint: "Bolsa usada nas costas para levar materiais." },
+      { id: "n3-20", level: 3, word: "CADERNO", syllables: ["CA", "DER", "NO"], emoji: "📓", hint: "Bloco de folhas para escrever e desenhar." },
+      { id: "n3-21", level: 3, word: "CANETA", syllables: ["CA", "NE", "TA"], emoji: "🖊️", hint: "Instrumento com tinta para escrever." },
+      { id: "n3-22", level: 3, word: "LAPIS", syllables: ["LA", "PIS"], emoji: "✏️", hint: "Usado para desenhar e apagar se errar." },
+      { id: "n3-23", level: 3, word: "BORRACHA", syllables: ["BOR", "RA", "CHA"], emoji: "🧹", hint: "Apaga riscos de lápis no papel." },
+      { id: "n3-24", level: 3, word: "ESTOJO", syllables: ["ES", "TO", "JO"], emoji: "✏️", hint: "Guarda lápis e canetas com segurança." },
+      { id: "n3-25", level: 3, word: "TESOURA", syllables: ["TE", "SOU", "RA"], emoji: "✂️", hint: "Ferramenta para cortar papéis com cuidado." },
+      { id: "n3-26", level: 3, word: "COLA", syllables: ["CO", "LA"], emoji: "🧴", hint: "Líquido adesivo para colar figurinhas." },
+      { id: "n3-27", level: 3, word: "REGUA", syllables: ["RÉ", "GUA"], emoji: "📏", hint: "Objeto reto para medir comprimentos." },
+      { id: "n3-28", level: 3, word: "MOEDA", syllables: ["MO", "E", "DA"], emoji: "🪙", hint: "Dinheiro metálico circular." },
+      { id: "n3-29", level: 3, word: "CHAVE", syllables: ["CHA", "VE"], emoji: "🔑", hint: "Abre e fecha portas e cadeados." },
+      { id: "n3-30", level: 3, word: "PORTA", syllables: ["POR", "TA"], emoji: "🚪", hint: "Entrada principal de cômodos e casas." },
+      { id: "n3-31", level: 3, word: "PAREDE", syllables: ["PA", "RE", "DE"], emoji: "🧱", hint: "Estrutura vertical que divide ambientes." },
+      { id: "n3-32", level: 3, word: "TELHADO", syllables: ["TE", "LHA", "DO"], emoji: "🏠", hint: "Cobertura superior que protege contra chuva." },
+      { id: "n3-33", level: 3, word: "JARDIM", syllables: ["JAR", "DIM"], emoji: "🌷", hint: "Área verde repleta de flores cheirosas." },
+      { id: "n3-34", level: 3, word: "GRAMA", syllables: ["GRA", "MA"], emoji: "🌱", hint: "Tapete verde de plantinhas no chão." },
+      { id: "n3-35", level: 3, word: "PLANTA", syllables: ["PLAN", "TA"], emoji: "🌿", hint: "Ser vivo que brota da terra e precisa de água." },
+      { id: "n3-36", level: 3, word: "FLOR", syllables: ["FLOR"], emoji: "🌸", hint: "Parte colorida e perfumada das plantas." },
+      { id: "n3-37", level: 3, word: "FRUTO", syllables: ["FRU", "TO"], emoji: "🍏", hint: "Alimento saboroso gerado pelas plantas." },
+      { id: "n3-38", level: 3, word: "SABAO", syllables: ["SA", "BÃO"], emoji: "🧼", hint: "Produto cheiroso para lavar as mãos." },
+      { id: "n3-39", level: 3, word: "TOALHA", syllables: ["TO", "A", "LHA"], emoji: "🛁", hint: "Pano macio para secar o corpo após o banho." },
+      { id: "n3-40", level: 3, word: "ESPELHO", syllables: ["ES", "PE", "LHO"], emoji: "🪞", hint: "Mostra o seu reflexo exato quando você olha." },
+      { id: "n3-41", level: 3, word: "PIJAMA", syllables: ["PI", "JA", "MA"], emoji: "👕", hint: "Roupinha confortável para dormir à noite." },
+      { id: "n3-42", level: 3, word: "CAMA", syllables: ["CA", "MA"], emoji: "🛏️", hint: "Móvel aconchegante para deitar e sonhar." },
+      { id: "n3-43", level: 3, word: "TRAVESSEIRO", syllables: ["TRA", "VES", "SEI", "RO"], emoji: "💤", hint: "Apoio macio para colocar a cabeça na hora de dormir." },
+      { id: "n3-44", level: 3, word: "LENCOL", syllables: ["LEN", "ÇOL"], emoji: "🛏️", hint: "Pano leve que cobre a cama." },
+      { id: "n3-45", level: 3, word: "TAPETE", syllables: ["TA", "PE", "TE"], emoji: "🧶", hint: "Peça felpuda colocada no chão da sala." },
+      { id: "n3-46", level: 3, word: "CORTINA", syllables: ["COR", "TI", "NA"], emoji: "🖼️", hint: "Pano elegante pendurado na janela." },
+      { id: "n3-47", level: 3, word: "LAMPADA", syllables: ["LÂM", "PA", "DA"], emoji: "💡", hint: "Emite luz artificial nos cômodos escuros." },
+      { id: "n3-48", level: 3, word: "TAPETE", syllables: ["TA", "PE", "TE"], emoji: "🧶", hint: "Protege o piso e decora." },
+      { id: "n3-49", level: 3, word: "RELOGIO", syllables: ["RE", "LÓ", "GIO"], emoji: "⏰", hint: "Marca as horas do dia." },
+      { id: "n3-50", level: 3, word: "CALENDARIO", syllables: ["CA", "LEN", "DÁ", "RIO"], emoji: "📅", hint: "Mostra os dias e meses do ano." },
 
-      // NÍVEL 4: POLISSÍLABAS E COMPLICADAS
+      // --- NÍVEL 4: POLISSÍLABAS E DESAFIOS (50+ PALAVRAS) ---
       { id: "n4-1", level: 4, word: "ASTRONAUTA", syllables: ["AS", "TRO", "NAU", "TA"], emoji: "👨‍🚀", hint: "Viajante do espaço que visita as estrelas." },
-      { id: "n4-2", level: 4, word: "TELEVISÃO", syllables: ["TE", "LE", "VI", "SÃO"], emoji: "📺", hint: "Aparelho que mostra desenhos animados e filmes." }
+      { id: "n4-2", level: 4, word: "TELEVISÃO", syllables: ["TE", "LE", "VI", "SÃO"], emoji: "📺", hint: "Aparelho que mostra desenhos animados e filmes." },
+      { id: "n4-3", level: 4, word: "PARALELEPIPEDO", syllables: ["PA", "RA", "LE", "LE", "PI", "PE", "DO"], emoji: "🧱", hint: "Bloco de pedra usado para calçar ruas antigas." },
+      { id: "n4-4", level: 4, word: "BICICLETA", syllables: ["BI", "CI", "CLE", "TA"], emoji: "🚲", hint: "Veículo de duas rodas movido a pedal." },
+      { id: "n4-5", level: 4, word: "HELICOPTERO", syllables: ["HE", "LI", "CÓP", "TE", "RO"], emoji: "🚁", hint: "Aeronave com hélice superior que voa na vertical." },
+      { id: "n4-6", level: 4, word: "HIPOPOTAMO", syllables: ["HI", "PO", "PÓ", "TA", "MO"], emoji: "🦛", hint: "Grande animal cinzento que adora banhos de rio." },
+      { id: "n4-7", level: 4, word: "COMPUTADOR", syllables: ["COM", "PU", "TA", "DOR"], emoji: "💻", hint: "Máquina inteligente usada para navegar na internet." },
+      { id: "n4-8", level: 4, word: "GELADEIRA", syllables: ["GE", "LA", "DEI", "RA"], emoji: "🧊", hint: "Eletrodoméstico que refrigera alimentos." },
+      { id: "n4-9", level: 4, word: "BORBOLETA", syllables: ["BOR", "BO", "LE", "TA"], emoji: "🦋", hint: "Inseto lindo com asas coloridas." },
+      { id: "n4-10", level: 4, word: "CHOCOLATE", syllables: ["CHO", "CO", "LA", "TE"], emoji: "🍫", hint: "Guloseima cremosa favorita de todos." },
+      { id: "n4-11", level: 4, word: "DINOSSAURO", syllables: ["DI", "NOS", "SAU", "RO"], emoji: "🦖", hint: "Antiga criatura gigante extinta da Terra." },
+      { id: "n4-12", level: 4, word: "ARCOIRIS", syllables: ["AR", "CO", "I", "RIS"], emoji: "🌈", hint: "Arco colorido que surge no céu após a chuva." },
+      { id: "n4-13", level: 4, word: "BIBLIOTECA", syllables: ["BI", "BLIO", "TE", "CA"], emoji: "📚", hint: "Lugar silencioso cheio de livros para leitura." },
+      { id: "n4-14", level: 4, word: "ESTETOSCOPIO", syllables: ["ES", "TE", "TOS", "CÓ", "PIO"], emoji: "🩺", hint: "Aparelho que o médico usa para ouvir o coração." },
+      { id: "n4-15", level: 4, word: "TARTARUGA", syllables: ["TAR", "TA", "RU", "GA"], emoji: "🐢", hint: "Réptil de casco duro e lento." },
+      { id: "n4-16", level: 4, word: "MARGARIDA", syllables: ["MAR", "GA", "RI", "DA"], emoji: "🌼", hint: "Flor delicada de pétalas brancas." },
+      { id: "n4-17", level: 1, word: "MATEMATICA", syllables: ["MA", "TE", "MÁ", "TI", "CA"], emoji: "🔢", hint: "Ciência dos números e cálculos divertidos." },
+      { id: "n4-18", level: 4, word: "UNIVERSO", syllables: ["U", "NI", "VER", "SO"], emoji: "🌌", hint: "Conjunto de todas as galáxias e estrelas." },
+      { id: "n4-19", level: 4, word: "LABIRINTO", syllables: ["LA", "BI", "RIN", "TO"], emoji: "🌀", hint: "Caminho cheio de curvas onde é fácil se perder." },
+      { id: "n4-20", level: 4, word: "BOMBEIRO", syllables: ["BOM", "BEI", "RO"], emoji: "👨‍🚒", hint: "Herói que apaga incêndios e resgata pessoas." },
+      { id: "n4-21", level: 4, word: "PROFESSOR", syllables: ["PRO", "FES", "SOR"], emoji: "👩‍🏫", hint: "Profissional dedicado a ensinar com carinho." },
+      { id: "n4-22", level: 4, word: "ENFERMEIRA", syllables: ["EN", "FER", "MEI", "RA"], emoji: "👩‍⚕️", hint: "Cuida dos pacientes nos hospitais com atenção." },
+      { id: "n4-23", level: 4, word: "VETERINARIO", syllables: ["VE", "TE", "RI", "NÁ", "RIO"], emoji: "🐶", hint: "Médico especializado em curar animais." },
+      { id: "n4-24", level: 4, word: "ARQUITETURA", syllables: ["AR", "QUI", "TE", "RU", "RA"], emoji: "🏛️", hint: "Arte de projetar casas e grandes edifícios." },
+      { id: "n4-25", level: 4, word: "CIRCUNFERENCIA", syllables: ["CIR", "CUN", "FE", "RÊN", "CIA"], emoji: "⭕", hint: "Linha geométrica perfeitamente redonda." },
+      { id: "n4-26", level: 4, word: "FOTOGRAFIA", syllables: ["FO", "TO", "GRA", "FI", "A"], emoji: "📷", hint: "Imagem capturada para registrar momentos." },
+      { id: "n4-27", level: 4, word: "REVOLUCAO", syllables: ["RE", "VO", "LU", "ÇÃO"], emoji: "⭐", hint: "Grande transformação histórica ou social." },
+      { id: "n4-28", level: 4, word: "CONSTRUCAO", syllables: ["CONS", "TRU", "ÇÃO"], emoji: "🏗️", hint: "Ato de erguer edifícios e estruturas." },
+      { id: "n4-29", level: 4, word: "CARRINHO", syllables: ["CAR", "RI", "NHO"], emoji: "🚗", hint: "Brinquedo favorito de quatro rodas." },
+      { id: "n4-30", level: 4, word: "TRANSFORMER", syllables: ["TRANS", "FOR", "MER"], emoji: "🤖", hint: "Robô que se transforma em veículo." },
+      { id: "n4-31", level: 4, word: "SUPERHEROI", syllables: ["SU", "PER", "HE", "RÓI"], emoji: "🦸‍♂️", hint: "Personagem corajoso com superpoderes." },
+      { id: "n4-32", level: 4, word: "AVENTUREIRO", syllables: ["A", "VEN", "TU", "REI", "RO"], emoji: "🧭", hint: "Explorador que busca grandes descobertas." },
+      { id: "n4-33", level: 4, word: "DIAMANTE", syllables: ["DIA", "MAN", "TE"], emoji: "💎", hint: "Pedra preciosa extremamente brilhante." },
+      { id: "n4-34", level: 4, word: "MISTERIOSO", syllables: ["MIS", "TE", "RI", "O", "SO"], emoji: "🔍", hint: "Algo secreto difícil de desvendar." },
+      { id: "n4-35", level: 4, word: "EXTRAORDINARIO", syllables: ["EX", "TRA", "OR", "DI", "NÁ", "RIO"], emoji: "✨", hint: "Algo fora do comum e espetacular." },
+      { id: "n4-36", level: 4, word: "IMAGINACAO", syllables: ["I", "MA", "GI", "NA", "ÇÃO"], emoji: "💭", hint: "Capacidade de criar mundos na mente." },
+      { id: "n4-37", level: 4, word: "MAGNIFICO", syllables: ["MAG", "NÍ", "FI", "CO"], emoji: "🌟", hint: "De beleza impressionante e grandiosa." },
+      { id: "n4-38", level: 4, word: "FANTASIOSO", syllables: ["FAN", "TA", "SI", "O", "SO"], emoji: "🦄", hint: "Pertencente ao mundo dos contos de fadas." },
+      { id: "n4-39", level: 4, word: "MARAVILHOSO", syllables: ["MA", "RA", "VI", "LHO", "SO"], emoji: "💖", hint: "Que enche o coração de alegria." },
+      { id: "n4-40", level: 4, word: "INACREDITAVEL", syllables: ["I", "NA", "CRE", "DI", "TÁ", "VEL"], emoji: "😲", hint: "Surpreendente ao extremo." },
+      { id: "n4-41", level: 4, word: "SENSACIONAL", syllables: ["SEN", "SA", "CIONAL"], emoji: "🎉", hint: "Espetacular, que gera muita emoção." },
+      { id: "n4-42", level: 4, word: "COMPAIXAO", syllables: ["COM", "PAI", "XÃO"], emoji: "🤗", hint: "Sentimento de amor e carinho pelo próximo." },
+      { id: "n4-43", level: 4, word: "SOLIDARIEDADE", syllables: ["SO", "LI", "DA", "RIE", "DA", "DE"], emoji: "🤝", hint: "Ajuda mútua e união entre as pessoas." },
+      { id: "n4-44", level: 4, word: "INTELIGENCIA", syllables: ["IN", "TE", "LI", "GÊN", "CIA"], emoji: "🧠", hint: "Facilidade para aprender e resolver desafios." },
+      { id: "n4-45", level: 4, word: "CRIATIVIDADE", syllables: ["CRI", "A", "TI", "VI", "DA", "DE"], emoji: "🎨", hint: "Talento para inventar coisas originais." },
+      { id: "n4-46", level: 4, word: "DISCIPLINA", syllables: ["DIS", "CI", "PLI", "NA"], emoji: "📋", hint: "Organização e cumprimento de regras." },
+      { id: "n4-47", level: 4, word: "PERSEVERANCA", syllables: ["PER", "SE", "VE", "RAN", "ÇA"], emoji: "🧗‍♀️", hint: "Nunca desistir diante dos obstáculos." },
+      { id: "n4-48", level: 4, word: "RESPONSABILIDADE", syllables: ["RES", "PON", "SA", "BI", "LI", "DA", "DE"], emoji: "🛡️", hint: "Cumprir com os deveres com seriedade." },
+      { id: "n4-49", level: 4, word: "ESPECIAL", syllables: ["ES", "PE", "CIAL"], emoji: "⭐", hint: "Único e de valor imenso." },
+      { id: "n4-50", level: 4, word: "TRIUNFANTE", syllables: ["TRI", "UN", "FAN", "TE"], emoji: "🏆", hint: "Vencedor de uma grande jornada." }
     ];
 
-    let currentGender = 'girl'; // 'girl' ou 'boy'
+    let currentGender = 'girl';
     let currentLevel = 1;
     let stars = 0;
     let assemblyMode = 'letters';
@@ -1024,112 +1120,12 @@
       renderChoices();
     }
 
-    function checkWinCondition() {
-      const userString = userSlots.join('');
-      const targetString = targetUnits.join('');
-      const banner = document.getElementById('feedbackBanner');
-
-      if (userString === targetString) {
-        if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
-        stars += 10;
-        document.getElementById('starsDisplay').innerText = stars;
-
-        const title = currentGender === 'boy' ? 'Príncipe' : 'Princesa';
-        speakText(`Parabéns, meu ${title}! Você acertou ${currentWordItem.word}!`);
-
-        banner.className = 'feedback-banner success';
-        banner.innerHTML = `✨ Muito bem, ${title}! Você conseguiu! (+10 ⭐)`;
-        banner.style.display = 'flex';
-      } else {
-        speakText("Ops! Tente novamente, você consegue!");
-        banner.className = 'feedback-banner error';
-        banner.innerHTML = `⚠️ Quase lá! Reorganize as pecinhas!`;
-        banner.style.display = 'flex';
-      }
-    }
-
-    function resetCurrentWord() {
-      loadCurrentWord();
-    }
-
-    function nextWord() {
-      const filtered = getFilteredWords();
-      currentIndex = (currentIndex + 1) % filtered.length;
-      loadCurrentWord();
-    }
-
-    function prevWord() {
-      const filtered = getFilteredWords();
-      currentIndex = (currentIndex - 1 + filtered.length) % filtered.length;
-      loadCurrentWord();
-    }
-
-    function speakText(text) {
-      if (!soundEnabled || !('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'pt-BR';
-      u.rate = 0.9;
-      window.speechSynthesis.speak(u);
-    }
-
-    function speakCurrentWord() {
-      speakText(currentWordItem.word);
-    }
-
-    function speakCharacterAffirmation() {
-      const role = currentGender === 'boy' ? 'Príncipe' : 'Princesa';
-      speakText(`Olá, ${role}! Nosso reino mágico está pronto para você jogar e aprender!`);
-    }
-
-    function spellWord() {
-      const letters = currentWordItem.word.split('').join('... ');
-      speakText(letters);
-    }
-
-    function clapWord() {
-      const syllables = currentWordItem.syllables.join('... ');
-      speakText(syllables);
-    }
-
-    function handlePeekName() {
-      document.getElementById('hiddenPillContent').innerText = currentWordItem.word;
-      setTimeout(() => {
-        document.getElementById('hiddenPillContent').innerText = "❓ · ❓";
-      }, 2000);
-    }
-
-    function toggleSound() {
-      soundEnabled = !soundEnabled;
-      document.getElementById('soundLabel').innerText = soundEnabled ? 'Som' : 'Mudo';
-    }
-
-    function openRepoModal() {
-      const overlay = document.getElementById('repoModalOverlay');
-      const grid = document.getElementById('repoWordsGrid');
-      grid.innerHTML = '';
-      const filtered = getFilteredWords();
-      filtered.forEach((w, idx) => {
-        const item = document.createElement('div');
-        item.className = 'repo-item-card';
-        item.innerHTML = `<strong>${w.emoji} ${w.word}</strong><br><small>${w.syllables.join('-')}</small>`;
-        item.onclick = () => {
-          currentIndex = idx;
-          loadCurrentWord();
-          closeRepoModal();
-        };
-        grid.appendChild(item);
-      });
-      overlay.classList.add('open');
-    }
-
-    function closeRepoModal() {
-      document.getElementById('repoModalOverlay').classList.remove('open');
-    }
-
-    function closeRepoModalOnBackdrop(e) {
-      if (e.target.id === 'repoModalOverlay') closeRepoModal();
-    }
-  </script>
-</body>
-</html>
+    // FUNÇÃO DE ÁUDIO DE PALMAS REAL (Web Audio API) - SEM VOZ ARTIFICIAL NO ACERTO
+    function playClapsSound() {
+      if (!soundEnabled || !window.AudioContext && !window.webkitAudioContext) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        
+        // Simula 4 palmas rítmicas festivas
+        for (let i = 0; i < 4; i++)
