@@ -660,4 +660,132 @@
     <div class="welcome-decor" style="top: 10%; left: 8%;">✨</div>
     <div class="welcome-decor" style="top: 15%; right: 10%;">🏰</div>
     <div class="welcome-decor" style="bottom: 12%; left: 10%;">🦄</div>
-    <div class="welcome-decor" style="bottom: 15%; right:
+    <div class="welcome-decor" style="bottom: 15%; right: 8%;">🐉</div>
+
+    <div class="welcome-card">
+      <div class="welcome-title">✨ Bem-vindo ao Reino Mágico! ✨</div>
+
+      <div class="name-input-group">
+        <label class="name-input-label" for="childNameInput">
+          <span>✏️ Como você se chama?</span>
+        </label>
+        <input 
+          type="text" 
+          id="childNameInput" 
+          class="name-input-field" 
+          placeholder="Digite seu lindo nome aqui..." 
+          maxlength="20"
+          autocomplete="off"
+        />
+      </div>
+
+      <div style="font-family: 'Fredoka', cursive; font-size: 1.05rem; color: #64748b; font-weight: 600; margin-top: 4px;">
+        Escolha quem vai jogar hoje:
+      </div>
+
+      <div class="character-selection-grid">
+        <button class="character-btn girl" onclick="setGenderTheme('girl')">
+          <span class="character-avatar">👸</span>
+          <span class="character-label">Princesa</span>
+        </button>
+        <button class="character-btn boy" onclick="setGenderTheme('boy')">
+          <span class="character-avatar">🤴</span>
+          <span class="character-label">Príncipe</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ambient-decor" style="top: 20px; left: 20px; font-size: 2.2rem;" id="decor1">☁️</div>
+  <div class="ambient-decor" style="top: 35px; right: 30px; font-size: 2rem;" id="decor2">✨</div>
+  <div class="ambient-decor" style="bottom: 30px; left: 30px; font-size: 2.2rem;" id="decor3">🧚‍♀️</div>
+  <div class="ambient-decor" style="bottom: 35px; right: 25px; font-size: 2.2rem;" id="decor4">🦄</div>
+
+  <div class="app-container">
+
+    <header class="header-bar">
+      <div class="brand-title">
+        <span id="brandIcon">👑</span>
+        <span id="brandText">O Reino Silábico Encantado</span>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-action" onclick="showWelcomeScreen()" title="Trocar de Perfil">
+          <span id="avatarBtnIcon">👸</span>
+          <span id="profileBtnName">Perfil</span>
+        </button>
+
+        <button class="btn-action primary" onclick="openShopModal()">
+          <span>🛍️</span>
+          <span>Lojinha</span>
+        </button>
+
+        <button class="btn-action" onclick="openParentsModal()">
+          <span>👨‍👩‍👧</span>
+          <span>Área dos Pais</span>
+        </button>
+
+        <button class="btn-action" onclick="openRepoModal()">
+          <span>📚</span>
+          <span>Palavras</span>
+        </button>
+
+        <div class="badge-star" onclick="openShopModal()" title="Sua pontuação! Clique para gastar na loja">
+          <span>⭐</span>
+          <span id="starsDisplay">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="theme-selector-bar" id="themeSelectorContainer"></div>
+
+    <div class="level-selector-grid">
+      <button class="level-card-btn lvl-1 active" id="btnLvl1" onclick="selectLevel(1)">
+        <div>
+          <span class="level-title-text">🌸 Nível 1: Simples</span>
+          <div style="font-size: 0.65rem; opacity: 0.85;">SÍLABAS SIMPLES (2-3)</div>
+        </div>
+      </button>
+
+      <button class="level-card-btn lvl-2" id="btnLvl2" onclick="selectLevel(2)">
+        <div>
+          <span class="level-title-text">🦄 Nível 2: Complexas</span>
+          <div style="font-size: 0.65rem; opacity: 0.85;">ENCONTROS E COMPLEXAS</div>
+        </div>
+      </button>
+
+      <button class="level-card-btn lvl-3" id="btnLvl3" onclick="selectLevel(3)">
+        <div>
+          <span class="level-title-text">⭐ Nível 3: Desafio</span>
+          <div style="font-size: 0.65rem; opacity: 0.85;">DESAFIOS SILÁBICOS</div>
+        </div>
+      </button>
+
+      <button class="level-card-btn lvl-4" id="btnLvl4" onclick="selectLevel(4)">
+        <div>
+          <span class="level-title-text">🔥 Nível 4: Polissílabas</span>
+          <div style="font-size: 0.65rem; opacity: 0.85;">PALAVRAS GRANDES</div>
+        </div>
+      </button>
+    </div>
+
+    <main class="game-main-card">
+      <div class="card-top-bar">
+        <button class="nav-arrow-btn" onclick="prevWord()" title="Palavra anterior">◀</button>
+
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span id="currentLevelBadge" style="background:var(--badge-bg); color:var(--primary-dark); border:1px solid var(--card-border); padding:3px 10px; border-radius:12px; font-weight:bold; font-size:0.75rem;">
+            🌸 Nível 1: Simples
+          </span>
+          <span id="wordProgressCounter" style="font-size:0.8rem; font-weight:bold; color:#64748b;">
+            Palavra 1
+          </span>
+        </div>
+
+        <button class="nav-arrow-btn" onclick="nextWord()" title="Próxima palavra">▶</button>
+      </div>
+
+      <div class="stage-layout">
+
+        <div class="left-panel">
+          <div class="pet-companion" id="pet
