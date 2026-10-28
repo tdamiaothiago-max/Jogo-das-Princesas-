@@ -71,14 +71,6 @@
       text-align: center;
     }
 
-    .welcome-decor {
-      position: absolute;
-      pointer-events: none;
-      font-size: 2.5rem;
-      animation: floatSlow 5s ease-in-out infinite;
-      opacity: 0.85;
-    }
-
     .welcome-card {
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
@@ -87,42 +79,16 @@
       padding: 30px 24px;
       max-width: 480px;
       width: 100%;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 0 20px rgba(236, 72, 153, 0.3);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
       gap: 18px;
-      position: relative;
-      z-index: 10;
-      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
     }
 
     .welcome-title {
       font-family: 'Fredoka', cursive;
       font-size: 1.8rem;
       color: #334155;
-      line-height: 1.25;
-    }
-
-    .name-input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: left;
-    }
-
-    .name-input-label {
-      font-family: 'Fredoka', cursive;
-      font-size: 1.05rem;
-      color: #be185d;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .name-input-field {
@@ -134,19 +100,12 @@
       font-size: 1.2rem;
       color: #334155;
       outline: none;
-      background: #fff;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
-      transition: border-color 0.2s ease;
-      user-select: text;
     }
-
-    .name-input-field:focus { border-color: #ec4899; }
 
     .character-selection-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      margin-top: 4px;
     }
 
     .character-btn {
@@ -159,28 +118,10 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      transition: all 0.2s ease;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
     }
-    .character-btn.girl:hover { border-color: #ec4899; background: #fdf2f8; transform: translateY(-5px) scale(1.02); }
-    .character-btn.boy:hover { border-color: #0284c7; background: #f0f9ff; transform: translateY(-5px) scale(1.02); }
 
     .character-avatar { font-size: 4rem; }
     .character-label { font-family: 'Fredoka', cursive; font-size: 1.25rem; font-weight: 700; }
-    .character-btn.girl .character-label { color: #db2777; }
-    .character-btn.boy .character-label { color: #0284c7; }
-
-    .ambient-decor {
-      position: fixed;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.25;
-      animation: floatSlow 6s ease-in-out infinite;
-    }
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-12px) rotate(3deg); }
-    }
 
     .app-container {
       position: relative;
@@ -203,11 +144,9 @@
       border-radius: 20px;
       padding: 6px 14px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .brand-title {
@@ -232,7 +171,6 @@
       gap: 4px;
       font-family: 'Fredoka', cursive;
       font-weight: 700;
-      font-size: 0.95rem;
       color: #b45309;
       cursor: pointer;
     }
@@ -249,14 +187,11 @@
       align-items: center;
       gap: 4px;
       color: #475569;
-      transition: all 0.15s ease;
     }
-    .btn-action:hover { background: var(--badge-bg); color: var(--primary-dark); border-color: var(--card-border); }
     .btn-action.primary {
       background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: #ffffff;
       border: none;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 
     .theme-selector-bar {
@@ -264,9 +199,7 @@
       gap: 6px;
       overflow-x: auto;
       padding: 4px 2px;
-      scrollbar-width: none;
     }
-    .theme-selector-bar::-webkit-scrollbar { display: none; }
 
     .theme-chip-btn {
       background: #ffffff;
@@ -279,17 +212,10 @@
       color: #475569;
       cursor: pointer;
       white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.15s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
-    .theme-chip-btn:hover, .theme-chip-btn.active {
+    .theme-chip-btn.active {
       background: var(--primary);
       color: white;
-      border-color: var(--primary-dark);
-      transform: translateY(-2px);
     }
 
     .level-selector-grid {
@@ -307,18 +233,8 @@
       border: 2px solid #e2e8f0;
       background: #ffffff;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.15s ease;
-      text-align: left;
     }
-    .level-card-btn.active.lvl-1 { background: linear-gradient(135deg, #10b981, #14b8a6); color: white; border-color: #059669; }
-    .level-card-btn.active.lvl-2 { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; border-color: var(--primary-dark); }
-    .level-card-btn.active.lvl-3 { background: linear-gradient(135deg, #f59e0b, #ea580c); color: white; border-color: #d97706; }
-    .level-card-btn.active.lvl-4 { background: linear-gradient(135deg, #e11d48, #be123c); color: white; border-color: #9f1239; }
-
-    .level-title-text { font-family: 'Fredoka', cursive; font-weight: 700; font-size: 0.85rem; }
+    .level-card-btn.active { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; }
 
     .game-main-card {
       background: var(--card-bg);
@@ -326,7 +242,6 @@
       border: 3px solid var(--card-border);
       border-radius: 28px;
       padding: 12px 16px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -337,9 +252,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 6px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #f1f5f9;
-      flex-wrap: wrap;
     }
 
     .nav-arrow-btn {
@@ -352,7 +264,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
       cursor: pointer;
       font-weight: bold;
     }
@@ -361,100 +272,46 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 14px;
-      align-items: center;
     }
     @media (min-width: 768px) {
-      .stage-layout { grid-template-columns: 5fr 7fr; gap: 20px; }
+      .stage-layout { grid-template-columns: 5fr 7fr; }
     }
 
     .left-panel {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.5) 100%);
+      background: rgba(255, 255, 255, 0.8);
       padding: 12px;
       border-radius: 22px;
       border: 1px solid var(--card-border);
-      position: relative;
     }
-
-    .pet-companion {
-      position: absolute;
-      bottom: 8px;
-      right: 12px;
-      font-size: 2.2rem;
-      animation: floatSlow 4s ease-in-out infinite;
-    }
-
-    .unit-toggle-pills {
-      display: flex;
-      background: #ffffff;
-      padding: 3px;
-      border-radius: 14px;
-      border: 1px solid #e2e8f0;
-      gap: 3px;
-      margin-bottom: 8px;
-    }
-    .unit-pill-btn {
-      padding: 4px 12px;
-      border-radius: 10px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      color: #64748b;
-    }
-    .unit-pill-btn.active { background: var(--primary); color: white; }
 
     .illustration-frame {
       width: 260px;
       height: 240px;
       border-radius: 28px;
-      background: linear-gradient(135deg, #ffffff, #fdf2f8);
+      background: #ffffff;
       padding: 8px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12), 0 0 0 3px var(--card-border);
-      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
       position: relative;
-      transition: transform 0.2s ease;
     }
-    .illustration-frame:hover { transform: scale(1.02); }
+
     .illustration-inner {
       width: 100%;
       height: 100%;
-      background: #ffffff;
       border-radius: 22px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
+      background: #f8fafc;
     }
+
     .word-illustration-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 20px;
-    }
-
-    .equipped-hat-badge {
-      position: absolute;
-      top: -12px;
-      font-size: 2.5rem;
-      z-index: 5;
-    }
-
-    .hidden-name-pill {
-      margin-top: 8px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1.5px dashed var(--primary);
-      border-radius: 14px;
-      padding: 5px 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
     }
 
     .btn-audio-speak {
@@ -468,54 +325,22 @@
       border-radius: 16px;
       font-family: 'Fredoka', cursive;
       font-weight: 700;
-      font-size: 0.95rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-    }
-
-    .support-tools-row { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
-    .support-tool-btn {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      color: var(--primary-dark);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .hint-bubble {
-      margin-top: 6px;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #f1f5f9;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      color: #64748b;
-      text-align: center;
     }
 
     .right-panel { display: flex; flex-direction: column; gap: 12px; }
 
     .assembly-box-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.8));
+      background: rgba(255, 255, 255, 0.9);
       border: 2px solid var(--card-border);
       border-radius: 22px;
       padding: 12px 14px;
       text-align: center;
     }
+
     .slots-container {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       justify-content: center;
       gap: 8px;
       min-height: 64px;
@@ -525,7 +350,6 @@
     .slot-tile {
       min-width: 52px;
       height: 60px;
-      padding: 0 8px;
       border-radius: 18px;
       font-family: 'Fredoka', cursive;
       font-weight: 700;
@@ -534,7 +358,6 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      position: relative;
     }
     .slot-tile.empty {
       background: rgba(255, 255, 255, 0.9);
@@ -544,8 +367,6 @@
     .slot-tile.filled {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      border: 2px solid var(--card-border);
     }
 
     .options-box-card {
@@ -555,10 +376,10 @@
       padding: 12px 14px;
       text-align: center;
     }
+
     .options-container {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       justify-content: center;
       gap: 8px;
       margin-top: 8px;
@@ -574,11 +395,8 @@
       background: #ffffff;
       color: var(--primary-dark);
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      transition: all 0.15s ease;
     }
-    .cloud-btn:hover { background: var(--badge-bg); transform: scale(1.06); }
-    .cloud-btn.used { opacity: 0.2; transform: scale(0.9); cursor: not-allowed; }
+    .cloud-btn.used { opacity: 0.2; cursor: not-allowed; }
 
     .feedback-banner {
       min-height: 38px;
@@ -587,119 +405,37 @@
       justify-content: center;
       border-radius: 16px;
       font-weight: 700;
-      font-size: 0.85rem;
       padding: 6px 14px;
-      text-align: center;
     }
     .feedback-banner.success { background: #ecfdf5; color: #065f46; border: 1.5px solid #6ee7b7; }
     .feedback-banner.error { background: #fff1f2; color: #9f1239; border: 1.5px solid #fecdd3; }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.6);
-      backdrop-filter: blur(4px);
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-card {
-      background: #ffffff;
-      border-radius: 28px;
-      max-width: 900px;
-      width: 100%;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      border: 3px solid var(--card-border);
-      overflow: hidden;
-    }
-    .modal-header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .modal-close-btn { background: rgba(255, 255, 255, 0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
-    
-    .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; padding: 16px; overflow-y: auto; }
-    .shop-item-card { background: #ffffff; border: 2px solid var(--card-border); border-radius: 20px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
-    .shop-item-emoji { font-size: 3rem; }
-    .shop-item-title { font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1rem; }
-    .shop-item-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 6px 14px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-    .shop-item-btn.equipped { background: #10b981; }
-
-    .report-card-body { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
-    .stat-box-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 12px; text-align: center; }
-    .stat-number { font-family: 'Fredoka', cursive; font-size: 1.6rem; color: var(--primary-dark); }
-    .stat-label { font-size: 0.75rem; color: #64748b; font-weight: bold; }
-
-    .word-grid-scroll {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 10px;
-    }
-    .repo-item-card { background: white; border: 1.5px solid var(--card-border); border-radius: 16px; padding: 8px; cursor: pointer; text-align: center; }
-    .repo-item-card:hover { border-color: var(--primary); }
-
-    .app-footer { text-align: center; font-size: 0.75rem; color: #64748b; padding: 6px; }
   </style>
 </head>
 <body>
 
   <div class="welcome-overlay" id="welcomeOverlay">
-    <div class="welcome-decor" style="top: 10%; left: 8%;">✨</div>
-    <div class="welcome-decor" style="top: 15%; right: 10%;">🏰</div>
-    <div class="welcome-decor" style="bottom: 12%; left: 10%;">🦄</div>
-    <div class="welcome-decor" style="bottom: 15%; right: 8%;">🐉</div>
-
     <div class="welcome-card">
       <div class="welcome-title">✨ Bem-vindo ao Reino Mágico! ✨</div>
 
-      <div class="name-input-group">
-        <label class="name-input-label" for="childNameInput">
-          <span>✏️ Como você se chama?</span>
-        </label>
-        <input 
-          type="text" 
-          id="childNameInput" 
-          class="name-input-field" 
-          placeholder="Digite seu lindo nome aqui..." 
-          maxlength="20"
-          autocomplete="off"
-        />
+      <div style="text-align: left;">
+        <label style="font-family:'Fredoka', cursive; color:#be185d; font-weight:600;">✏️ Como você se chama?</label>
+        <input type="text" id="childNameInput" class="name-input-field" placeholder="Digite seu lindo nome aqui..." maxlength="20" autocomplete="off" />
       </div>
 
-      <div style="font-family: 'Fredoka', cursive; font-size: 1.05rem; color: #64748b; font-weight: 600; margin-top: 4px;">
-        Escolha quem vai jogar hoje:
-      </div>
+      <div style="font-family:'Fredoka', cursive; color:#64748b; font-weight:600;">Escolha quem vai jogar hoje:</div>
 
       <div class="character-selection-grid">
-        <button class="character-btn girl" onclick="setGenderTheme('girl')">
+        <button class="character-btn" onclick="setGenderTheme('girl')">
           <span class="character-avatar">👸</span>
-          <span class="character-label">Princesa</span>
+          <span class="character-label" style="color:#db2777;">Princesa</span>
         </button>
-        <button class="character-btn boy" onclick="setGenderTheme('boy')">
+        <button class="character-btn" onclick="setGenderTheme('boy')">
           <span class="character-avatar">🤴</span>
-          <span class="character-label">Príncipe</span>
+          <span class="character-label" style="color:#0284c7;">Príncipe</span>
         </button>
       </div>
     </div>
   </div>
-
-  <div class="ambient-decor" style="top: 20px; left: 20px; font-size: 2.2rem;" id="decor1">☁️</div>
-  <div class="ambient-decor" style="top: 35px; right: 30px; font-size: 2rem;" id="decor2">✨</div>
-  <div class="ambient-decor" style="bottom: 30px; left: 30px; font-size: 2.2rem;" id="decor3">🧚‍♀️</div>
-  <div class="ambient-decor" style="bottom: 35px; right: 25px; font-size: 2.2rem;" id="decor4">🦄</div>
 
   <div class="app-container">
 
@@ -710,27 +446,12 @@
       </div>
 
       <div class="header-actions">
-        <button class="btn-action" onclick="showWelcomeScreen()" title="Trocar de Perfil">
+        <button class="btn-action" onclick="showWelcomeScreen()">
           <span id="avatarBtnIcon">👸</span>
           <span id="profileBtnName">Perfil</span>
         </button>
 
-        <button class="btn-action primary" onclick="openShopModal()">
-          <span>🛍️</span>
-          <span>Lojinha</span>
-        </button>
-
-        <button class="btn-action" onclick="openParentsModal()">
-          <span>👨‍👩‍👧</span>
-          <span>Área dos Pais</span>
-        </button>
-
-        <button class="btn-action" onclick="openRepoModal()">
-          <span>📚</span>
-          <span>Palavras</span>
-        </button>
-
-        <div class="badge-star" onclick="openShopModal()" title="Sua pontuação! Clique para gastar na loja">
+        <div class="badge-star">
           <span>⭐</span>
           <span id="starsDisplay">0</span>
         </div>
@@ -740,469 +461,116 @@
     <div class="theme-selector-bar" id="themeSelectorContainer"></div>
 
     <div class="level-selector-grid">
-      <button class="level-card-btn lvl-1 active" id="btnLvl1" onclick="selectLevel(1)">
-        <div>
-          <span class="level-title-text">🌸 Nível 1: Simples</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">SÍLABAS SIMPLES (2-3)</div>
-        </div>
-      </button>
-
-      <button class="level-card-btn lvl-2" id="btnLvl2" onclick="selectLevel(2)">
-        <div>
-          <span class="level-title-text">🦄 Nível 2: Complexas</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">ENCONTROS E COMPLEXAS</div>
-        </div>
-      </button>
-
-      <button class="level-card-btn lvl-3" id="btnLvl3" onclick="selectLevel(3)">
-        <div>
-          <span class="level-title-text">⭐ Nível 3: Desafio</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">DESAFIOS SILÁBICOS</div>
-        </div>
-      </button>
-
-      <button class="level-card-btn lvl-4" id="btnLvl4" onclick="selectLevel(4)">
-        <div>
-          <span class="level-title-text">🔥 Nível 4: Polissílabas</span>
-          <div style="font-size: 0.65rem; opacity: 0.85;">PALAVRAS GRANDES</div>
-        </div>
-      </button>
+      <button class="level-card-btn active" id="btnLvl1" onclick="selectLevel(1)">🌸 Nível 1: Simples</button>
+      <button class="level-card-btn" id="btnLvl2" onclick="selectLevel(2)">🦄 Nível 2: Complexas</button>
+      <button class="level-card-btn" id="btnLvl3" onclick="selectLevel(3)">⭐ Nível 3: Desafio</button>
+      <button class="level-card-btn" id="btnLvl4" onclick="selectLevel(4)">🔥 Nível 4: Polissílabas</button>
     </div>
 
     <main class="game-main-card">
       <div class="card-top-bar">
-        <button class="nav-arrow-btn" onclick="prevWord()" title="Palavra anterior">◀</button>
-
-        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <span id="currentLevelBadge" style="background:var(--badge-bg); color:var(--primary-dark); border:1px solid var(--card-border); padding:3px 10px; border-radius:12px; font-weight:bold; font-size:0.75rem;">
-            🌸 Nível 1: Simples
-          </span>
-          <span id="wordProgressCounter" style="font-size:0.8rem; font-weight:bold; color:#64748b;">
-            Palavra 1
-          </span>
+        <button class="nav-arrow-btn" onclick="prevWord()">◀</button>
+        <div>
+          <span id="currentLevelBadge" style="font-weight:bold; font-size:0.85rem;">🌸 Nível 1: Simples</span>
+          <span id="wordProgressCounter" style="font-size:0.8rem; font-weight:bold; color:#64748b; margin-left:8px;">Palavra 1</span>
         </div>
-
-        <button class="nav-arrow-btn" onclick="nextWord()" title="Próxima palavra">▶</button>
+        <button class="nav-arrow-btn" onclick="nextWord()">▶</button>
       </div>
 
       <div class="stage-layout">
 
         <div class="left-panel">
-          <div class="pet-companion" id="petCompanionSlot"></div>
-
-          <div class="unit-toggle-pills">
-            <button class="unit-pill-btn active" id="btnModeLetters" onclick="setAssemblyMode('letters')">
-              🔤 Por Letras
-            </button>
-            <button class="unit-pill-btn" id="btnModeSyllables" onclick="setAssemblyMode('syllables')">
-              🧩 Por Sílabas
-            </button>
-          </div>
-
-          <div class="illustration-frame" onclick="speakCurrentWord()" title="Toque para ouvir!">
-            <div class="equipped-hat-badge" id="hatBadgeSlot"></div>
+          <div class="illustration-frame">
             <div class="illustration-inner">
-              <img id="wordIllustrationImage" class="word-illustration-img" src="" alt="Desenho Educativo Realista" />
+              <img id="wordIllustrationImage" class="word-illustration-img" src="" alt="Ilustração Educativa" onerror="handleImageError(this)" />
             </div>
           </div>
 
-          <div class="hidden-name-pill" id="objectNamePill" onclick="handlePeekName()" title="Nome do objeto oculto! Toque para espiar">
-            <span id="hiddenPillIcon" style="font-size:0.85rem;">🙈</span>
-            <span id="hiddenPillTitle" style="font-weight:700; font-size:0.85rem; color:#64748b;">Nome Oculto:</span>
-            <span id="hiddenPillContent" style="font-weight:800; font-size:0.85rem; color:var(--primary-dark); letter-spacing:1px;">❓ · ❓</span>
-          </div>
+          <button class="btn-audio-speak" onclick="speakCurrentWord()">🔊 Ouvir Palavra</button>
 
-          <button class="btn-audio-speak" onclick="speakCurrentWord()">
-            <span>🔊</span>
-            <span>Ouvir Palavra</span>
-          </button>
-
-          <div class="support-tools-row">
-            <button class="support-tool-btn" onclick="spellWord()">
-              <span>🔤</span>
-              <span>Soletrar</span>
-            </button>
-            <button class="support-tool-btn" onclick="clapWord()">
-              <span>👏</span>
-              <span>Palmas</span>
-            </button>
-            <button class="support-tool-btn" onclick="handlePeekName()">
-              <span>👁️</span>
-              <span>Espiar (2s)</span>
-            </button>
-          </div>
-
-          <div class="hint-bubble" id="wordHintText">
+          <div id="wordHintText" style="margin-top:8px; font-size:0.8rem; color:#64748b; text-align:center;">
             💡 Dica mágica...
           </div>
         </div>
 
         <div class="right-panel">
           <div class="assembly-box-card">
-            <div style="font-size: 0.8rem; font-weight: 800; color: var(--secondary); text-transform: uppercase;">
-              ✨ Campo de Montagem da Palavra:
-            </div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--secondary);">✨ CAMPO DE MONTAGEM DA PALAVRA:</div>
             <div class="slots-container" id="slotsContainer"></div>
           </div>
 
           <div class="options-box-card">
-            <div style="font-size: 0.8rem; font-weight: 800; color: var(--primary-dark); text-transform: uppercase;">
-              ☁️ Toque para Escolher:
-            </div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--primary-dark);">☁️ TOQUE PARA ESCOLHER:</div>
             <div class="options-container" id="optionsContainer"></div>
           </div>
 
           <div class="feedback-banner" id="feedbackBanner" style="display: none;"></div>
 
           <div style="display: flex; gap: 8px; justify-content: flex-end;">
-            <button class="btn-action" onclick="resetCurrentWord()">
-              <span>🔄</span>
-              <span>Limpar</span>
-            </button>
-            <button class="btn-action primary" onclick="nextWord()">
-              <span>Próxima</span>
-              <span>▶</span>
-            </button>
+            <button class="btn-action" onclick="resetCurrentWord()">🔄 Limpar</button>
+            <button class="btn-action primary" onclick="nextWord()">Próxima ▶</button>
           </div>
         </div>
 
       </div>
     </main>
 
-    <footer class="app-footer">
-      O Reino Silábico Encantado · Alfabetização Lúdica & Consciência Silábica
-    </footer>
-
-  </div>
-
-  <div class="modal-overlay" id="shopModalOverlay" onclick="closeShopModalOnBackdrop(event)">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 1.4rem;">🛍️</span>
-          <div>
-            <div style="font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1.15rem;">
-              Lojinha Mágica do Reino
-            </div>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeShopModal()">✕</button>
-      </div>
-      <div class="shop-grid" id="shopItemsGrid"></div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="parentsModalOverlay" onclick="closeParentsModalOnBackdrop(event)">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 1.4rem;">📊</span>
-          <div>
-            <div style="font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1.15rem;">
-              Relatório de Desempenho Escolar
-            </div>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeParentsModal()">✕</button>
-      </div>
-      <div class="report-card-body" id="parentsReportContent"></div>
-    </div>
-  </div>
-
-  <div class="modal-overlay" id="repoModalOverlay" onclick="closeRepoModalOnBackdrop(event)">
-    <div class="modal-card">
-      <div class="modal-header">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 1.4rem;">📚</span>
-          <div>
-            <div style="font-family: 'Fredoka', cursive; font-weight: 700; font-size: 1.15rem;">
-              Repositório de Palavras Mágicas
-            </div>
-          </div>
-        </div>
-        <button class="modal-close-btn" onclick="closeRepoModal()">✕</button>
-      </div>
-      <div class="word-grid-scroll" id="repoWordsGrid"></div>
-    </div>
   </div>
 
   <script>
-    const THEMES = [
-      { id: "all", name: "Todos", icon: "⭐", gender: "all" },
-      { id: "reino", name: "Reino Mágico", icon: "👑", gender: "girl" },
-      { id: "sereia", name: "Fundo do Mar", icon: "🧜‍♀️", gender: "girl" },
-      { id: "doces", name: "Doceria", icon: "🎂", gender: "girl" },
-      { id: "fofos", name: "Animais Fofos", icon: "🐰", gender: "girl" },
-      { id: "cavaleiro", name: "Cavaleiros", icon: "🛡️", gender: "boy" },
-      { id: "espaco", name: "Espaço", icon: "🚀", gender: "boy" },
-      { id: "dino", name: "Dinossauros", icon: "🦕", gender: "boy" },
-      { id: "carros", name: "Corrida", icon: "🏎️", gender: "boy" },
-      { id: "piratas", name: "Piratas", icon: "🏴‍☠️", gender: "boy" }
-    ];
+    // Gerador de imagens públicas confiáveis por palavra via Unsplash / Pixabay / SVG de backup
+    function getWordImageUrl(wordKey) {
+      const imageMap = {
+        "FADA": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&q=80",
+        "BOLO": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80",
+        "DADO": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=400&q=80",
+        "GATO": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&q=80",
+        "PEIXE": "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=400&q=80",
+        "BALA": "https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=400&q=80",
+        "CARRO": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&q=80",
+        "LUA": "https://images.unsplash.com/photo-1532693322450-2cb5c511067d?w=400&q=80",
+        "CASA": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&q=80",
+        "PRINCESA": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&q=80",
+        "DRAGÃO": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=400&q=80",
+        "CASTELO": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=80"
+      };
+
+      if (imageMap[wordKey]) return imageMap[wordKey];
+      
+      // Imagem alternativa ilustrativa gerada dinamicamente com o texto
+      return `https://placehold.co/400x300/fbcfe8/be185d?text=${encodeURIComponent(wordKey)}`;
+    }
+
+    function handleImageError(img) {
+      // Fallback em caso de falha de conexão na imagem externa
+      const word = currentWordItem ? currentWordItem.word : "Reino";
+      img.src = `https://placehold.co/400x300/e0f2fe/0369a1?text=${encodeURIComponent(word)}`;
+    }
 
     const WORDS_DATABASE = [
-      // ==================== NÍVEL 1: SIMPLES (50 PALAVRAS) ====================
-      { id: "fada", theme: "reino", level: 1, word: "FADA", syllables: ["FA", "DA"], image: "img/fada.jpg", hint: "Ser mágico com asas que realiza desejos." },
-      { id: "bolo", theme: "doces", level: 1, word: "BOLO", syllables: ["BO", "LO"], image: "img/bolo.jpg", hint: "Doce de aniversário com velinhas." },
-      { id: "dado", theme: "doces", level: 1, word: "DADO", syllables: ["DA", "DO"], image: "img/dado.jpg", hint: "Cubinho colorido com números para jogar." },
-      { id: "gato", theme: "fofos", level: 1, word: "GATO", syllables: ["GA", "TO"], image: "img/gato.jpg", hint: "Felino manhoso que faz miau." },
-      { id: "peixe", theme: "sereia", level: 1, word: "PEIXE", syllables: ["PEI", "XE"], image: "img/peixe.jpg", hint: "Nada alegremente no fundo do mar." },
-      { id: "concha", theme: "sereia", level: 1, word: "CONCHA", syllables: ["CON", "CHA"], image: "img/concha.jpg", hint: "Guarda preciosas pérolas na praia." },
-      { id: "bala", theme: "doces", level: 1, word: "BALA", syllables: ["BA", "LA"], image: "img/bala.jpg", hint: "Guloseima açucarada e bem docinha." },
-      { id: "suco", theme: "doces", level: 1, word: "SUCO", syllables: ["SU", "CO"], image: "img/suco.jpg", hint: "Bebida geladinha feita com frutas." },
-      { id: "lua", theme: "espaco", level: 1, word: "LUA", syllables: ["LU", "A"], image: "img/lua.jpg", hint: "Brilha no céu durante a noite." },
-      { id: "carro", theme: "carros", level: 1, word: "CARRO", syllables: ["CAR", "RO"], image: "img/carro.jpg", hint: "Veículo rápido com rodas que anda na pista." },
-      { id: "bau", theme: "piratas", level: 1, word: "BAÚ", syllables: ["BA", "Ú"], image: "img/bau.jpg", hint: "Caixa de madeira trancada cheia de moedas." },
-      { id: "pato", theme: "fofos", level: 1, word: "PATO", syllables: ["PA", "TO"], image: "img/pato.jpg", hint: "Avezinha amarela que nada na lagoa e faz quá." },
-      { id: "sapo", theme: "fofos", level: 1, word: "SAPO", syllables: ["SA", "PO"], image: "img/sapo.jpg", hint: "Amiguinho verde que dá grandes pulos." },
-      { id: "vaca", theme: "fofos", level: 1, word: "VACA", syllables: ["VA", "CA"], image: "img/vaca.jpg", hint: "Animal da fazenda que nos dá leite." },
-      { id: "fogo", theme: "dino", level: 1, word: "FOGO", syllables: ["FO", "GO"], image: "img/fogo.jpg", hint: "Quentinho e brilhante que vem do vulcão." },
-      { id: "maca", theme: "doces", level: 1, word: "MAÇÃ", syllables: ["MA", "ÇÃ"], image: "img/maca.jpg", hint: "Fruta vermelha e muito saborosa." },
-      { id: "uval", theme: "doces", level: 1, word: "UVA", syllables: ["U", "VA"], image: "img/uva.jpg", hint: "Frutinha roxa em cachos bem doces." },
-      { id: "bola", theme: "carros", level: 1, word: "BOLA", syllables: ["BO", "LA"], image: "img/bola.jpg", hint: "Redondinha para chutar no futebol." },
-      { id: "casa", theme: "reino", level: 1, word: "CASA", syllables: ["CA", "SA"], image: "img/casa.jpg", hint: "Lugar aconchegante onde a gente mora." },
-      { id: "copo", theme: "doces", level: 1, word: "COPO", syllables: ["CO", "PO"], image: "img/copo.jpg", hint: "Usado para tomar água ou suco." },
-      { id: "fita", theme: "reino", level: 1, word: "FITA", syllables: ["FI", "TA"], image: "img/fita.jpg", hint: "Usada para fazer laços nos presentes." },
-      { id: "luva", theme: "cavaleiro", level: 1, word: "LUVA", syllables: ["LU", "VA"], image: "img/luva.jpg", hint: "Aquece e protege as nossas mãos." },
-      { id: "mala", theme: "piratas", level: 1, word: "MALA", syllables: ["MA", "LA"], image: "img/mala.jpg", hint: "Guarda nossas roupas para viajar." },
-      { id: "mola", theme: "carros", level: 1, word: "MOLA", syllables: ["MO", "LA"], image: "img/mola.jpg", hint: "Objeto de metal que pula bastante." },
-      { id: "neve", theme: "reino", level: 1, word: "NEVE", syllables: ["NE", "VE"], image: "img/neve.jpg", hint: "Gelo branquinho e gelado que cai do céu." },
-      { id: "rosa", theme: "reino", level: 1, word: "ROSA", syllables: ["RO", "SA"], image: "img/rosa.jpg", hint: "Flor cheirosa de pétalas delicadas." },
-      { id: "sofa", theme: "reino", level: 1, word: "SOFÁ", syllables: ["SO", "FÁ"], image: "img/sofa.jpg", hint: "Móvel fofinho da sala para sentar." },
-      { id: "tatu", theme: "fofos", level: 1, word: "TATU", syllables: ["TA", "TU"], image: "img/tatu.jpg", hint: "Bicho com casca dura que faz buracos." },
-      { id: "vela", theme: "doces", level: 1, word: "VELA", syllables: ["VE", "LA"], image: "img/vela.jpg", hint: "Ilumina o bolo no dia do aniversário." },
-      { id: "zero", theme: "espaco", level: 1, word: "ZERO", syllables: ["ZE", "RO"], image: "img/zero.jpg", hint: "Número redondo que indica o começo." },
-      { id: "bule", theme: "doces", level: 1, word: "BULE", syllables: ["BU", "LE"], image: "img/bule.jpg", hint: "Guarda chazinho bem quentinho." },
-      { id: "cafe", theme: "doces", level: 1, word: "CAFÉ", syllables: ["CA", "FÉ"], image: "img/cafe.jpg", hint: "Bebida quentinha e cheirosa." },
-      { id: "dama", theme: "reino", level: 1, word: "DAMA", syllables: ["DA", "MA"], image: "img/dama.jpg", hint: "Mulher nobre e elegante do castelo." },
-      { id: "faca", theme: "doces", level: 1, word: "FACA", syllables: ["FA", "CA"], image: "img/faca.jpg", hint: "Usada na cozinha para cortar o pão." },
-      { id: "gola", theme: "reino", level: 1, word: "GOLA", syllables: ["GO", "LA"], image: "img/gola.jpg", hint: "Parte da camisa perto do pescoço." },
-      { id: "lama", theme: "fofos", level: 1, word: "LAMA", syllables: ["LA", "MA"], image: "img/lama.jpg", hint: "Mistura macia de terra com água." },
-      { id: "mesa", theme: "reino", level: 1, word: "MESA", syllables: ["ME", "SA"], image: "img/mesa.jpg", hint: "Onde colocamos os pratos para comer." },
-      { id: "pote", theme: "doces", level: 1, word: "POTE", syllables: ["PO", "TE"], image: "img/pote.jpg", hint: "Recipiente com tampa para guardar doces." },
-      { id: "rede", theme: "sereia", level: 1, word: "REDE", syllables: ["RE", "DE"], image: "img/rede.jpg", hint: "Pano balançante ótimo para descansar." },
-      { id: "sino", theme: "reino", level: 1, word: "SINO", syllables: ["SI", "NO"], image: "img/sino.jpg", hint: "Toca no alto da torre com som alegre." },
-      { id: "taco", theme: "carros", level: 1, word: "TACO", syllables: ["TA", "CO"], image: "img/taco.jpg", hint: "Bastão de madeira para rebater a bola." },
-      { id: "voto", theme: "reino", level: 1, word: "VOTO", syllables: ["VO", "TO"], image: "img/voto.jpg", hint: "Escolha importante na eleição do rei." },
-      { id: "lata", theme: "doces", level: 1, word: "LATA", syllables: ["LA", "TA"], image: "img/lata.jpg", hint: "Embalagem de metal que guarda biscoitos." },
-      { id: "moto", theme: "carros", level: 1, word: "MOTO", syllables: ["MO", "TO"], image: "img/moto.jpg", hint: "Veículo rápido de duas rodas com capacete." },
-      { id: "pino", theme: "carros", level: 1, word: "PINO", syllables: ["PI", "NO"], image: "img/pino.jpg", hint: "Peça de plástico no jogo de boliche." },
-      { id: "remo", theme: "sereia", level: 1, word: "REMO", syllables: ["RE", "MO"], image: "img/remo.jpg", hint: "Usado para fazer o barquinho navegar." },
-      { id: "suja", theme: "dino", level: 1, word: "SUJA", syllables: ["SU", "JA"], image: "img/suja.jpg", hint: "Roupa cheia de terra precisando de banho." },
-      { id: "toca", theme: "fofos", level: 1, word: "TOCA", syllables: ["TO", "CA"], image: "img/toca.jpg", hint: "Esconderijo quentinho do coelhinho." },
-      { id: "viga", theme: "reino", level: 1, word: "VIGA", syllables: ["VI", "GA"], image: "img/viga.jpg", hint: "Madeira forte que segura o teto." },
-      { id: "bico", theme: "fofos", level: 1, word: "BICO", syllables: ["BI", "CO"], image: "img/bico.jpg", hint: "Boca pontudinha dos passarinhos." },
-
-      // ==================== NÍVEL 2: COMPLEXAS (50 PALAVRAS) ====================
-      { id: "princesa", theme: "reino", level: 2, word: "PRINCESA", syllables: ["PRIN", "CE", "SA"], image: "img/princesa.jpg", hint: "Jovem nobre do palácio que usa tiara." },
-      { id: "sereia", theme: "sereia", level: 2, word: "SEREIA", syllables: ["SE", "REI", "A"], image: "img/sereia.jpg", hint: "Criatura mágica do mar que ama cantar." },
-      { id: "sorvete", theme: "doces", level: 2, word: "SORVETE", syllables: ["SOR", "VE", "TE"], image: "img/sorvete.jpg", hint: "Doce geladinho e delicioso na casquinha." },
-      { id: "pipoca", theme: "doces", level: 2, word: "PIPOCA", syllables: ["PI", "PO", "CA"], image: "img/pipoca.jpg", hint: "Pula na panela e combina com cinema." },
-      { id: "coelho", theme: "fofos", level: 2, word: "COELHO", syllables: ["COE", "LHO"], image: "img/coelho.jpg", hint: "Tem orelhas compridas e adora cenoura." },
-      { id: "coruja", theme: "fofos", level: 2, word: "CORUJA", syllables: ["CO", "RU", "JA"], image: "img/coruja.jpg", hint: "Ave sábia de olhos grandes da floresta." },
-      { id: "dragao", theme: "cavaleiro", level: 2, word: "DRAGÃO", syllables: ["DRA", "GÃO"], image: "img/dragao.jpg", hint: "Criatura mágica com asas poderosas." },
-      { id: "escudo", theme: "cavaleiro", level: 2, word: "ESCUDO", syllables: ["ES", "CU", "DO"], image: "img/escudo.jpg", hint: "Usado pelos bravos cavaleiros para proteção." },
-      { id: "foguete", theme: "espaco", level: 2, word: "FOGUETE", syllables: ["FO", "GUE", "TE"], image: "img/foguete.jpg", hint: "Voa bem alto em direção às estrelas." },
-      { id: "vulcao", theme: "dino", level: 2, word: "VULCÃO", syllables: ["VUL", "CÃO"], image: "img/vulcao.jpg", hint: "Montanha mágica que solta fumaça." },
-      { id: "trofeu", theme: "carros", level: 2, word: "TROFÉU", syllables: ["TRO", "FÉU"], image: "img/trofeu.jpg", hint: "Prêmio dourado ganho pelo grande campeão." },
-      { id: "navio", theme: "piratas", level: 2, word: "NAVIO", syllables: ["NA", "VI", "O"], image: "img/navio.jpg", hint: "Navega pelos mares em busca de aventuras." },
-      { id: "tesouro", theme: "piratas", level: 2, word: "TESOURO", syllables: ["TE", "SOU", "RO"], image: "img/tesouro.jpg", hint: "Baú de moedas de ouro escondido na ilha." },
-      { id: "coroa", theme: "reino", level: 2, word: "COROA", syllables: ["CO", "RO", "A"], image: "img/coroa.jpg", hint: "Usada na cabeça de reis e rainhas." },
-      { id: "magia", theme: "reino", level: 2, word: "MAGIA", syllables: ["MA", "GI", "A"], image: "img/magia.jpg", hint: "Poder misterioso que cria coisas incríveis." },
-      { id: "reino", theme: "reino", level: 2, word: "REINO", syllables: ["REI", "NO"], image: "img/reino.jpg", hint: "Território governado por monarcas." },
-      { id: "perola", theme: "sereia", level: 2, word: "PÉROLA", syllables: ["PÉ", "RO", "LA"], image: "img/perola.jpg", hint: "Esfera brilhante encontrada na ostra." },
-      { id: "coral", theme: "sereia", level: 2, word: "CORAL", syllables: ["CO", "RAL"], image: "img/coral.jpg", hint: "Jardim colorido do fundo do mar." },
-      { id: "cookie", theme: "doces", level: 2, word: "COOKIE", syllables: ["COO", "KIE"], image: "img/cookie.jpg", hint: "Biscoito crocante com pedacinhos de chocolate." },
-      { id: "panda", theme: "fofos", level: 2, word: "PANDA", syllables: ["PAN", "DA"], image: "img/panda.jpg", hint: "Ursinho fofinho que adora comer bambu." },
-      { id: "raposa", theme: "fofos", level: 2, word: "RAPOSA", syllables: ["RA", "PO", "SA"], image: "img/raposa.jpg", hint: "Animal esperto de cauda longa e peluda." },
-      { id: "espada", theme: "cavaleiro", level: 2, word: "ESPADA", syllables: ["ES", "PA", "DA"], image: "img/espada.jpg", hint: "Arma brilhante dos cavaleiros medievais." },
-      { id: "torre", theme: "cavaleiro", level: 2, word: "TORRE", syllables: ["TOR", "RE"], image: "img/torre.jpg", hint: "Parte alta e pontiaguda do castelo." },
-      { id: "selva", theme: "dino", level: 2, word: "SELVA", syllables: ["SEL", "VA"], image: "img/selva.jpg", hint: "Floresta densa onde habitam animais selvagens." },
-      { id: "pista", theme: "carros", level: 2, word: "PISTA", syllables: ["PIS", "TA"], image: "img/pista.jpg", hint: "Local onde os carros velozes disputam corridas." },
-      { id: "mapa", theme: "piratas", level: 2, word: "MAPA", syllables: ["MA", "PA"], image: "img/mapa.jpg", hint: "Indica o caminho secreto para achar o prêmio." },
-      { id: "brinco", theme: "reino", level: 2, word: "BRINCO", syllables: ["BRIN", "CO"], image: "img/brinco.jpg", hint: "Enfeite brilhante para colocar na orelha." },
-      { id: "fruta", theme: "doces", level: 2, word: "FRUTA", syllables: ["FRU", "TA"], image: "img/fruta.jpg", hint: "Alimento doce e saudável da natureza." },
-      { id: "planta", theme: "dino", level: 2, word: "PLANTA", syllables: ["PLAN", "TA"], image: "img/planta.jpg", hint: "Verdinha, precisa de água e sol para crescer." },
-      { id: "prato", theme: "doces", level: 2, word: "PRATO", syllables: ["PRA", "TO"], image: "img/prato.jpg", hint: "Onde colocamos a comida deliciosa." },
-      { id: "trilho", theme: "carros", level: 2, word: "TRILHO", syllables: ["TRI", "LHO"], image: "img/trilho.jpg", hint: "Caminho de ferro por onde anda o trem." },
-      { id: "zebra", theme: "fofos", level: 2, word: "ZEBRA", syllables: ["ZE", "BRA"], image: "img/zebra.jpg", hint: "Cavalo de pijama com listras pretas e brancas." },
-      { id: "bloco", theme: "carros", level: 2, word: "BLOCO", syllables: ["BLO", "CO"], image: "img/bloco.jpg", hint: "Peça de brinquedo para construir torres." },
-      { id: "clube", theme: "doces", level: 2, word: "CLUBE", syllables: ["CLU", "BE"], image: "img/clube.jpg", hint: "Lugar divertido com piscina para brincar." },
-      { id: "floresta", theme: "reino", level: 2, word: "FLORESTA", syllables: ["FLO", "RES", "TA"], image: "img/floresta.jpg", hint: "Lugar verde repleto de árvores e animais." },
-      { id: "globo", theme: "espaco", level: 2, word: "GLOBO", syllables: ["GLO", "BO"], image: "img/globo.jpg", hint: "Esfera que representa o nosso planeta Terra." },
-      { id: "pluma", theme: "fofos", level: 2, word: "PLUMA", syllables: ["PLU", "MA"], image: "img/pluma.jpg", hint: "Pena leve e fofinha dos passarinhos." },
-      { id: "tronco", theme: "dino", level: 2, word: "TRONCO", syllables: ["TRON", "CO"], image: "img/tronco.jpg", hint: "Parte forte e de madeira da árvore." },
-      { id: "banco", theme: "reino", level: 2, word: "BANCO", syllables: ["BAN", "CO"], image: "img/banco.jpg", hint: "Assento longo no parque da praça." },
-      { id: "campo", theme: "fofos", level: 2, word: "CAMPO", syllables: ["CAM", "PO"], image: "img/campo.jpg", hint: "Gramado verde grande onde as vacas pastam." },
-      { id: "dente", theme: "doces", level: 2, word: "DENTE", syllables: ["DEN", "TE"], image: "img/dente.jpg", hint: "Branquinho na boca usado para mastigar." },
-      { id: "fonte", theme: "reino", level: 2, word: "FONTE", syllables: ["FON", "TE"], image: "img/fonte.jpg", hint: "Chafariz com água jorrando no castelo." },
-      { id: "gente", theme: "reino", level: 2, word: "GENTE", syllables: ["GEN", "TE"], image: "img/gente.jpg", hint: "Muitas pessoas juntas se divertindo." },
-      { id: "manta", theme: "fofos", level: 2, word: "MANTA", syllables: ["MAN", "TA"], image: "img/manta.jpg", hint: "Coberta quentinha para a hora de dormir." },
-      { id: "ponte", theme: "cavaleiro", level: 2, word: "PONTE", syllables: ["PON", "TE"], image: "img/ponte.jpg", hint: "Estrutura para atravessar o rio em segurança." },
-      { id: "santa", theme: "reino", level: 2, word: "SANTA", syllables: ["SAN", "TA"], image: "img/santa.jpg", hint: "Figura abençoada cheia de bondade." },
-      { id: "tinta", theme: "reino", level: 2, word: "TINTA", syllables: ["TIN", "TA"], image: "img/tinta.jpg", hint: "Líquido colorido usado para fazer pinturas." },
-      { id: "vento", theme: "espaco", level: 2, word: "VENTO", syllables: ["VEN", "TO"], image: "img/vento.jpg", hint: "Ar em movimento que faz as folhas voarem." },
-      { id: "brilho", theme: "reino", level: 2, word: "BRILHO", syllables: ["BRI", "LHO"], image: "img/brilho.jpg", hint: "Luz reluzente que vem das estrelas." },
-      { id: "creme", theme: "doces", level: 2, word: "CREME", syllables: ["CRE", "ME"], image: "img/creme.jpg", hint: "Mistura doce usada no recheio do bolo." },
-
-      // ==================== NÍVEL 3: DESAFIO (50 PALAVRAS) ====================
-      { id: "unicornio", theme: "reino", level: 3, word: "UNICÓRNIO", syllables: ["U", "NI", "CÓR", "NIO"], image: "img/unicornio.jpg", hint: "Cavalo mágico com um chifre brilhante." },
-      { id: "castelo", theme: "reino", level: 3, word: "CASTELO", syllables: ["CAS", "TE", "LO"], image: "img/castelo.jpg", hint: "Palácio mágico com grandes torres." },
-      { id: "varinha", theme: "reino", level: 3, word: "VARINHA", syllables: ["VA", "RI", "NHA"], image: "img/varinha.jpg", hint: "Ferramenta mágica para lançar feitiços." },
-      { id: "estrela", theme: "reino", level: 3, word: "ESTRELA", syllables: ["ES", "TRE", "LA"], image: "img/estrela.jpg", hint: "Brilha forte no céu noturno." },
-      { id: "cristal", theme: "reino", level: 3, word: "CRISTAL", syllables: ["CRIS", "TAL"], image: "img/cristal.jpg", hint: "Pedra preciosa que brilha na luz." },
-      { id: "golfinho", theme: "sereia", level: 3, word: "GOLFINHO", syllables: ["GOL", "FI", "NHO"], image: "img/golfinho.jpg", hint: "Mamífero marinho inteligente e brincalhão." },
-      { id: "oceano", theme: "sereia", level: 3, word: "OCEANO", syllables: ["O", "CE", "A", "NO"], image: "img/oceano.jpg", hint: "Grande imensidão de água salgada." },
-      { id: "tubarao", theme: "sereia", level: 3, word: "TUBARÃO", syllables: ["TU", "BA", "RÃO"], image: "img/tubarao.jpg", hint: "Grande nadador veloz dos oceanos." },
-      { id: "ursinho", theme: "fofos", level: 3, word: "URSINHO", syllables: ["UR", "SI", "NHO"], image: "img/ursinho.jpg", hint: "Brinquedo de pelúcia fofinho para abraçar." },
-      { id: "planeta", theme: "espaco", level: 3, word: "PLANETA", syllables: ["PLA", "NE", "TA"], image: "img/planeta.jpg", hint: "Grande mundo que gira no espaço sideral." },
-      { id: "cometa", theme: "espaco", level: 3, word: "COMETA", syllables: ["CO", "ME", "TA"], image: "img/cometa.jpg", hint: "Estrela com cauda brilhante viajando no céu." },
-      { id: "fosseis", theme: "dino", level: 3, word: "FÓSSIL", syllables: ["FÓS", "SIL"], image: "img/fosseis.jpg", hint: "Restos antigos de dinossauros guardados na terra." },
-      { id: "volante", theme: "carros", level: 3, word: "VOLANTE", syllables: ["VO", "LAN", "TE"], image: "img/volante.jpg", hint: "Usado pelo motorista para guiar o automóvel." },
-      { id: "pirata", theme: "piratas", level: 3, word: "PIRATA", syllables: ["PI", "RA", "TA"], image: "img/pirata.jpg", hint: "Navegador aventureiro dos sete mares." },
-      { id: "espelho", theme: "reino", level: 3, word: "ESPELHO", syllables: ["ES", "PE", "LHO"], image: "img/espelho.jpg", hint: "Reflete a imagem da rainha perfeitamente." },
-      { id: "palacio", theme: "reino", level: 3, word: "PALÁCIO", syllables: ["PA", "LÁ", "CIO"], image: "img/palacio.jpg", hint: "Residência luxuosa e gigante dos reis." },
-      { id: "ostra", theme: "sereia", level: 3, word: "OSTRA", syllables: ["OS", "TRA"], image: "img/ostra.jpg", hint: "Concha marinha que guarda uma linda pérola." },
-      { id: "tartaruga", theme: "sereia", level: 3, word: "TARTARUGA", syllables: ["TAR", "TA", "RU", "GA"], image: "img/tartaruga.jpg", hint: "Réptil marinho que anda bem devagar." },
-      { id: "cupcake", theme: "doces", level: 3, word: "CUPCAKE", syllables: ["CUP", "CA", "KE"], image: "img/cupcake.jpg", hint: "Bolo pequeno de copo com cobertura colorida." },
-      { id: "pudim", theme: "doces", level: 3, word: "PUDIM", syllables: ["PU", "DIM"], image: "img/pudim.jpg", hint: "Sobremesa macia com calda de caramelo." },
-      { id: "girafa", theme: "fofos", level: 3, word: "GIRAFA", syllables: ["GI", "RA", "FA"], image: "img/girafa.jpg", hint: "Animal de pescoço bem longo que come folhas alto." },
-      { id: "macaco", theme: "fofos", level: 3, word: "MACACO", syllables: ["MA", "CA", "CO"], image: "img/macaco.jpg", hint: "Animal brincalhão que pula de galho em galho." },
-      { id: "lança", theme: "cavaleiro", level: 3, word: "LANÇA", syllables: ["LAN", "ÇA"], image: "img/lanca.jpg", hint: "Haste longa usada pelos cavaleiros nas corridas." },
-      { id: "galaxia", theme: "espaco", level: 3, word: "GALÁXIA", syllables: ["GA", "LÁ", "XIA"], image: "img/galaxia.jpg", hint: "Conjunto imenso de bilhões de estrelas." },
-      { id: "meteoro", theme: "espaco", level: 3, word: "METEORO", syllables: ["ME", "TE", "O", "RO"], image: "img/meteoro.jpg", hint: "Rocha mágica caindo do espaço como luz." },
-      { id: "vulcani", theme: "dino", level: 3, word: "LAVA", syllables: ["LA", "VA"], image: "img/lava.jpg", hint: "Rocha derretida e muito quente do vulcão." },
-      { id: "pneu", theme: "carros", level: 3, word: "PNEU", syllables: ["PNEU"], image: "img/pneu.jpg", hint: "Borracha preta que envolve a roda do carro." },
-      { id: "ancora", theme: "piratas", level: 3, word: "ÂNCORA", syllables: ["ÂN", "CO", "RA"], image: "img/ancora.jpg", hint: "Peça pesada de metal que prende o navio." },
-      { id: "luneta", theme: "piratas", level: 3, word: "LUNETA", syllables: ["LU", "NE", "TA"], image: "img/luneta.jpg", hint: "Telescópio dos piratas para olhar de longe." },
-      { id: "caravel", theme: "piratas", level: 3, word: "CARAVELA", syllables: ["CA", "RA", "VE", "LA"], image: "img/caravela.jpg", hint: "Antigo navio de velas ao vento." },
-      { id: "trompete", theme: "reino", level: 3, word: "TROMPETE", syllables: ["TROM", "PE", "TE"], image: "img/trompete.jpg", hint: "Instrumento musical de metal do castelo." },
-      { id: "flauta", theme: "reino", level: 3, word: "FLAUTA", syllables: ["FLAU", "TA"], image: "img/flauta.jpg", hint: "Tubo de assoprar que produz lindas melodias." },
-      { id: "tambor", theme: "reino", level: 3, word: "TAMBOR", syllables: ["TAM", "BOR"], image: "img/tambor.jpg", hint: "Instrumento de percussão para dar o ritmo." },
-      { id: "dragoin", theme: "dino", level: 3, word: "NINHO", syllables: ["NI", "NHO"], image: "img/ninho.jpg", hint: "Lugar protegido onde os dinossauros chocam ovos." },
-      { id: "esquilo", theme: "fofos", level: 3, word: "ESQUILO", syllables: ["ES", "QUI", "LO"], image: "img/esquilo.jpg", hint: "Bicho esperto que guarda nozes na floresta." },
-      { id: "castanha", theme: "fofos", level: 3, word: "CASTANHA", syllables: ["CAS", "TA", "NHA"], image: "img/castanha.jpg", hint: "Fruta dura gostosa que o esquilo adora." },
-      { id: "pirulito", theme: "doces", level: 3, word: "PIRULITO", syllables: ["PI", "RU", "LI", "TO"], image: "img/pirulito.jpg", hint: "Doce colorido no palitinho." },
-      { id: "sorveti", theme: "doces", level: 3, word: "PICOLÉ", syllables: ["PI", "CO", "LÉ"], image: "img/picole.jpg", hint: "Sorvete geladinho no palito de madeira." },
-      { id: "tubaral", theme: "sereia", level: 3, word: "POLVO", syllables: ["POL", "VO"], image: "img/polvo.jpg", hint: "Animal marinho com oito braços longos." },
-      { id: "lagosta", theme: "sereia", level: 3, word: "LAGOSTA", syllables: ["LA", "GOS", "TA"], image: "img/lagosta.jpg", hint: "Crustáceo vermelho com pinças no oceano." },
-      { id: "espadai", theme: "cavaleiro", level: 3, word: "FLECHA", syllables: ["FLE", "CHA"], image: "img/flecha.jpg", hint: "Disparada pelo arco do arqueiro no alvo." },
-      { id: "arqueiro", theme: "cavaleiro", level: 3, word: "ARQUEIRO", syllables: ["AR", "QUEI", "RO"], image: "img/arqueiro.jpg", hint: "Atirador habilidoso com arco e flecha." },
-      { id: "turbina", theme: "espaco", level: 3, word: "TURBINA", syllables: ["TUR", "BI", "NA"], image: "img/turbina.jpg", hint: "Motor potente que faz o foguete subir rápido." },
-      { id: "satelite", theme: "espaco", level: 3, word: "SATÉLITE", syllables: ["SA", "TÉ", "LI", "TE"], image: "img/satelite.jpg", hint: "Aparelho no espaço que envia sinais à Terra." },
-      { id: "bandeira", theme: "carros", level: 3, word: "BANDEIRA", syllables: ["BAN", "DEI", "RA"], image: "img/bandeira.jpg", hint: "Quadriculada, indica o final da corrida." },
-      { id: "motor", theme: "carros", level: 3, word: "MOTOR", syllables: ["MO", "TOR"], image: "img/motor.jpg", hint: "Coração do carro que faz as rodas girarem." },
-      { id: "bussola", theme: "piratas", level: 3, word: "BÚSSOLA", syllables: ["BÚS", "SO", "LA"], image: "img/bussola.jpg", hint: "Aparelho magnético que aponta para o Norte." },
-      { id: "papagaio", theme: "piratas", level: 3, word: "PAPAGAIO", syllables: ["PA", "PA", "GAI", "O"], image: "img/papagaio.jpg", hint: "Ave colorida companheira do capitão pirata." },
-      { id: "espiga", theme: "fofos", level: 3, word: "ESPIGA", syllables: ["ES", "PI", "GA"], image: "img/espiga.jpg", hint: "Milho amarelo que dá ótimas pipocas." },
-      { id: "cenoura", theme: "fofos", level: 3, word: "CENOURA", syllables: ["CE", "NOU", "RA"], image: "img/cenoura.jpg", hint: "Legume laranja crocante preferido do coelho." },
-
-      // ==================== NÍVEL 4: POLISSÍLABAS (50 PALAVRAS) ====================
-      { id: "brigadeiro", theme: "doces", level: 4, word: "BRIGADEIRO", syllables: ["BRI", "GA", "DEI", "RO"], image: "img/brigadeiro.jpg", hint: "Doce tradicional de festa coberto de granulado." },
-      { id: "passarinho", theme: "fofos", level: 4, word: "PASSARINHO", syllables: ["PAS", "SA", "RI", "NHO"], image: "img/passarinho.jpg", hint: "Pequeno cantor que voa pelas árvores." },
-      { id: "cavaleiro", theme: "cavaleiro", level: 4, word: "CAVALEIRO", syllables: ["CA", "VA", "LEI", "RO"], image: "img/cavaleiro.jpg", hint: "Guerreiro corajoso que protege o castelo." },
-      { id: "armadura", theme: "cavaleiro", level: 4, word: "ARMADURA", syllables: ["AR", "MA", "DU", "RA"], image: "img/armadura.jpg", hint: "Roupa de metal pesada para proteger o guerreiro." },
-      { id: "astronauta", theme: "espaco", level: 4, word: "ASTRONAUTA", syllables: ["AS", "TRO", "NAU", "TA"], image: "img/astronauta.jpg", hint: "Viajante do espaço que visita a Lua." },
-      { id: "dinossauro", theme: "dino", level: 4, word: "DINOSSAURO", syllables: ["DI", "NOS", "SAU", "RO"], image: "img/dinossauro.jpg", hint: "Gigante pré-histórico que viveu há muito tempo." },
-      { id: "capacete", theme: "carros", level: 4, word: "CAPACETE", syllables: ["CA", "PA", "CE", "TE"], image: "img/capacete.jpg", hint: "Proteção segura para a cabeça do piloto." },
-      { id: "borboleta", theme: "reino", level: 4, word: "BORBOLETA", syllables: ["BOR", "BO", "LE", "TA"], image: "img/borboleta.jpg", hint: "Inseto de asas coloridas que voa no jardim." },
-      { id: "tartarugai", theme: "sereia", level: 4, word: "TARTARUGA", syllables: ["TAR", "TA", "RU", "GA"], image: "img/tartaruga.jpg", hint: "Réptil marinho antigo com casco protetor." },
-      { id: "chocolate", theme: "doces", level: 4, word: "CHOCOLATE", syllables: ["CHO", "CO", "LA", "TE"], image: "img/chocolate.jpg", hint: "Doce marrom delicioso adorado por todos." },
-      { id: "hipopotamo", theme: "fofos", level: 4, word: "HIPOPÓTAMO", syllables: ["HI", "PO", "PÓ", "TA", "MO"], image: "img/hipopotamo.jpg", hint: "Grande animal fofo que adora tomar banho no rio." },
-      { id: "velocimetro", theme: "carros", level: 4, word: "VELOCÍMETRO", syllables: ["VE", "LO", "CÍ", "ME", "TRO"], image: "img/velocimetro.jpg", hint: "Aparelho do painel que mostra a velocidade." },
-      { id: "caranguejo", theme: "sereia", level: 4, word: "CARANGUEJO", syllables: ["CA", "RAN", "GUE", "JO"], image: "img/caranguejo.jpg", hint: "Crustáceo que anda de lado na areia da praia." },
-      { id: "sapatilha", theme: "reino", level: 4, word: "SAPATILHA", syllables: ["SA", "PA", "TI", "LHA"], image: "img/sapatilha.jpg", hint: "Calçado delicado usado pela bailarina." },
-      { id: "marmelada", theme: "doces", level: 4, word: "MARMELADA", syllables: ["MAR", "ME", "LA", "DA"], image: "img/marmelada.jpg", hint: "Doce saboroso feito da fruta marmeleiro." },
-      { id: "joaninha", theme: "fofos", level: 4, word: "JOANINHA", syllables: ["JO", "A", "NI", "NHA"], image: "img/joaninha.jpg", hint: "Besourinho vermelho fofo com bolinhas pretas." },
-      { id: "jacaré", theme: "dino", level: 4, word: "JACARÉ", syllables: ["JA", "CA", "RÉ"], image: "img/jacare.jpg", hint: "Réptil verde de dentes afiados da lagoa." },
-      { id: "televisao", theme: "reino", level: 4, word: "TELEVISÃO", syllables: ["TE", "LE", "VI", "SÃO"], image: "img/televisao.jpg", hint: "Aparelho onde assistimos a desenhos animados." },
-      { id: "geladeira", theme: "doces", level: 4, word: "GELADEIRA", syllables: ["GE", "LA", "DEI", "RA"], image: "img/geladeira.jpg", hint: "Mantenha nossos alimentos e sucos bem geladinhos." },
-      { id: "aquario", theme: "sereia", level: 4, word: "AQUÁRIO", syllables: ["A", "QUÁ", "RIO"], image: "img/aquario.jpg", hint: "Tanque de vidro onde vivem peixinhos coloridos." },
-      { id: "elefante", theme: "fofos", level: 4, word: "ELEFANTE", syllables: ["E", "LE", "FAN", "TE"], image: "img/elefante.jpg", hint: "Gigante cinza com tromba longa e orelhas grandes." },
-      { id: "catavento", theme: "espaco", level: 4, word: "CATAVENTO", syllables: ["CA", "TA", "VEN", "TO"], image: "img/catavento.jpg", hint: "Brinquedo que gira velozmente quando o ar sobra." },
-      { id: "pirataria", theme: "piratas", level: 4, word: "ASTRONOMIA", syllables: ["AS", "TRO", "NO", "MIA"], image: "img/astronomia.jpg", hint: "Ciência fantástica que estuda as estrelas e planetas." },
-      { id: "caravelai", theme: "piratas", level: 4, word: "EMBARCAÇÃO", syllables: ["EM", "BAR", "CA", "ÇÃO"], image: "img/embarcacao.jpg", hint: "Nome dado aos grandes navios que navegam no mar." },
-      { id: "princesinha", theme: "reino", level: 4, word: "PRINCESINHA", syllables: ["PRIN", "CE", "SI", "NHA"], image: "img/princesinha.jpg", hint: "Linda menina jovem Herdeira do trono." },
-      { id: "encantado", theme: "reino", level: 4, word: "ENCANTADO", syllables: ["EN", "CAN", "TA", "DO"], image: "img/encantado.jpg", hint: "Mundo cheio de magia, fadas e unicórnios." },
-      { id: "goiabada", theme: "doces", level: 4, word: "GOIABADA", syllables: ["GOI", "A", "BA", "DA"], image: "img/goiabada.jpg", hint: "Doce tradicional feito da fruta goiaba." },
-      { id: "caramelo", theme: "doces", level: 4, word: "CARAMELO", syllables: ["CA", "RA", "ME", "LO"], image: "img/caramelo.jpg", hint: "Açúcar derretido bem douradinho e doce." },
-      { id: "tartaruguinha", theme: "sereia", level: 4, word: "TARTARUGUINHA", syllables: ["TAR", "TA", "RU", "GUI", "NHA"], image: "img/tartaruguinha.jpg", hint: "Filhotinho fofo de tartaruga saindo do ovo." },
-      { id: "pinguinzinho", theme: "fofos", level: 4, word: "PINGUINZINHO", syllables: ["PIN", "GUIN", "ZI", "NHO"], image: "img/pinguinzinho.jpg", hint: "Avezinha de pijama no gelo que anda engraçado." },
-      { id: "margarida", theme: "reino", level: 4, word: "MARGARIDA", syllables: ["MAR", "GA", "RI", "DA"], image: "img/margarida.jpg", hint: "Flor com pétalas brancas e miolo amarelo." },
-      { id: "girassol", theme: "reino", level: 4, word: "GIRASSOL", syllables: ["GI", "RAS", "SOL"], image: "img/girassol.jpg", hint: "Flor amarela grande que se vira para a luz do sol." },
-      { id: "araraquara", theme: "fofos", level: 4, word: "ARARINHA", syllables: ["A", "RA", "RI", "NHA"], image: "img/ararinha.jpg", hint: "Pequena ave azul muito linda e rara." },
-      { id: "dinossaurinho", theme: "dino", level: 4, word: "DINOSSAURINHO", syllables: ["DI", "NOS", "SAU", "RI", "NHO"], image: "img/dinossaurinho.jpg", hint: "Filhote fofinho de dinossauro nascendo." },
-      { id: "meteorito", theme: "espaco", level: 4, word: "METEORITO", syllables: ["ME", "TE", "O", "RI", "TO"], image: "img/meteorito.jpg", hint: "Pedra do espaço que atinge o solo do planeta." },
-      { id: "constelacao", theme: "espaco", level: 4, word: "CONSTELAÇÃO", syllables: ["CONS", "TE", "LA", "ÇÃO"], image: "img/constelacao.jpg", hint: "Grupo de estrelas que forma desenhos no céu." },
-      { id: "automovel", theme: "carros", level: 4, word: "AUTOMÓVEL", syllables: ["AU", "TO", "MÓ", "VEL"], image: "img/automovel.jpg", hint: "Outro nome bonito dado aos carros de corrida." },
-      { id: "retrovisor", theme: "carros", level: 4, word: "RETROVISOR", syllables: ["RE", "TRO", "VI", "SOR"], image: "img/retrovisor.jpg", hint: "Espelho do carro para olhar o que vem atrás." },
-      { id: "esconderijo", theme: "piratas", level: 4, word: "ESCONDERIJO", syllables: ["ES", "CON", "DE", "RI", "JO"], image: "img/esconderijo.jpg", hint: "Lugar secreto onde os piratas guardam o baú." },
-      { id: "navegante", theme: "piratas", level: 4, word: "NAVEGANTE", syllables: ["NA", "VE", "GAN", "TE"], image: "img/navegante.jpg", hint: "Pessoa corajosa que guia os navios pelos mares." },
-      { id: "chocalho", theme: "fofos", level: 4, word: "CHOCALHO", syllables: ["CHO", "CA", "LHO"], image: "img/chocalho.jpg", hint: "Brinquedo sonoro muito divertido para bebês." },
-      { id: "mamadeira", theme: "fofos", level: 4, word: "MAMADEIRA", syllables: ["MA", "MA", "DEI", "RA"], image: "img/mamadeira.jpg", hint: "Garrafinha com bico para os filhotinhos beberem leite." },
-      { id: "sorveteria", theme: "doces", level: 4, word: "SORVETERIA", syllables: ["SOR", "VE", "TE", "RIA"], image: "img/sorveteria.jpg", hint: "Loja mágica e bem geladinha recheada de sorvetes." },
-      { id: "confeitaria", theme: "doces", level: 4, word: "CONFEITARIA", syllables: ["CON", "FEI", "TA", "RIA"], image: "img/confeitaria.jpg", hint: "Lugar onde os chefs fazem bolos e doces." },
-      { id: "mariposin", theme: "fofos", level: 4, word: "MARIPOSA", syllables: ["MA", "RI", "PO", "SA"], image: "img/mariposa.jpg", hint: "Inseto noturno fofinho parente da borboleta." },
-      { id: "lagartixa", theme: "dino", level: 4, word: "LAGARTIXA", syllables: ["LA", "GAR", "TI", "XA"], image: "img/lagartixa.jpg", hint: "Pequeno réptil inofensivo que anda nas paredes." },
-      { id: "salamandra", theme: "dino", level: 4, word: "SALAMANDRA", syllables: ["SA", "LA", "MAN", "DRA"], image: "img/salamandra.jpg", hint: "Anfíbio fofo colorido que gosta de água." },
-      { id: "lanterna", theme: "espaco", level: 4, word: "LANTERNA", syllables: ["LAN", "TER", "NA"], image: "img/lanterna.jpg", hint: "Aparelho portátil que projeta luz no escuro." },
-      { id: "engrenagem", theme: "carros", level: 4, word: "ENGRENAGEM", syllables: ["EN", "GRE", "NA", "GEM"], image: "img/engrenagem.jpg", hint: "Roda de metal com dentes que faz máquinas funcionarem." },
-      { id: "revolucao", theme: "espaco", level: 4, word: "REVOLUÇÃO", syllables: ["RE", "VO", "LU", "ÇÃO"], image: "img/revolucao.jpg", hint: "Movimento completo que a Terra faz ao redor do Sol." }
-    ];
-
-    const SHOP_ITEMS = [
-      { id: "hat_crown", type: "hat", title: "Coroa Real", price: 30, emoji: "👑" },
-      { id: "hat_wizard", type: "hat", title: "Cartola Mágica", price: 50, emoji: "🎩" },
-      { id: "pet_dragon", type: "pet", title: "Dragãozinho", price: 80, emoji: "🐉" },
-      { id: "pet_unicorn", type: "pet", title: "Unicórnio", price: 100, emoji: "🦄" },
-      { id: "pet_cat", type: "pet", title: "Gatinho Real", price: 40, emoji: "🐱" }
+      { id: "fada", level: 1, word: "FADA", syllables: ["FA", "DA"], hint: "Ser mágico com asas que realiza desejos." },
+      { id: "bolo", level: 1, word: "BOLO", syllables: ["BO", "LO"], hint: "Doce de aniversário com velinhas." },
+      { id: "dado", level: 1, word: "DADO", syllables: ["DA", "DO"], hint: "Cubinho colorido com números." },
+      { id: "gato", level: 1, word: "GATO", syllables: ["GA", "TO"], hint: "Felino manhoso que faz miau." },
+      { id: "peixe", level: 1, word: "PEIXE", syllables: ["PEI", "XE"], hint: "Nada alegremente no mar." },
+      { id: "casa", level: 1, word: "CASA", syllables: ["CA", "SA"], hint: "Lugar onde a gente mora." },
+      { id: "princesa", level: 2, word: "PRINCESA", syllables: ["PRIN", "CE", "SA"], hint: "Jovem nobre que usa tiara." },
+      { id: "dragao", level: 2, word: "DRAGÃO", syllables: ["DRA", "GÃO"], hint: "Criatura mágica com asas." },
+      { id: "castelo", level: 3, word: "CASTELO", syllables: ["CAS", "TE", "LO"], hint: "Palácio com grandes torres." }
     ];
 
     let childName = "";
     let currentGender = 'girl';
-    let currentTheme = 'all';
     let currentLevel = 1;
     let stars = 0;
-    let assemblyMode = 'letters';
     let currentIndex = 0;
     let currentWordItem = null;
     let targetUnits = [];
     let userSlots = [];
     let activeChoices = [];
-    let soundEnabled = true;
-
-    let statsCorrect = 0;
-    let statsAttempts = 0;
-    let historyWords = [];
-    let purchasedItems = [];
-    let equippedHat = null;
-    let equippedPet = null;
-
-    function renderThemeSelector() {
-      const container = document.getElementById('themeSelectorContainer');
-      container.innerHTML = '';
-      
-      const filteredThemes = THEMES.filter(t => t.gender === 'all' || t.gender === currentGender);
-      
-      filteredThemes.forEach(t => {
-        const btn = document.createElement('button');
-        btn.className = `theme-chip-btn ${currentTheme === t.id ? 'active' : ''}`;
-        btn.innerHTML = `<span>${t.icon}</span> <span>${t.name}</span>`;
-        btn.onclick = () => selectTheme(t.id);
-        container.appendChild(btn);
-      });
-    }
-
-    function selectTheme(themeId) {
-      currentTheme = themeId;
-      currentIndex = 0;
-      renderThemeSelector();
-      loadCurrentWord();
-    }
 
     function setGenderTheme(gender) {
       currentGender = gender;
-      
       const inputVal = document.getElementById('childNameInput').value.trim();
       childName = inputVal !== "" ? inputVal : (gender === 'boy' ? "Príncipe" : "Princesa");
 
@@ -1213,22 +581,12 @@
         document.body.classList.add('theme-boy');
         document.getElementById('brandIcon').innerText = "🤴";
         document.getElementById('brandText').innerText = "O Reino Silábico do Príncipe";
-        document.getElementById('avatarBtnIcon').innerText = "🤴";
-        document.getElementById('decor3').innerText = "🐉";
-        document.getElementById('decor4').innerText = "🛡️";
-        speakText(`Bem-vindo, Príncipe ${childName}! O reino está pronto para você jogar!`);
       } else {
         document.body.classList.remove('theme-boy');
         document.getElementById('brandIcon').innerText = "👑";
         document.getElementById('brandText').innerText = "O Reino Silábico Encantado";
-        document.getElementById('avatarBtnIcon').innerText = "👸";
-        document.getElementById('decor3').innerText = "🧚‍♀️";
-        document.getElementById('decor4').innerText = "🦄";
-        speakText(`Bem-vinda, Princesa ${childName}! Nosso reino está pronto para você jogar!`);
       }
 
-      currentTheme = 'all';
-      renderThemeSelector();
       selectLevel(1);
     }
 
@@ -1236,78 +594,35 @@
       document.getElementById('welcomeOverlay').style.display = 'flex';
     }
 
-    function getFilteredWords() {
-      return WORDS_DATABASE.filter(w => {
-        const matchesLevel = w.level === currentLevel;
-        const matchesTheme = currentTheme === 'all' || w.theme === currentTheme;
-        return matchesLevel && matchesTheme;
-      });
-    }
-
     function selectLevel(lvl) {
       currentLevel = lvl;
       currentIndex = 0;
-
-      [1, 2, 3, 4].forEach(i => {
-        const btn = document.getElementById(`btnLvl${i}`);
-        if (btn) btn.classList.toggle('active', i === lvl);
-      });
-
-      const badge = document.getElementById('currentLevelBadge');
-      const levelNames = {
-        1: '🌸 Nível 1: Simples',
-        2: '🦄 Nível 2: Complexas',
-        3: '⭐ Nível 3: Desafio',
-        4: '🔥 Nível 4: Polissílabas'
-      };
-      badge.innerText = levelNames[lvl];
-
-      loadCurrentWord();
-    }
-
-    function setAssemblyMode(mode) {
-      assemblyMode = mode;
-      document.getElementById('btnModeLetters').classList.toggle('active', mode === 'letters');
-      document.getElementById('btnModeSyllables').classList.toggle('active', mode === 'syllables');
       loadCurrentWord();
     }
 
     function loadCurrentWord() {
-      const filtered = getFilteredWords();
-      if (filtered.length === 0) {
-        document.getElementById('wordProgressCounter').innerText = `Sem palavras neste tema`;
-        document.getElementById('wordIllustrationImage').src = "";
-        document.getElementById('wordHintText').innerText = "💡 Escolha outro tema ou nível acima!";
-        document.getElementById('slotsContainer').innerHTML = "<div style='color:#64748b;'>Troque de Tema acima 👆</div>";
-        document.getElementById('optionsContainer').innerHTML = "";
-        return;
-      }
+      const filtered = WORDS_DATABASE.filter(w => w.level === currentLevel);
+      if (filtered.length === 0) return;
 
       currentWordItem = filtered[currentIndex % filtered.length];
       document.getElementById('wordProgressCounter').innerText = `Palavra ${currentIndex + 1} de ${filtered.length}`;
       
-      document.getElementById('wordIllustrationImage').src = currentWordItem.image;
+      const imgElem = document.getElementById('wordIllustrationImage');
+      imgElem.src = getWordImageUrl(currentWordItem.word);
+      
       document.getElementById('wordHintText').innerText = `💡 ${currentWordItem.hint}`;
-      document.getElementById('hiddenPillContent').innerText = "❓ · ❓";
 
-      if (assemblyMode === 'letters') {
-        targetUnits = currentWordItem.word.split('');
-      } else {
-        targetUnits = [...currentWordItem.syllables];
-      }
-
+      targetUnits = currentWordItem.word.split('');
       userSlots = targetUnits.map(() => null);
-      generateChoices();
 
-      document.getElementById('feedbackBanner').style.display = 'none';
+      generateChoices();
       renderSlots();
       renderChoices();
-      updateEquippedDecorations();
     }
 
     function generateChoices() {
       let pool = [...targetUnits];
-      const distractors = assemblyMode === 'letters' ? ['A', 'E', 'O', 'S', 'M', 'P'] : ['BA', 'CA', 'PA', 'TA', 'RO', 'LE'];
+      const distractors = ['A', 'E', 'O', 'S', 'M', 'P', 'R', 'T'];
       while (pool.length < targetUnits.length + 2) {
         const rand = distractors[Math.floor(Math.random() * distractors.length)];
         if (!pool.includes(rand)) pool.push(rand);
@@ -1353,7 +668,7 @@
         choice.used = true;
         renderSlots();
         renderChoices();
-        if (!userSlots.includes(null)) checkWinCondition();
+        if (!userSlots.includes(null)) checkWin();
       }
     }
 
@@ -1367,60 +682,20 @@
       renderChoices();
     }
 
-    function playClapsSound() {
-      if (!soundEnabled || !window.AudioContext && !window.webkitAudioContext) return;
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        for (let i = 0; i < 4; i++) {
-          setTimeout(() => {
-            if (ctx.state === 'closed') return;
-            const bufferSize = ctx.sampleRate * 0.08;
-            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let j = 0; j < bufferSize; j++) data[j] = Math.random() * 2 - 1;
-
-            const noise = ctx.createBufferSource();
-            noise.buffer = buffer;
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'bandpass';
-            filter.frequency.value = 1200;
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(0.8, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(ctx.destination);
-            noise.start();
-          }, i * 120);
-        }
-      } catch (e) {}
-    }
-
-    function checkWinCondition() {
+    function checkWin() {
       const userString = userSlots.join('');
       const targetString = targetUnits.join('');
       const banner = document.getElementById('feedbackBanner');
-      statsAttempts++;
 
       if (userString === targetString) {
-        if (typeof confetti === 'function') confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
         stars += 10;
-        statsCorrect++;
         document.getElementById('starsDisplay').innerText = stars;
-        playClapsSound();
-
-        if (!historyWords.includes(currentWordItem.word)) historyWords.push(currentWordItem.word);
-
-        const displayName = childName !== "" ? childName : (currentGender === 'boy' ? 'Príncipe' : 'Princesa');
         banner.className = 'feedback-banner success';
-        banner.innerHTML = `✨ Muito bem, ${displayName}! Você conseguiu! (+10 ⭐)`;
+        banner.innerHTML = `✨ Muito bem! Você acertou! (+10 ⭐)`;
         banner.style.display = 'flex';
       } else {
-        speakText("Ops! Tente novamente, você consegue!");
         banner.className = 'feedback-banner error';
-        banner.innerHTML = `⚠️ Quase lá! Reorganize as pecinhas!`;
+        banner.innerHTML = `⚠️ Tente novamente!`;
         banner.style.display = 'flex';
       }
     }
@@ -1428,160 +703,26 @@
     function resetCurrentWord() { loadCurrentWord(); }
 
     function nextWord() {
-      const filtered = getFilteredWords();
-      if (filtered.length === 0) return;
+      const filtered = WORDS_DATABASE.filter(w => w.level === currentLevel);
       currentIndex = (currentIndex + 1) % filtered.length;
       loadCurrentWord();
     }
 
     function prevWord() {
-      const filtered = getFilteredWords();
-      if (filtered.length === 0) return;
+      const filtered = WORDS_DATABASE.filter(w => w.level === currentLevel);
       currentIndex = (currentIndex - 1 + filtered.length) % filtered.length;
       loadCurrentWord();
     }
 
-    function speakText(text) {
-      if (!soundEnabled || !('speechSynthesis' in window)) return;
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'pt-BR';
-      u.rate = 0.9;
-      window.speechSynthesis.speak(u);
-    }
-
-    function speakCurrentWord() { if (currentWordItem) speakText(currentWordItem.word); }
-    function spellWord() { if (currentWordItem) speakText(currentWordItem.word.split('').join('... ')); }
-    function clapWord() { if (currentWordItem) speakText(currentWordItem.syllables.join('... ')); }
-    function handlePeekName() {
-      if (!currentWordItem) return;
-      document.getElementById('hiddenPillContent').innerText = currentWordItem.word;
-      setTimeout(() => { document.getElementById('hiddenPillContent').innerText = "❓ · ❓"; }, 2000);
-    }
-
-    function openShopModal() {
-      const grid = document.getElementById('shopItemsGrid');
-      grid.innerHTML = '';
-      SHOP_ITEMS.forEach(item => {
-        const isBought = purchasedItems.includes(item.id);
-        const isEquipped = (equippedHat === item.emoji) || (equippedPet === item.emoji);
-
-        const card = document.createElement('div');
-        card.className = 'shop-item-card';
-        card.innerHTML = `
-          <div class="shop-item-emoji">${item.emoji}</div>
-          <div class="shop-item-title">${item.title}</div>
-          <button class="shop-item-btn ${isEquipped ? 'equipped' : ''}" onclick="buyOrEquipItem('${item.id}')">
-            ${isEquipped ? 'Equipado' : isBought ? 'Usar' : `⭐ ${item.price}`}
-          </button>
-        `;
-        grid.appendChild(card);
-      });
-      document.getElementById('shopModalOverlay').classList.add('open');
-    }
-
-    function buyOrEquipItem(itemId) {
-      const item = SHOP_ITEMS.find(i => i.id === itemId);
-      if (!item) return;
-
-      if (!purchasedItems.includes(itemId)) {
-        if (stars >= item.price) {
-          stars -= item.price;
-          purchasedItems.push(itemId);
-          document.getElementById('starsDisplay').innerText = stars;
-        } else {
-          alert('Você precisa de mais estrelas! Continue acertando as palavras.');
-          return;
-        }
-      }
-
-      if (item.type === 'hat') equippedHat = (equippedHat === item.emoji) ? null : item.emoji;
-      if (item.type === 'pet') equippedPet = (equippedPet === item.emoji) ? null : item.emoji;
-
-      updateEquippedDecorations();
-      openShopModal();
-    }
-
-    function updateEquippedDecorations() {
-      document.getElementById('hatBadgeSlot').innerText = equippedHat || '';
-      document.getElementById('petCompanionSlot').innerText = equippedPet || '';
-    }
-
-    function closeShopModal() { document.getElementById('shopModalOverlay').classList.remove('open'); }
-    function closeShopModalOnBackdrop(e) { if (e.target.id === 'shopModalOverlay') closeShopModal(); }
-
-    function openParentsModal() {
-      const n1 = Math.floor(Math.random() * 5) + 2;
-      const n2 = Math.floor(Math.random() * 5) + 1;
-      const ans = prompt(`Área do Responsável: Quanto é ${n1} + ${n2}?`);
-
-      if (parseInt(ans) === (n1 + n2)) {
-        const accuracy = statsAttempts > 0 ? Math.round((statsCorrect / statsAttempts) * 100) : 100;
-        const container = document.getElementById('parentsReportContent');
-        container.innerHTML = `
-          <div style="background:#f1f5f9; padding:12px; border-radius:16px; margin-bottom:12px; font-weight:bold; color:#334155;">
-            👤 Aluno(a): <span style="color:var(--primary-dark);">${childName !== "" ? childName : 'Não informado'}</span>
-          </div>
-          <div class="stat-box-grid">
-            <div class="stat-box">
-              <div class="stat-number">${statsCorrect}</div>
-              <div class="stat-label">Acertos</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number">${stars}</div>
-              <div class="stat-label">Estrelas ⭐</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-number">${accuracy}%</div>
-              <div class="stat-label">Precisão</div>
-            </div>
-          </div>
-          <div style="margin-top:12px;">
-            <strong>Palavras Praticadas com Sucesso:</strong>
-            <p style="margin-top:6px; color:#64748b; font-size:0.9rem;">
-              ${historyWords.length > 0 ? historyWords.join(', ') : 'Nenhuma palavra concluída ainda nesta sessão.'}
-            </p>
-          </div>
-        `;
-        document.getElementById('parentsModalOverlay').classList.add('open');
-      } else if (ans !== null) {
-        alert('Resposta incorreta! Acesso restrito aos pais.');
+    function speakCurrentWord() {
+      if ('speechSynthesis' in window && currentWordItem) {
+        const u = new SpeechSynthesisUtterance(currentWordItem.word);
+        u.lang = 'pt-BR';
+        window.speechSynthesis.speak(u);
       }
     }
 
-    function closeParentsModal() { document.getElementById('parentsModalOverlay').classList.remove('open'); }
-    function closeParentsModalOnBackdrop(e) { if (e.target.id === 'parentsModalOverlay') closeParentsModal(); }
-
-    function openRepoModal() {
-      const grid = document.getElementById('repoWordsGrid');
-      grid.innerHTML = '';
-      const filtered = getFilteredWords();
-      filtered.forEach((w, idx) => {
-        const item = document.createElement('div');
-        item.className = 'repo-item-card';
-        item.innerHTML = `
-          <img src="${w.image}" style="width:100%; height:90px; object-fit:cover; border-radius:12px; margin-bottom:6px;" />
-          <div><strong>${w.word}</strong></div>
-          <small style="color:#64748b;">${w.syllables.join('-')}</small>
-        `;
-        item.onclick = () => {
-          currentIndex = idx;
-          loadCurrentWord();
-          closeRepoModal();
-        };
-        grid.appendChild(item);
-      });
-      document.getElementById('repoModalOverlay').classList.add('open');
-    }
-
-    function closeRepoModal() { document.getElementById('repoModalOverlay').classList.remove('open'); }
-    function closeRepoModalOnBackdrop(e) { if (e.target.id === 'repoModalOverlay') closeRepoModal(); }
-
-    // Inicialização automática caso queira pular por padrão ou garantir foco
-    window.onload = () => {
-      renderThemeSelector();
-      selectLevel(1);
-    };
+    window.onload = () => { selectLevel(1); };
   </script>
 </body>
 </html>
